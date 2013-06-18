@@ -9,6 +9,5 @@ class SessionsController < ApplicationController
   	@current_user = nil
   	session[:cas_user] = nil
     RubyCAS::Filter.logout(self, root_path)
-  	#redirect_to root_path
   end
 end

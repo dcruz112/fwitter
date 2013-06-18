@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<% if current_user %>
+	<% if current_user(false) %>
 		<div id="user_info">
 			Hello, <%= current_user.first_name %> <%= link_to "logout", log_out_path %>
 		</div>
