@@ -1,5 +1,5 @@
 class AddUserIdToTweets < ActiveRecord::Migration
   def change
-    add_column :tweets, :user_id, :FixNum
+    add_reference :tweets, :user, index: true
   end
 end
