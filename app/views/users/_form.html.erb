@@ -1,41 +1,17 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= simple_form_for @user do |f| %>
+  
+  <br>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= f.input :first_name, input_html: { maxlength: 20 }, label: 'First Name'%>
+    <%= f.input :last_name, input_html: { maxlength: 20 } %>
+    <%= f.input :netid, input_html: { maxlength: 7 }, disabled: true %>
+    <%= f.input :handle, input_html: { maxlength: 15 } %>
+    <%= f.input :biography, input_html: { maxlength: 100 } %>
+    <%= f.input :current_location, input_html:{ maxlength: 20 } %>
+    <%= f.submit 'Update Profile' %>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :netid %><br>
-    <%= f.text_field :netid %>
-  </div>
-  <div class="field">
-    <%= f.label :handle %><br>
-    <%= f.text_field :handle %>
-  </div>
-  <div class="field">
-    <%= f.label :biography %><br>
-    <%= f.text_area :biography %>
-  </div>
-  <div class="field">
-    <%= f.label :current_location %><br>
-    <%= f.text_field :current_location %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+   
+  
 <% end %>
+
+<br>
