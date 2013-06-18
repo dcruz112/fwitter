@@ -1,0 +1,7 @@
+<div class="tweet">
+  <div class="tweet-author">Posted by:
+      <%= link_to tweet.user.full_name, tweet.user %>
+  </div>
+  <div class="tweet-content"><%= simple_format(tweet.content) %></div>
+
+</div>

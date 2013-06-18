@@ -1,34 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+<h1><%= @user.full_name %></h1>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Netid:</strong>
-  <%= @user.netid %>
-</p>
-
-<p>
-  <strong>Handle:</strong>
-  <%= @user.handle %>
-</p>
-
-<p>
-  <strong>Biography:</strong>
-  <%= @user.biography %>
-</p>
-
-<p>
-  <strong>Current location:</strong>
-  <%= @user.current_location %>
-</p>
+<%= render @user.tweets.reverse %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

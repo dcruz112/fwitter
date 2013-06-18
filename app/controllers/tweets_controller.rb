@@ -28,6 +28,9 @@ class TweetsController < ApplicationController
   # POST /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.user = @current_user
+    #current_user was already defined somewhere, while finding by :user_id
+    # might not work for some reason. You were working from the wrong demo blog
 
     respond_to do |format|
       if @tweet.save
