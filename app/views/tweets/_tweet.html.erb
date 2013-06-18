@@ -1,7 +1,25 @@
-<div class="tweet">
-  <div class="tweet-author">Posted by:
-      <%= link_to tweet.user.full_name, tweet.user %>
-  </div>
-  <div class="tweet-content"><%= simple_format(tweet.content) %></div>
+	<div class="tweet-list">
+	  <div class="tweet-author">Posted by:
+	  	  <%= tweet.user.full_name %>
+	      <%= link_to tweet.user.handle, tweet.user %>
+	  </div>
+	  <div class="tweet-content">
+	  	<div class="tweet-body">
+	  		<%= tweet.content %>
+	  	</div>
+	  	<div class="tweet-footer">
+	  		<table>
+	  			<td><%= link_to 'Show', tweet %></td>
+        		<td>
+	        		<% if current_user == tweet.user %>
+	        		<%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
+        			<%= link_to 'Edit', edit_tweet_path(tweet) %>
+	        		<% end %> 
+        		</td>
+            </table>
+	  	</div>
+	  </div>
 
-</div>
+	</div>
+
+<!-- Note: simple_format doesn't seem to allow tags through? -->

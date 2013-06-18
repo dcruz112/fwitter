@@ -1,3 +1,25 @@
 // Place all the styles related to the Tweets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.tweet-author {
+	color: black;
+	font-size: 18px;
+	font-family: Helvetica;
+}
+
+.tweet-content {
+	color: black;
+	font-size: 12px;
+	font-family: Helvetica;
+}
+
+.tweet-list {
+	margin-top: 20px;
+}
+
+#new-tweet{
+	// border: 2px solid black;
+	padding: 8px;
+	margin: 5px 0px 5px 0px;
+}

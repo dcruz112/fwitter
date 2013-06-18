@@ -1,28 +1,20 @@
-<h1>Listing tweets</h1>
+<h1>All The Tweets</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Content</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
     </tr>
   </thead>
 
+  <div id="new-tweet"><%= link_to 'New Tweet', new_tweet_path %></div>
+
   <tbody>
-    <% @tweets.each do |tweet| %>
-      <tr>
-        <td><%= tweet.content %></td>
-        <td><%= tweet.user.full_name %></td>
-        <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+        <%= render @tweets.reverse %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Tweet', new_tweet_path %>

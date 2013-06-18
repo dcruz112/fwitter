@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Project1</title>
+  <title>Fwitter: A Brief Unique Messaging Service for Yale Students Only</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div id="header">
 	<% if current_user %>
 		<div id="user_info">
-			Hello, <%= current_user.first_name %> <%= link_to "logout", log_out_path %>
+			Welcome to Fwitter, <%= current_user.first_name %> 
+		</div>
+		<div id="logout">
+		<%= link_to "Log Out", log_out_path %>
 		</div>
 	<% else %>
-		<div id="user_info">
+		<div id="login">
 			<%= link_to "Log In", log_in_path(return_to_controller: params[:controller], return_to_action: params[:action]) %>
 		</div>
+	</div>
 	<% end %>
+
 <%= yield %>
 
 </body>
