@@ -17,7 +17,10 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new(netid: session[:cas_user])
+    @user = User.new
+    @net_id = session[:cas_user]
+    @user.search_ldap(@net_id)
+    @user.netid = @net_id
   end
 
   # GET /users/1/edit
@@ -27,13 +30,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    # @user = User.new(user_params)
-    @user = User.new
+    @user = User.new(user_params)
     @user.netid = session[:cas_user]
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to root_path, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -47,7 +49,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

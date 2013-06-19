@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def log_in
   	current_user
-		redirect_to current_user
+	redirect_to current_user
   end
 
   def log_out
