@@ -15,6 +15,8 @@
 <% end %>
 <% if current_user == @user %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Delete', @user, method: :delete %> |
+<%= link_to 'Delete', @user, method: :delete, 
+	data: { confirm: 'Warning: This will permanently delete your account
+		and all of your tweets.' } %> |
 <% end %>
 <%= link_to 'Back', users_path %>

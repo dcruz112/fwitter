@@ -15,10 +15,6 @@
 			<div id="logout">
 			<%= link_to "Log Out", log_out_path %>
 			</div>
-		<% else %>
-			<div id="login">
-				<%= link_to "Log In", log_in_path(return_to_controller: params[:controller], return_to_action: params[:action]) %>
-			</div>
 		<% end %>
 	</div>
 
