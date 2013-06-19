@@ -7,7 +7,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+
+
+
+
   private
+  
   def current_user(redirect=true)
   	@possible_user_list = User.where(netid: session[:cas_user])
     if !@possible_user_list.empty?

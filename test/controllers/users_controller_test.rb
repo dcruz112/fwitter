@@ -3,24 +3,24 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
-
-    
   end
 
-  # test "should get index" do
-  #   get :index
-  #   assert_response :success
-  #   assert_not_nil assigns(:users)
-  # end
+
+  
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:users)
+  end
 
   # test "should get new" do
   #   get :new
-  #   assert_response :success
+  #   assert_response :success    
   # end
 
   # test "should create user" do
   #   assert_difference('User.count') do
-  #     post :create, user: { biography: @user.biography, current_location: @user.current_location, first_name: @user.first_name, handle: @user.handle, last_name: @user.last_name, netid: @user.netid }
+  #     post :create, user: {  }
   #   end
 
   #   assert_redirected_to user_path(assigns(:user))
@@ -37,7 +37,7 @@ class UsersControllerTest < ActionController::TestCase
   # end
 
   # test "should update user" do
-  #   patch :update, id: @user, user: { biography: @user.biography, current_location: @user.current_location, first_name: @user.first_name, handle: @user.handle, last_name: @user.last_name, netid: @user.netid }
+  #   patch :update, id: @user, user: { }
   #   assert_redirected_to user_path(assigns(:user))
   # end
 

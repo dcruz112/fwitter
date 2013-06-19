@@ -4,6 +4,10 @@ class TweetsControllerTest < ActionController::TestCase
   setup do
     @tweet = tweets(:one)
 
+    @update = {
+      content: 'I play for the Miami Heat and my name is Lebron'
+    }
+
   end
 
   # test "should get index" do
@@ -12,18 +16,18 @@ class TweetsControllerTest < ActionController::TestCase
   #   assert_not_nil assigns(:tweets)
   # end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+  # test "should get new" do
+  #   get :new
+  #   assert_response :success
+  # end
 
-  test "should create tweet" do
-    assert_difference('Tweet.count') do
-      post :create, tweet: { content: @tweet.content }
-    end
+  # test "should create tweet" do
+  #   assert_difference('Tweet.count') do
+  #     post :create, tweet: @update
+  #   end
 
-    assert_redirected_to tweet_path(assigns(:tweet))
-  end
+  #   assert_redirected_to tweet_path(assigns(:tweet))
+  # end
 
   # test "should show tweet" do
   #   get :show, id: @tweet
@@ -36,7 +40,7 @@ class TweetsControllerTest < ActionController::TestCase
   # end
 
   # test "should update tweet" do
-  #   patch :update, id: @tweet, tweet: { content: @tweet.content }
+  #   patch :update, id: @tweet, tweet: @update
   #   assert_redirected_to tweet_path(assigns(:tweet))
   # end
 
@@ -47,4 +51,8 @@ class TweetsControllerTest < ActionController::TestCase
 
   #   assert_redirected_to tweets_path
   # end
+
+
+
+  
 end

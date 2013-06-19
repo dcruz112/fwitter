@@ -15,3 +15,11 @@ two:
   handle: MyString
   biography: MyText
   current_location: MyString
+
+three:
+  first_name: MyString
+  last_name: MyString
+  netid: MyString
+  handle: MyString
+  biography: MyText
+  current_location: MyString

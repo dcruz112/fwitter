@@ -3,7 +3,14 @@ require 'test_helper'
 class UsersHelperTest < ActionView::TestCase
 
 
-
+	test "user attributes must not be empty" do
+		user = User.new
+		assert user.invalid?
+		assert user.errors[:first_name].any?
+		assert user.errors[:last_name].any?
+	    #assert user.errors[:netid].any?
+		assert user.errors[:handle].any?
+	end
 
 
 
@@ -29,6 +36,19 @@ class UsersHelperTest < ActionView::TestCase
 		bad.each do |name|
 			assert new_user(name).invalid?, "#{name} shouldn't be valid"
 		end
+	end
+
+
+	test "user is not valid without a unique handle - i18n" do
+		user = User.new(handle: users(:three).handle, 
+								first_name: "yyy", 
+								last_name: "zzz", 
+								biography: "new to this",
+								current_location: "newhaven",
+								netid:"abc123")
+		assert user.invalid?
+		assert_equal ["has already been taken"], user.errors[:handle]
+		#assert_equal [I18n.translate('errors.messages.taken')], user.errors[:handle]
 	end
 
 
