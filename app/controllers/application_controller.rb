@@ -8,7 +8,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
-  def current_user
-  	@current_user ||= User.where(netid: session[:cas_user]).first
+  def current_user(redirect=true)
+  	@possible_user_list = User.where(netid: session[:cas_user])
+    if !@possible_user_list.empty?
+      @current_user = @possible_user_list.first
+    elsif redirect
+      redirect_to new_user_path and return
+    else
+      nil
+    end
   end
 end
