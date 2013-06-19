@@ -1,11 +1,22 @@
 Project1::Application.routes.draw do
-  root to: 'users#show'
+  root to: 'users#index'
 
   get '/log_in' => 'sessions#log_in', as: :log_in
   get '/log_out' => 'sessions#log_out', as: :log_out
+  get '/follow/:id' => 'users#follow', as: :follow
+  get '/users/:id/follow' => 'users#follow'
+  # get '/users/:id' => 'users#show', as: :show
 
   resources :tweets
-  resources :users
+  # as: User.find(:user_id).show
+  resources :users do
+    member do
+      get 'follow'
+    end 
+  end
+
+  # We'll want to add a follow route at some point, I suppose? 
+    # And eventually implement Ajax for auto-following
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

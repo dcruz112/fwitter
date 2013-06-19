@@ -4,15 +4,13 @@ class UsersController < ApplicationController
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index]
 
-  # GET /users
-  # GET /users.json
   def index
     @users = User.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
+    @id = params[:id]
+    @user = User.find(@id)
   end
 
   # GET /users/new
@@ -64,6 +62,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+    @id = params[:id]
+    @following = []
+    @following << User.find(@id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -75,3 +79,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :netid, :handle, :biography, :current_location)
     end
 end
+
+
+
