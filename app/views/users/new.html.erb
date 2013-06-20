@@ -1,7 +1,11 @@
 <h1>Welcome to Fwitter! Create your profile below. </h1>
 
-<%= render 'form' %>
+
 
 <% if current_user(false) %>
+	<%= render 'form_edit' %>
+
 	<%= link_to 'Back', users_path %>
+<% else %>
+	<%= render 'form_new' %>
 <% end %>
