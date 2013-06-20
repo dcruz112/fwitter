@@ -4,9 +4,10 @@ class Tweet < ActiveRecord::Base
 
 	def time_since_tweet
 		seconds = Time.now - self.updated_at
-		
-		if seconds < 60    #less than 1 minute
-			display = seconds.to_s + "s"
+		if seconds < 15
+			display = "Just Now"
+		elsif seconds < 60    #less than 1 minute
+			display = seconds.round(0).to_s + "s"
 		elsif seconds < 3600    #less than 1 hour
 			display = (seconds/60).round(0).to_s + "m"
 		elsif seconds < 86400     #less than 1 day
