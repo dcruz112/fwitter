@@ -11,6 +11,7 @@
 		<% if current_user(false) %>
 			<div id="user_info">
 				Welcome to Fwitter, <%= current_user.first_name %> 
+				<%= link_to image_tag("bull.png"), new_tweet_path %>
 			</div>
 			<div id="logout">
 			<%= link_to "Log Out", log_out_path %>
