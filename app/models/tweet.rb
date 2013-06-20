@@ -5,87 +5,32 @@ class Tweet < ActiveRecord::Base
 	def time_since_tweet
 		seconds = Time.now - self.updated_at
 		
-
-		if seconds < 60
-			type = "s"
-			display = seconds
-		elsif seconds < 3600
-			type = "m"
-			display = (seconds/60).round(0)
-		elsif seconds < 86400
-			type = "h"
-			display = (seconds/3600).round(0)
-		elsif seconds >= 86400
+		if seconds < 60    #less than 1 minute
+			display = seconds.to_s + "s"
+		elsif seconds < 3600    #less than 1 hour
+			display = (seconds/60).round(0).to_s + "m"
+		elsif seconds < 86400     #less than 1 day
+			display = (seconds/3600).round(0).to_s + "h"
+		elsif seconds < 86400*2    #less than 2 days
+			display = "Yesterday"
+		elsif seconds < 86400*7    #less than 1 week
+			display = self.updated_at.strftime("%A")
+		else                      #more than 1 week
 			mon = self.updated_at.month
-			day = self.updated_at.day
-			
-				if mon == 1 
-					m = " Jan"
-				elsif mon == 2 
-					m = " Feb"
-				elsif mon == 3 
-					m= " Mar"
-				elsif mon == '4' 
-					m= " Apr"
-				elsif mon == '5' 
-					m= " May"
-				elsif mon == 6 
-					m= " Jun"
-				elsif mon == '7' 
-					m= " Jul"
-				elsif mon == '8' 
-					m= " Aug"
-				elsif mon == 9 
-					m= " Sep"
-				elsif mon == 10 
-					m= " Oct"
-				elsif mon == 11 
-					m= " Nov"
-				elsif mon == 12 
-					m= " Dec"
-				end
-
-
-			type = m
-			#type = mon.convert_month_number_to_month_name
-			display = day
+			day = self.updated_at.day.to_s	
+			display = day + convert_month_number_to_month_name(mon).to_s
 		end
-		val = display.to_s + type.to_s
-		return val
+		
+		return display
 	end
 
 
-	# def convert_month_number_to_month_name
+	def convert_month_number_to_month_name(mo)
+		months = { 1 => " Jan", 2 => " Feb", 3 =>" Mar", 4 => " Apr", 5 => " May", 6 => " Jun", 7 => " Jul", 8=> " Aug", 9=> " Sep", 10 => " Oct", 11 => " Nov", 12 => " Dec" }
+		return months[mo]
+	end
+
 	
-	# 	if self == 1 
-	# 		m = "Jan"
-	# 	elsif self == 2 
-	# 		m= "Feb"
-	# 	elsif self == 3 
-	# 		m= "Mar"
-	# 	elsif self == '4' 
-	# 		m= "Apr"
-	# 	elsif self == '5' 
-	# 		m= "May"
-	# 	elsif self == 6 
-	# 		m= "Jun"
-	# 	elsif self == '7' 
-	# 		m= "Jul"
-	# 	elsif self == '8' 
-	# 		m= "Aug"
-	# 	elsif self == 9 
-	# 		m= "Sep"
-	# 	elsif self == 10 
-	# 		m= "Oct"
-	# 	elsif self == 11 
-	# 		m= "Nov"
-	# 	elsif self == 12 
-	# 		m= "Dec"
-	# 	end
-
-	# 	return m.to_s
-
-	# end
 
 
 

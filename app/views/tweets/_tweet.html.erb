@@ -1,22 +1,27 @@
 	<div class="tweet-list">
 	  <div class="tweet-author">
-	  	  <%= tweet.user.full_name %>
-	      <%= link_to tweet.user.handle_at, tweet.user %>
-	      <%= tweet.time_since_tweet %>
+	  	  <strong><%= tweet.user.full_name %></strong>
+	      <span class= "author-handle"> <%= link_to tweet.user.handle_at, tweet.user %> </span>
+	      <span class= "tweet-time-stamp"><%= tweet.time_since_tweet %></span>
 	  </div>
+
+
 	  <div class="tweet-content">
 	  	<div class="tweet-body">
-	  		<%= tweet.content %>
+	  		<%=  link_to tweet.content,  tweet %>
 	  	</div>
 	  	<div class="tweet-footer">
-	  		<table>
-	  			<td><%= link_to 'Show', tweet %></td>
+	  		<table>	
+
+	  			<!-- <td><%= link_to 'Show', tweet %></td> -->
         		<td>
 	        		<% if current_user == tweet.user %>
-	        		<%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
+	        		<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
         			<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
 	        		<% end %> 
         		</td>
+
+        	
             </table>
 	  	</div>
 	  </div>

@@ -1,12 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @user.full_name %></h1>
 
-<h2><%= @user.handle_at %></h2>
-<h3><%= @user.biography %></h3>
-<% if @user.current_location %>
-	<h3><%= @user.current_location %></h3>
-<% end %> <br><br>
+			<div class= "user-profile-info">
+				<h1><%= @user.full_name %></h1>
+				<h2><%= @user.handle_at %></h2>
+				<h3><%= @user.biography %></h3>
+				<% if @user.current_location %>
+					<h3><%= @user.current_location %></h3>
+				<% end %> <br><br>
+			</div>
+
 
 <div><%= render @user.tweets.reverse %></div>
 

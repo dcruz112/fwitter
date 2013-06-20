@@ -13,8 +13,11 @@
  */
 
 #header {
+ 	
  	color: #0F4D92;
  	font-size: 18px;
+
+
  }
 
 #logout {
@@ -29,4 +32,26 @@
 	color: blue;
 	border: 1px solid black;
 	padding: 8px;
+}
+
+a:link {
+color:black;
+text-decoration:none;
+}
+
+a:visited {
+color:black;
+text-decoration:none;
+}
+
+
+a:hover {
+color:blue;
+border-bottom:2px;
+text-decoration:none;
+}
+
+.user-profile-info {
+	margin-left: 300px;
+	width: 300px;
 }
