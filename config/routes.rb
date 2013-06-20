@@ -1,5 +1,5 @@
 Project1::Application.routes.draw do
-  root to: 'users#index'
+  root to: 'users#show'
 
   get '/log_in' => 'sessions#log_in', as: :log_in
   get '/log_out' => 'sessions#log_out', as: :log_out

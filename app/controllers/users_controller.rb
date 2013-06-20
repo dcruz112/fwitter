@@ -10,7 +10,11 @@ class UsersController < ApplicationController
 
   def show
     @id = params[:id]
-    @user = User.find(@id)
+    if @id.nil?
+      @user = User.find(current_user.id)
+    else
+      @user = User.find(@id)
+    end
   end
 
   # GET /users/new
@@ -33,7 +37,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_path, notice: 'User was successfully created.' }
+        format.html { redirect_to root_path(delete: false), notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -64,7 +68,7 @@ class UsersController < ApplicationController
       tweet.destroy
     end
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to log_out_path(delete: true) }
       format.json { head :no_content }
     end
   end

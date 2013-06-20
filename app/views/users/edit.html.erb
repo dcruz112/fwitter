@@ -3,4 +3,5 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', @user %> |
+<%= link_to 'Delete Profile', @user, method: :delete, data: { confirm: 'Warning: This will permanently delete your account and all of your tweets.' } %> |
 <%= link_to 'Back', users_path %>
