@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  netid: MyString
-  handle: MyString
+  first_name: Lebron
+  last_name: James
+  netid: lbj1
+  handle: kingjames
   biography: MyText
   current_location: MyString
 

@@ -1,7 +1,8 @@
 	<div class="tweet-list">
-	  <div class="tweet-author">Posted by:
+	  <div class="tweet-author">
 	  	  <%= tweet.user.full_name %>
 	      <%= link_to tweet.user.handle_at, tweet.user %>
+	      <%= tweet.time_since_tweet %>
 	  </div>
 	  <div class="tweet-content">
 	  	<div class="tweet-body">
@@ -13,7 +14,7 @@
         		<td>
 	        		<% if current_user == tweet.user %>
 	        		<%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
-        			<%= link_to 'Edit', edit_tweet_path(tweet) %>
+        			<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
 	        		<% end %> 
         		</td>
             </table>

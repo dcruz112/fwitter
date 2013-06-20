@@ -1,9 +1,10 @@
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+#require 'ffaker'
 
 class ActiveSupport::TestCase
- ActiveRecord::Migration.check_pending!
+ #ActiveRecord::Migration.check_pending!
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   #
@@ -11,17 +12,18 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
+  RubyCAS::Filter.fake('testnetid')
 
-   def login_as(user)
+   def log_in_as(user)
      session[:user_id] = users(user).id
    end
 
-   def logout
+   def log_out
      session.delete :user_id
    end
   
    def setup
-     login_as :one if defined? session
+     log_in_as :one if defined? session
    end
   
 

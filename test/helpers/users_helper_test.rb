@@ -13,9 +13,6 @@ class UsersHelperTest < ActionView::TestCase
 	end
 
 
-
-
-
 	def new_user(input)
 		User.new(first_name: "Lebron",
 		last_name: "James",
