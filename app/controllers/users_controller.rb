@@ -10,7 +10,11 @@ class UsersController < ApplicationController
 
   def show
     @id = params[:id]
-    @user = User.find(@id)
+    if @id.nil?
+      @user = User.find(current_user.id)
+    else
+      @user = User.find(@id)
+    end
   end
 
   # GET /users/new
@@ -64,7 +68,7 @@ class UsersController < ApplicationController
       tweet.destroy
     end
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to log_out_path }
       format.json { head :no_content }
     end
   end

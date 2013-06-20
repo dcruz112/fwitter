@@ -27,7 +27,8 @@
         <td><%= user.email %></td>
         <td><%= link_to 'Show Tweets', user %></td>
         <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
-        <td><%= link_to 'Delete Profile', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete Profile', user, method: :delete, data: 
+                { confirm: 'Warning: This will permanently delete your profile and tweets.' } %></td>
       </tr>
     <% end %>
   </tbody>
