@@ -2,11 +2,13 @@
 
 <%= simple_form_for @tweet do |f| %>
 	
-	
+	<% @tweet.is_retweet = true %>
+	<% @tweet.content = "RT: " + @tweet.content.to_s  + "\nRetweeted by: " + @current_user.full_name %>
 
-
+	<%= f.hidden_field :is_retweet, label: false %>  <br>
     <%= f.hidden_field :content, input_html: { maxlength: 140 }, label: false %>  <br>
     <%= f.submit 'ReTweet' %>
   
  
 <% end %>
+<% @tweet.is_retweet = true %>
