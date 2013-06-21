@@ -23,6 +23,11 @@ class UsersController < ApplicationController
     @net_id = session[:cas_user]
     @user.search_ldap(@net_id)
     @user.netid = @net_id
+    if !current_user(false)
+      @user.default = true
+    else
+      @user.default = false
+    end
   end
 
   # GET /users/1/edit
@@ -40,6 +45,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
+    if !current_user(false)
+      @user.default = true
+    else
+      @user.default = false
+    end
 
     respond_to do |format|
       if @user.save
@@ -90,6 +100,9 @@ class UsersController < ApplicationController
   end
 
   def default
+    User.where(default: true).first.default = false
+    User.find(id).default = true
+    redirect_to index_user_path
   end
 
   private
@@ -103,6 +116,3 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :handle, :biography, :current_location, :email)
     end
 end
-
-
-
