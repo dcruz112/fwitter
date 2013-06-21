@@ -1,10 +1,6 @@
 <%= simple_form_for @tweet do |f| %>
 	
-
-
-	
     <%= f.input :content, input_html: { maxlength: 140 }, label: false %>  <br>
     <%= f.submit 'Tweet' %>
   
- 
 <% end %>

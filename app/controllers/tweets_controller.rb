@@ -18,6 +18,7 @@ class TweetsController < ApplicationController
   # GET /tweets/new
   def new
     @tweet = Tweet.new
+    @tweet.poster_id = current_user.id
   end
 
   # GET /tweets/1/edit
@@ -28,7 +29,8 @@ class TweetsController < ApplicationController
   # POST /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
-    @tweet.user = @current_user
+    @tweet.poster_id = current_user.id
+    @tweet.user = current_user
     #current_user was already defined somewhere, while finding by :user_id
     # might not work for some reason. You were working from the wrong demo blog
 
@@ -72,8 +74,7 @@ class TweetsController < ApplicationController
 
     @old_tweet = Tweet.find(params[:id])
 
-    @retweet = Tweet.new(content: ("RT: "+ @old_tweet.content), user_id: @old_tweet.user_id, is_retweet: true)
-
+    @retweet = Tweet.new(content: ("RT: "+ @old_tweet.content), user_id: @old_tweet.user_id, is_retweet: true, poster_id: current_user.id)
     @retweet.save
     redirect_to tweets_path
 
@@ -90,10 +91,11 @@ class TweetsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
       @tweet = Tweet.find(params[:id])
+      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tweet_params
-      params.require(:tweet).permit(:content, :user_id, :is_retweet)
+      params.require(:tweet).permit(:content, :user_id, :is_retweet, :poster_id)
     end
 end
