@@ -1,6 +1,7 @@
-<%= simple_form_for @user do |f| %>
+
+	<%= simple_form_for @user do |f| %>
   
-  <br>
+    <br>
 
     <%= f.hidden_field :first_name, input_html: { maxlength: 20 }, label: 'First Name'%>
     <%= f.hidden_field :last_name, input_html: { maxlength: 20 }, label: 'Last Name' %>
@@ -10,8 +11,8 @@
     <%= f.input :current_location, input_html:{ maxlength: 20 }, label: 'Current Location' %>
     <%= f.submit 'Update Profile' %>
 
-   
-  
-<% end %>
 
-<br>
+  
+	<% end %>
+
+	<br>

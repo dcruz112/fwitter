@@ -10,8 +10,20 @@
 	<div id="header">
 		<% if current_user(false) %>
 			<div id="user_info">
-				Welcome to Fwitter, <%= current_user.first_name %> 
-				<%= link_to image_tag("bull.png"), new_tweet_path %>
+				Welcome to Fwitter, <%= current_user.first_name %><br> 
+
+
+				<% h = (Time.now.hour+20)%24 %>
+				<% m = Time.now.min %>
+				<% m = "0" + m.to_s if m < 10 %>
+				<% am_or_pm = "AM" %>
+				<% am_or_pm = "PM" if h > 12 %>
+				<% h = h - 12 if h > 12 %>
+				<%= "It is #{h}:#{m}#{am_or_pm} at Yale" %>
+				
+
+				<br>
+				<%= link_to image_tag("yalelogo.jpg"), new_tweet_path %>
 			</div>
 			<div id="logout">
 			<%= link_to "Log Out", log_out_path %>
