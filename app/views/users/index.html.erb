@@ -1,18 +1,15 @@
 
 <div class="list-of-users" style= "margin-left: 300px;">
-<h1>Administrator: List of Users</h1>
+<h1>Accounts</h1>
 
 <table>
   <thead>
     <tr>
       <th></th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Netid</th>
+      <th>Name</th>
       <th>Handle</th>
       <th>Biography</th>
       <th>Current location</th>
-      <th>E-mail</th>
       <th></th>
     </tr>
   </thead>
@@ -22,16 +19,11 @@
       <% if  user.netid == session[:cas_user] %>
         <tr class=<%= user.default ? 'current' : 'others' %>>
           <td><%= "*" if user.default %></td>
-          <td><%= user.first_name %></td>
-          <td><%= user.last_name %></td>
-          <td><%= user.netid %></td>
+          <td><%= link_to user.full_name, user %></td>
           <td><%= user.handle_at %></td>
           <td><%= user.biography %></td>
           <td><%= user.current_location %></td>
-          <td><%= user.email %></td>
-          <td><%= link_to 'Show Tweets', user %></td>
           <td><%= link_to 'Switch User', user %></td>
-          <td><%= link_to 'Set as Default', default_path(user) %></td>
           <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
           <td><%= link_to 'Delete Profile', user, method: :delete, data: 
                   { confirm: 'Warning: This will permanently delete your profile and tweets.' } %></td>
@@ -43,5 +35,5 @@
 
 <br>
 
-<%= link_to 'Add another account!', new_user_path %>
+<%= link_to 'Add another!', new_user_path %>
 </div>
