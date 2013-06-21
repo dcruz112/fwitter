@@ -13,14 +13,17 @@
  */
 
 #logout {
-	float: right;
+	
+	position: fixed;
+	right:10px; top:25px;
 	color: blue;
 	border: 1px solid black;
 	padding: 8px;
 }
 
 #login {
-	float: right;
+	margin-right:10px;
+	position: fixed;
 	color: blue;
 	border: 1px solid black;
 	padding: 8px;
@@ -29,6 +32,7 @@
 #header {
  	color: #0F4D92;
  	font-size: 18px;
+ 	position: fixed;
  }
 
 a:link {
@@ -48,7 +52,14 @@ border-bottom:2px;
 text-decoration:none;
 }
 
-.user-profile-info {
-	margin-left: 300px;
-	width: 300px;
+
+
+
+img {
+opacity:0.7;
+
+}
+
+img:hover {
+opacity:1;
 }
