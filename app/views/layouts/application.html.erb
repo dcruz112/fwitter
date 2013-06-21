@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Fwitter: A Brief Unique Messaging Service for Yale Students Only</title>
+  <title>Fwitter</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -10,6 +10,7 @@
 	<div id="header">
 		<% if current_user(false) %>
 			<div id="user_info">
+				<h1><%= link_to 'FWITTER', root_path %></h1>
 				Welcome to Fwitter, <%= current_user.first_name %><br> 
 
 
