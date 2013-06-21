@@ -16,7 +16,15 @@
 
 	  		<%=  link_to tweet.content,  tweet %>
 	  	</div>
-	  	
+	 
+
+	  	<div>
+	  		<% if tweet.is_retweet %>
+	  			<%= "Retweeted by #{current_user.full_name}" %>
+	  		<% end %>
+	  	</div>
+
+
 	  	<div class="tweet-footer">
 	  		<table>	
 	  			<!-- <td><%= link_to 'Show', tweet %></td> -->
@@ -25,8 +33,12 @@
 	        			<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
         				<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
 	        		<% end %> 
-	        		<% if current_user != tweet.user %>
+	        		<% if (current_user != tweet.user && tweet.is_retweet != true) %>
 	        			<%= link_to 'Retweet', retweet_path(tweet) %>	
+        				<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
+	        		<% end %> 
+	        		<% if (current_user != tweet.user && tweet.is_retweet == true) %>
+	        			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>	
         				<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
 	        		<% end %> 
         		</td>

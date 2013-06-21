@@ -69,8 +69,17 @@ class TweetsController < ApplicationController
 
 
   def retweet
-    @tweet = Tweet.find(params[:id])
-    @tweet.is_retweet = true
+
+    @old_tweet = Tweet.find(params[:id])
+
+    @retweet = Tweet.new(content: ("RT: "+ @old_tweet.content), user_id: @old_tweet.user_id, is_retweet: true)
+
+    @retweet.save
+    redirect_to tweets_path
+
+
+    #@retweet.content = "RT: " + @retweet.content.to_s  + "\nRetweeted by: " + @current_user.full_name
+  
   # @tweet = self
   #   @tweet.content = 'RT' + tweet.content.to_s
   # @tweet.updated_at = Time.now
