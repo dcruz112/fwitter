@@ -4,29 +4,27 @@ Project1::Application.routes.draw do
   get '/log_in' => 'sessions#log_in', as: :log_in
   get '/log_out' => 'sessions#log_out', as: :log_out
   get '/follow/:id' => 'users#follow', as: :follow
-  get '/users/:id/follow' => 'users#follow'
-
-  
+  get '/default/:id' => 'users#default', as: :default
   get '/retweet/:id' => 'tweets#retweet', as: :retweet
-  get '/tweets/:id/retweet' => 'tweets#retweet' 
+  get '/tweets/:id/retweet' => 'tweets#retweet'
+
 
 
   #resources :tweets
-  
+
   resources :tweets do
     member do
       get 'retweet'
-    end 
+    end
   end
-
 
   resources :users do
     member do
       get 'follow'
-    end 
+    end
   end
 
-  # We'll want to add a follow route at some point, I suppose? 
+  # We'll want to add a follow route at some point, I suppose?
     # And eventually implement Ajax for auto-following
 
   # The priority is based upon order of creation: first created -> highest priority.

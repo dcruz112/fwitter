@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>First name</th>
       <th>Last name</th>
       <th>Netid</th>
@@ -12,7 +13,6 @@
       <th>Biography</th>
       <th>Current location</th>
       <th>E-mail</th>
-      <th>Default</th>
       <th></th>
     </tr>
   </thead>
@@ -20,7 +20,8 @@
   <tbody class='users'>
     <% @users.each do |user| %>
       <% if  user.netid == session[:cas_user] %>
-        <tr class=<%= user.default ? 'default' : 'normal' %>>
+        <tr class=<%= user.default ? 'current' : 'others' %>>
+          <td><%= "*" if user.default %></td>
           <td><%= user.first_name %></td>
           <td><%= user.last_name %></td>
           <td><%= user.netid %></td>
@@ -28,10 +29,9 @@
           <td><%= user.biography %></td>
           <td><%= user.current_location %></td>
           <td><%= user.email %></td>
-          <td><%= user.default %></td>
           <td><%= link_to 'Show Tweets', user %></td>
           <td><%= link_to 'Switch User', user %></td>
-          <td><%= link_to 'Set as Default', user, {:action => "default", :id => user} %></td>
+          <td><%= link_to 'Set as Default', default_path(user) %></td>
           <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
           <td><%= link_to 'Delete Profile', user, method: :delete, data: 
                   { confirm: 'Warning: This will permanently delete your profile and tweets.' } %></td>
@@ -43,5 +43,5 @@
 
 <br>
 
-<%= link_to 'Sign up!', new_user_path %>
+<%= link_to 'Add another account!', new_user_path %>
 </div>

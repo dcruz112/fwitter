@@ -101,9 +101,13 @@ class UsersController < ApplicationController
   end
 
   def default
-    User.where(default: true).first.default = false
-    User.find(id).default = true
-    redirect_to index_user_path
+    @old_default = User.where(netid: session[:cas_user], default: true).first
+    @old_default.default = false
+    @old_default.save
+    @new_default = User.find(params[:id])
+    @new_default.default = true
+    @new_default.save
+    redirect_to users_path
   end
 
   private

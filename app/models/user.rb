@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
 
 	validates :first_name, :last_name, :handle, :email, presence: true
 	validates :handle, uniqueness: { case_sensitive: false }
-	#validates :netid, uniqueness: true
 	validates :handle, allow_blank: true, format: { with: /\A[a-zA-Z0-9_]+\z/,
     message: "Only use letters, numbers, and '_'" }
 
