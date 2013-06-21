@@ -31,6 +31,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.poster_id = current_user.id
     @tweet.user = current_user
+    @tweet.is_retweet = false
     #current_user was already defined somewhere, while finding by :user_id
     # might not work for some reason. You were working from the wrong demo blog
 
@@ -74,7 +75,8 @@ class TweetsController < ApplicationController
 
     @old_tweet = Tweet.find(params[:id])
 
-    @retweet = Tweet.new(content: ("RT: "+ @old_tweet.content), user_id: @old_tweet.user_id, is_retweet: true, poster_id: current_user.id)
+    @retweet = Tweet.new(content: ("RT: "+ @old_tweet.content), 
+      user_id: @old_tweet.user_id, is_retweet: true, poster_id: current_user.id)
     @retweet.save
     redirect_to tweets_path
 

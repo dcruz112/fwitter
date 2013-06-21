@@ -14,7 +14,7 @@
 				Welcome to Fwitter, <%= current_user.first_name %><br> 
 
 
-				<% h = (Time.now.hour+20)%24 %>
+				<% h = (Time.now.hour)%24 %>
 				<% m = Time.now.min %>
 				<% m = "0" + m.to_s if m < 10 %>
 				<% am_or_pm = "AM" %>
@@ -24,6 +24,7 @@
 				
 
 				<br>
+				<h2><%= link_to 'FEED', tweets_path %></h2>
 				<%= link_to image_tag("yalelogo.jpg"), new_tweet_path %>
 			</div>
 			<div id="logout">
