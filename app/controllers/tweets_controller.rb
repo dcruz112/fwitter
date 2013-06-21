@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :retweet]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index]
@@ -69,6 +69,8 @@ class TweetsController < ApplicationController
 
 
   def retweet
+    @tweet = Tweet.find(params[:id])
+    @tweet.is_retweet = true
   # @tweet = self
   #   @tweet.content = 'RT' + tweet.content.to_s
   # @tweet.updated_at = Time.now
@@ -83,6 +85,6 @@ class TweetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tweet_params
-      params.require(:tweet).permit(:content, :user_id)
+      params.require(:tweet).permit(:content, :user_id, :is_retweet)
     end
 end
