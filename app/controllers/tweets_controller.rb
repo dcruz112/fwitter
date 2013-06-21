@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :retweet]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index]
@@ -21,7 +21,7 @@ class TweetsController < ApplicationController
   end
 
   # GET /tweets/1/edit
-  def edit
+  def edit 
   end
 
   # POST /tweets
@@ -48,7 +48,7 @@ class TweetsController < ApplicationController
   def update
     respond_to do |format|
       if @tweet.update(tweet_params)
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully updated.' }
+        format.html { redirect_to @tweet}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -66,6 +66,14 @@ class TweetsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  def retweet
+  # @tweet = self
+  #   @tweet.content = 'RT' + tweet.content.to_s
+  # @tweet.updated_at = Time.now
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
