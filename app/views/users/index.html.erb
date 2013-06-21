@@ -17,19 +17,23 @@
 
   <tbody>
     <% @users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.netid %></td>
-        <td><%= user.handle_at %></td>
-        <td><%= user.biography %></td>
-        <td><%= user.current_location %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show Tweets', user %></td>
-        <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
-        <td><%= link_to 'Delete Profile', user, method: :delete, data: 
-                { confirm: 'Warning: This will permanently delete your profile and tweets.' } %></td>
-      </tr>
+      <% if  user.netid == session[:cas_user] %>
+        <tr>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.netid %></td>
+          <td><%= user.handle_at %></td>
+          <td><%= user.biography %></td>
+          <td><%= user.current_location %></td>
+          <td><%= user.email %></td>
+          <td><%= link_to 'Show Tweets', user %></td>
+          <td><%= link_to 'Switch User', user %></td>
+          <td><%= link_to 'Set as Default', default_user_path %></td>
+          <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
+          <td><%= link_to 'Delete Profile', user, method: :delete, data: 
+                  { confirm: 'Warning: This will permanently delete your profile and tweets.' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

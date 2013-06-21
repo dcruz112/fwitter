@@ -4,10 +4,10 @@
 
     <%= f.hidden_field :first_name, input_html: { maxlength: 20 }, label: 'First Name'%>
     <%= f.hidden_field :last_name, input_html: { maxlength: 20 }, label: 'Last Name' %>
+    <%= f.hidden_field :email, input_html:{ maxlength: 30 }, label: 'E-mail' %>
     <%= f.input :handle, input_html: { maxlength: 15 }, label: 'Handle' %>
     <%= f.input :biography, input_html: { maxlength: 160 }, label: 'Biography' %>
     <%= f.input :current_location, input_html:{ maxlength: 20 }, label: 'Current Location' %>
-    <%= f.hidden_field :email, input_html:{ maxlength: 30 }, label: 'E-mail' %>
     <%= f.submit 'Update Profile' %>
 
    

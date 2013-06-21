@@ -27,6 +27,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @id = params[:id]
+    if @id.nil?
+      @user = User.find(current_user.id)
+    else
+      @user = User.find(@id)
+    end
   end
 
   # POST /users
@@ -37,7 +43,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_path(delete: false), notice: 'User was successfully created.' }
+        format.html { redirect_to users_path, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -77,6 +83,13 @@ class UsersController < ApplicationController
     @id = params[:id]
     @following = []
     @following << User.find(@id)
+  end
+
+  def change
+    
+  end
+
+  def default
   end
 
   private
