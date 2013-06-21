@@ -11,7 +11,9 @@
 			</div>
 
 
-<div><%= render @user.tweets.reverse %></div>
+<div>
+	<%= render Tweet.where(poster_id: @user.id).reverse %>
+</div>
 
 <div> <%= @following.inspect %> </div>
 

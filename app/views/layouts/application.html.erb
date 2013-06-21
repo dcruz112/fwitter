@@ -13,7 +13,7 @@
 				Welcome to Fwitter, <%= current_user.first_name %><br> 
 
 
-				<% h = (Time.now.hour)%24 %>
+				<% h = (Time.now.hour+20)%24 %>
 				<% m = Time.now.min %>
 				<% m = "0" + m.to_s if m < 10 %>
 				<% am_or_pm = "AM" %>
