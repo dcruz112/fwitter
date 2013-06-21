@@ -23,10 +23,21 @@ class UsersController < ApplicationController
     @net_id = session[:cas_user]
     @user.search_ldap(@net_id)
     @user.netid = @net_id
+    if !current_user(false)
+      @user.default = true
+    else
+      @user.default = false
+    end
   end
 
   # GET /users/1/edit
   def edit
+    @id = params[:id]
+    if @id.nil?
+      @user = User.find(current_user.id)
+    else
+      @user = User.find(@id)
+    end
   end
 
   # POST /users
@@ -34,9 +45,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
+    if !current_user(false)
+      @user.default = true
+    else
+      @user.default = false
+    end
 
     respond_to do |format|
       if @user.save
+
         format.html { redirect_to root_path(delete: false) }
         format.json { render action: 'show', status: :created, location: @user }
       else
@@ -79,6 +96,16 @@ class UsersController < ApplicationController
     @following << User.find(@id)
   end
 
+  def change
+    
+  end
+
+  def default
+    User.where(default: true).first.default = false
+    User.find(id).default = true
+    redirect_to index_user_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -90,6 +117,3 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :handle, :biography, :current_location, :email)
     end
 end
-
-
-

@@ -5,10 +5,11 @@ Project1::Application.routes.draw do
   get '/log_out' => 'sessions#log_out', as: :log_out
   get '/follow/:id' => 'users#follow', as: :follow
   get '/users/:id/follow' => 'users#follow'
+
   
   get '/retweet/:id' => 'tweets#retweet', as: :retweet
   get '/tweets/:id/retweet' => 'tweets#retweet' 
-  # get '/users/:id' => 'users#show', as: :show
+
 
   #resources :tweets
   

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   private
   
   def current_user(redirect=true)
-  	@possible_user_list = User.where(netid: session[:cas_user])
+  	@possible_user_list = User.where(netid: session[:cas_user], default: true)
     if !@possible_user_list.empty?
       @current_user = @possible_user_list.first
     elsif redirect && !params[:delete]
@@ -23,4 +23,5 @@ class ApplicationController < ActionController::Base
       nil
     end
   end
+
 end

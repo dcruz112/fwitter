@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	validates :first_name, :last_name, :handle, presence: true
+	validates :first_name, :last_name, :handle, :email, presence: true
 	validates :handle, uniqueness: { case_sensitive: false }
 	#validates :netid, uniqueness: true
 	validates :handle, allow_blank: true, format: { with: /\A[a-zA-Z0-9_]+\z/,
