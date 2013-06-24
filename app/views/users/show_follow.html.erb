@@ -1,0 +1,21 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1><%= @user.handle %></h1>
+      <span><%= link_to "view my profile", @user %></span>
+      <span><b>Tweets:</b> <%= @user.tweets.count %></span>
+    </section>
+    <section>
+      <%= render 'stats' %>
+    </section>
+  </aside>
+  <div class="span8">
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+      <ul class="users">
+       <%= render @users %>
+      </ul>
+    <% end %>
+  </div>
+</div>

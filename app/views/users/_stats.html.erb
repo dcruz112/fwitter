@@ -1,0 +1,8 @@
+<% @user ||= current_user %>
+
+<div> <a href ="<%= following_user_path(@user) %>">Following <%= @user.followed_users.count %> </a> </div>
+
+<div> <a href ="<%= followers_user_path(@user) %>">Followed By <%= @user.followers.count %> </a> </div>
+
+
+Should I be moving this to a separate "shared" view folder to make it work?
