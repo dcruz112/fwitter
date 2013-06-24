@@ -2,6 +2,10 @@ require 'net/ldap'
 
 class User < ActiveRecord::Base
 	has_many :tweets
+	has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+	has_many :followed_users, through: :relationships, source: :followed
+	has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+	has_many :followers, through: :reverse_relationships, source: :follower
 
 	def search_ldap(login)
 	    ldap = Net::LDAP.new(:host => "directory.yale.edu", :port => 389)
@@ -32,5 +36,17 @@ class User < ActiveRecord::Base
 
 	def full_name
 		first_name + " " + last_name
+	end
+
+	def following?(some_user)
+		Relationship.find_by(followed_id: some_user.id)
+	end
+
+	def follow!(other_user)
+		self.relationships.create!(followed_id: other_user.id)
+	end
+
+	def unfollow!(other_user)
+		relationships.find_by(followed_id: other_user.id).destroy
 	end
 end

@@ -1,7 +1,7 @@
 require 'open-uri'
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index, :new, :create]
@@ -93,14 +93,15 @@ class UsersController < ApplicationController
     end
   end
 
-  def follow
-    @id = params[:id]
-    @following = []
-    @following << User.find(@id)
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users
+    # .paginate(page: params[:page])
+    render 'show_follow'
   end
 
   def change
-    
   end
 
   def show_stuff
@@ -117,6 +118,14 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers
+    # .paginate(page: params[:page])
+    render 'show_follow'
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

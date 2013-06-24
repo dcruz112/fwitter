@@ -10,23 +10,26 @@ Project1::Application.routes.draw do
   get '/tweets/:id/retweet' => 'tweets#retweet'
 
 
-
-  #resources :tweets
-
   resources :tweets do
     member do
       get 'retweet'
     end
   end
 
+  resources :tweets
+  resources :relationships
   resources :users do
     member do
-      get 'follow'
-    end
+      get :following, :followers
+    end 
   end
 
   # We'll want to add a follow route at some point, I suppose?
     # And eventually implement Ajax for auto-following
+
+
+  # We want to use member rather than collection stuff, because there doesn't
+  # seem to be a point to seeing all followers in the DB -- maybe for admin?
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
