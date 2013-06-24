@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0.rc1'
 
 gem 'net-ldap'
+gem 'nokogiri'
+gem 'mechanize'
 
 gem 'faker', '1.1.2'
 
