@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div id="header">
+	<div id="sidebar">
 		<% if current_user(false) %>
 			<div id="user_info">
 				<h1><%= link_to 'FWITTER', root_path %></h1>
@@ -25,7 +25,7 @@
 
 				<br>
 				<h2><%= link_to 'FEED', tweets_path %></h2>
-				<%= link_to image_tag("yalelogo.jpg"), new_tweet_path %>
+				<div id="tweet-button"><%= link_to image_tag("yalelogo.jpg"), new_tweet_path %></div>
 			</div>
 			<div id="logout">
 			<%= link_to "Log Out", log_out_path %>

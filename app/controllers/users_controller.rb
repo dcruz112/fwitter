@@ -98,6 +98,14 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers
+    # .paginate(page: params[:page])
+    render 'show_follow'
+  end
+  
   def change
   end
 
@@ -109,14 +117,6 @@ class UsersController < ApplicationController
     @new_default.default = true
     @new_default.save
     redirect_to users_path
-  end
-
-  def followers
-    @title = "Followers"
-    @user = User.find(params[:id])
-    @users = @user.followers
-    # .paginate(page: params[:page])
-    render 'show_follow'
   end
   
   private

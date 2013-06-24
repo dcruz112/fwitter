@@ -29,11 +29,16 @@
 	padding: 8px;
 }
 
-#header {
+#sidebar {
  	color: #0F4D92;
  	font-size: 18px;
  	position: fixed;
+ 	margin-right: 10px
  }
+
+#tweet-button {
+	margin-top: 100px;
+}
 
 a:link {
 	color:black;
