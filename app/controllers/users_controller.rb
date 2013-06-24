@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -80,6 +82,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
     @user.tweets.each do |tweet|
       tweet.destroy
@@ -98,6 +101,10 @@ class UsersController < ApplicationController
 
   def change
     
+  end
+
+  def show_stuff
+    @doc = Nokogiri::HTML(open("https://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1"))
   end
 
   def default

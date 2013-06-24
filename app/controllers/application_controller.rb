@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def current_user(redirect=true)
     @user_list = User.where(netid: session[:cas_user], default: true)
     if !@user_list.empty?
+      
       @current_user = @user_list.first
     elsif redirect && !params[:delete]
       redirect_to new_user_path and return

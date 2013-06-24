@@ -5,6 +5,7 @@ Project1::Application.routes.draw do
   get '/log_out' => 'sessions#log_out', as: :log_out
   get '/follow/:id' => 'users#follow', as: :follow
   get '/default/:id' => 'users#default', as: :default
+  get '/show_stuff' => 'users#show_stuff', as: :show_stuff
   get '/retweet/:id' => 'tweets#retweet', as: :retweet
   get '/tweets/:id/retweet' => 'tweets#retweet'
 
