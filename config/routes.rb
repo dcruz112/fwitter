@@ -3,20 +3,33 @@ Project1::Application.routes.draw do
 
   get '/log_in' => 'sessions#log_in', as: :log_in
   get '/log_out' => 'sessions#log_out', as: :log_out
-  get '/follow/:id' => 'users#follow', as: :follow
-  get '/users/:id/follow' => 'users#follow'
-  # get '/users/:id' => 'users#show', as: :show
+
+  # namespace :users, :module => "relationships" do
+  #   resources :following, :followers
+  # end
+
+  # try following/users/1 instead?
+
+  # The "namespace" thing they keep talking about in routes is important
+
+  # scope "/users/:id/following" do
+  #   resources :relationships
+  # end
 
   resources :tweets
-  # as: User.find(:user_id).show
+  resources :relationships
   resources :users do
     member do
-      get 'follow'
+      get :following, :followers
     end 
   end
 
   # We'll want to add a follow route at some point, I suppose? 
     # And eventually implement Ajax for auto-following
+
+
+  # We want to use member rather than collection stuff, because there doesn't
+  # seem to be a point to seeing all followers in the DB -- maybe for admin?
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index, :new, :create]
@@ -10,7 +10,11 @@ class UsersController < ApplicationController
 
   def show
     @id = params[:id]
-    @user = User.find(@id)
+    if @id.nil?
+      @user = User.find(current_user.id)
+    else
+      @user = User.find(@id)
+    end
   end
 
   # GET /users/new
@@ -69,12 +73,22 @@ class UsersController < ApplicationController
     end
   end
 
-  def follow
-    @id = params[:id]
-    @following = []
-    @following << User.find(@id)
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users
+    # .paginate(page: params[:page])
+    render 'show_follow'
   end
 
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers
+    # .paginate(page: params[:page])
+    render 'show_follow'
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
