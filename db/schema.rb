@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130621210805) do
+ActiveRecord::Schema.define(version: 20130624142016) do
+
+  create_table "retweets", force: true do |t|
+    t.text     "content"
+    t.string   "user_id"
+    t.string   "poster_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "tweet_id"
+  end
+
+  add_index "retweets", ["tweet_id"], name: "index_retweets_on_tweet_id"
 
   create_table "tweets", force: true do |t|
     t.text     "content"

@@ -1,22 +1,33 @@
 Project1::Application.routes.draw do
+  
+
   root to: 'users#show'
 
   get '/log_in' => 'sessions#log_in', as: :log_in
   get '/log_out' => 'sessions#log_out', as: :log_out
   get '/follow/:id' => 'users#follow', as: :follow
   get '/default/:id' => 'users#default', as: :default
-  get '/retweet/:id' => 'tweets#retweet', as: :retweet
-  get '/tweets/:id/retweet' => 'tweets#retweet'
+  # get '/retweet/:id' => 'tweets#retweet', as: :retweet
+  # get '/tweets/:id/retweet' => 'tweets#retweet'
 
 
+  # get '/retweet/:id' => 'retweets#show'
+  # get '/retweets' => 'retweets#new', as: :new_retweet
+  # post '/retweets' => 'retweets#create', as: :retweet
+  # delete '/retweets/:id' => 'retweets#destroy'
+  # patch '/retweets/:id' => 'retweets#update'
+  # put '/retweets/:id' => 'retweets#update'
+  # get '/retweets' => 'retweets#index', as: :retweets
 
-  #resources :tweets
+  resources :retweets
 
-  resources :tweets do
-    member do
-      get 'retweet'
-    end
-  end
+  resources :tweets
+
+  # resources :tweets do
+  #   member do
+  #     get 'retweet'
+  #   end
+  # end
 
   resources :users do
     member do
