@@ -7,9 +7,6 @@ Project1::Application.routes.draw do
   get '/log_out' => 'sessions#log_out', as: :log_out
   get '/follow/:id' => 'users#follow', as: :follow
   get '/default/:id' => 'users#default', as: :default
-  # get '/retweet/:id' => 'tweets#retweet', as: :retweet
-  # get '/tweets/:id/retweet' => 'tweets#retweet'
-
 
   # get '/retweet/:id' => 'retweets#show'
   # get '/retweets' => 'retweets#new', as: :new_retweet
@@ -18,25 +15,30 @@ Project1::Application.routes.draw do
   # patch '/retweets/:id' => 'retweets#update'
   # put '/retweets/:id' => 'retweets#update'
   # get '/retweets' => 'retweets#index', as: :retweets
+ 
+
+  get '/switch_user/:id' => 'users#switch_user', as: :switch_user
+  get '/show_stuff' => 'users#show_stuff', as: :show_stuff
+
 
   resources :retweets
 
   resources :tweets
 
-  # resources :tweets do
-  #   member do
-  #     get 'retweet'
-  #   end
-  # end
+  resources :relationships
 
   resources :users do
     member do
-      get 'follow'
-    end
+      get :following, :followers
+    end 
   end
 
   # We'll want to add a follow route at some point, I suppose?
     # And eventually implement Ajax for auto-following
+
+
+  # We want to use member rather than collection stuff, because there doesn't
+  # seem to be a point to seeing all followers in the DB -- maybe for admin?
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

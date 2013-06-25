@@ -4,6 +4,13 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0.rc1'
 
 gem 'net-ldap'
+gem 'nokogiri'
+gem 'mechanize'
+gem 'net-http-digest_auth'
+
+gem 'faker', '1.1.2'
+
+# gem 'will_paginate', '3.0.4'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

@@ -1,5 +1,10 @@
+require 'rubygems'
+require 'rbconfig'
+require 'mechanize'
+require 'open-uri'
+
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index, :new, :create]
@@ -80,24 +85,40 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    @user.tweets.each do |tweet|
-      tweet.destroy
-    end
-    respond_to do |format|
-      format.html { redirect_to log_out_path(delete: true) }
-      format.json { head :no_content }
+    @user = User.find(params[:id])
+    if User.where(netid: session[:cas_user]).length == 1 || !@user.default
+      @user.destroy
+      @user.tweets.each do |tweet|
+        tweet.destroy
+      end
+      respond_to do |format|
+        format.html { redirect_to log_out_path(delete: true) }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to "http://www.youtube.com/watch?v=mJXYMDu6dpY"
     end
   end
 
-  def follow
-    @id = params[:id]
-    @following = []
-    @following << User.find(@id)
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users
+    # .paginate(page: params[:page])
+    render 'show_follow'
   end
 
-  def change
-    
+  def switch_user
+    @user = User.find(params[:id])
+    session[:current_account] = @user.id
+    redirect_to users_path
+  end
+
+  def show_stuff
+    @a = Mechanize.new
+    @a.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    @page = @a.get 'https://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1'
   end
 
   def default
@@ -110,6 +131,14 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers
+    # .paginate(page: params[:page])
+    render 'show_follow'
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

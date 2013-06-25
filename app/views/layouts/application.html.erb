@@ -13,15 +13,17 @@
 				<h1><%= link_to 'FWITTER', root_path %></h1>
 				Welcome to Fwitter, <%= current_user.first_name %><br> 
 
+				<% t = Time.now.localtime %>
 
-				<% h = (Time.now.hour+20)%24 %>
-				<% m = Time.now.min %>
+				<% h = (t.hour)%24 %>
+				<% m = t.min %>
+
+
 				<% m = "0" + m.to_s if m < 10 %>
 				<% am_or_pm = "AM" %>
 				<% am_or_pm = "PM" if h > 12 %>
 				<% h = h - 12 if h > 12 %>
 				<%= "It is #{h}:#{m}#{am_or_pm} at Yale" %>
-				
 
 				<br>
 				<h2><%= link_to 'FEED', tweets_path %></h2>

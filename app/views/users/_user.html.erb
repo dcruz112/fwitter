@@ -1,0 +1,32 @@
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Handle</th>
+      <th>Biography</th>
+      <th>Current location</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody class='users'>
+    <% @users.each do |user| %>
+      <% if  user.netid == session[:cas_user] %>
+        <tr class=<%= user.default ? 'current' : 'others' %>>
+          <td><%= "*" if user.default %></td>
+          <td><%= link_to user.full_name, user %></td>
+          <td><%= user.handle_at %></td>
+          <td><%= user.biography %></td>
+          <td><%= user.current_location %></td>
+          <td><%= link_to 'Switch User', user %></td>
+          <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
+          <td><%= link_to 'Delete Profile', user, method: :delete, data: 
+                  { confirm: 'Warning: This will permanently delete your profile and tweets.' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
