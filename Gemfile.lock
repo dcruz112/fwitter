@@ -157,6 +157,7 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   mechanize
+  net-http-digest_auth
   net-ldap
   nokogiri
   rails (= 4.0.0.rc1)

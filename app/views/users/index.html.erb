@@ -17,19 +17,19 @@
   <tbody class='users'>
     <% @users = User.where(netid: session[:cas_user]) %>
     <% @users.each do |user| %>
-      <tr class=<%= user.default ? 'current' : 'others' %>>
+      <tr class=<%= user.id == session[:current_account] ? 'current' : 'others' %>>
         <td><%= "*" if user.default %></td>
         <td><%= link_to user.full_name, user %></td>
         <td><%= user.handle_at %></td>
         <td><%= user.biography %></td>
         <td><%= user.current_location %></td>
-        <td><%= link_to 'Switch To', user %></td>
+        <td><%= link_to 'Switch To', switch_user_path(user) %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Show Stuff', show_stuff_path %></td>
         <td>
           <% if @users.length > 1 && user.default %>
               <%= link_to 'Delete', users_path, data: 
-              { confirm: 'You must choose a new default acchttps://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1ount if you wish to delete this account.'} %>
+              { confirm: 'You must choose a new default account if you wish to delete this account.'} %>
           <% else %>
             <%= link_to 'Delete', user, method: :delete, class: :destroy, data: 
                 { confirm: 'Warning: This will permanently delete your profile and tweets.' } %>

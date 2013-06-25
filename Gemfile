@@ -6,6 +6,7 @@ gem 'rails', '4.0.0.rc1'
 gem 'net-ldap'
 gem 'nokogiri'
 gem 'mechanize'
+gem 'net-http-digest_auth'
 
 gem 'faker', '1.1.2'
 

@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'rbconfig'
+require 'mechanize'
 require 'open-uri'
 
 class UsersController < ApplicationController
@@ -83,13 +86,17 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    @user.tweets.each do |tweet|
-      tweet.destroy
-    end
-    respond_to do |format|
-      format.html { redirect_to log_out_path(delete: true) }
-      format.json { head :no_content }
+    if User.where(netid: session[:cas_user]).length == 1 || !@user.default
+      @user.destroy
+      @user.tweets.each do |tweet|
+        tweet.destroy
+      end
+      respond_to do |format|
+        format.html { redirect_to log_out_path(delete: true) }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to "http://www.youtube.com/watch?v=mJXYMDu6dpY"
     end
   end
 
@@ -101,11 +108,17 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  def change
+  def switch_user
+    @user = User.find(params[:id])
+    session[:current_account] = @user.id
+    redirect_to users_path
   end
 
   def show_stuff
-    @doc = Nokogiri::HTML(open("https://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1"))
+    @a = Mechanize.new
+    @a.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    @page = @a.get 'http://www.bbc.com/news/'#'https://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1'
   end
 
   def default
