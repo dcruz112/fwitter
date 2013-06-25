@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130621221559) do
+ActiveRecord::Schema.define(version: 20130624142016) do
 
-  create_table "relationships", force: true do |t|
+    create_table "relationships", force: true do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
     t.datetime "created_at"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 20130621221559) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
 
+
+  create_table "retweets", force: true do |t|
+    t.text     "content"
+    t.string   "user_id"
+    t.string   "poster_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "tweet_id"
+  end
+
+  add_index "retweets", ["tweet_id"], name: "index_retweets_on_tweet_id"
+
   create_table "tweets", force: true do |t|
     t.text     "content"
     t.datetime "created_at"
@@ -31,7 +43,6 @@ ActiveRecord::Schema.define(version: 20130621221559) do
     t.integer  "user_id"
     t.boolean  "is_retweet"
     t.string   "poster_id"
-    t.boolean  "retweeted"
   end
 
   add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"

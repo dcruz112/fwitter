@@ -1,0 +1,29 @@
+<h1>Listing retweets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>User</th>
+      <th>Poster</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @retweets.each do |retweet| %>
+      <tr>
+        <td><%= retweet.content %></td>
+        <td><%= retweet.user_id %></td>
+        <td><%= retweet.poster_id %></td>
+        <td><%= link_to 'Show', retweet %></td>
+        <td><%= link_to 'Destroy', retweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
