@@ -50,6 +50,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
+    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
     if !current_user(false)
       @user.default = true
     else
@@ -153,6 +154,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :handle, :biography, :current_location, :email)
+      params.require(:user).permit(:first_name, :last_name, :handle, :biography, 
+        :current_location, :email, :college)
     end
 end

@@ -11,6 +11,7 @@
     <%= f.input :handle, input_html: { maxlength: 15 }, label: 'Handle' %>
     <%= f.input :biography, input_html: { maxlength: 160 }, label: 'Biography' %>
     <%= f.input :current_location, input_html:{ maxlength: 20 }, label: 'Current Location' %>
+    <%= f.hidden_field :college, input_html:{ maxlength: 2 }, label: 'College' %>
     <%= f.submit 'Save Changes' %>
 
 <% end %>

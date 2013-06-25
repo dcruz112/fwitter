@@ -8,11 +8,11 @@ class User < ActiveRecord::Base
 	has_many :followers, through: :reverse_relationships, source: :follower
 
 	def search_ldap(login)
-	    ldap = Net::LDAP.new(:host => "directory.yale.edu", :port => 389)
+	    ldap = Net::LDAP.new(host: "directory.yale.edu", port: 389)
 	    filter = Net::LDAP::Filter.eq("uid", login)
 	    attrs = ["givenname", "sn", "eduPersonNickname", "telephoneNumber", "uid",
 	             "mail", "collegename", "curriculumshortname", "college", "class"]
-	    result = ldap.search(:base => "ou=People,o=yale.edu", :filter => filter, :attributes => attrs)
+	    result = ldap.search(base: "ou=People,o=yale.edu", filter: filter, attributes: attrs)
 		if !result.empty?
 	    	@nickname = result[0][:eduPersonNickname]
 			if @nickname.empty?
@@ -22,11 +22,12 @@ class User < ActiveRecord::Base
 			end
 			self.last_name   = result[0][:sn][0]
 			self.email   = result[0][:mail][0]
+			self.college = result[0][:college][0]
 		end
 	end
 
 	validates :first_name, :last_name, :handle, :email, presence: true
-	validates :handle, uniqueness: { case_sensitive: false }, :unless => :update
+	validates :handle, uniqueness: { case_sensitive: false }
 	validates :handle, allow_blank: true, format: { with: /\A[a-zA-Z0-9_]+\z/,
     message: "Only use letters, numbers, and '_'" }
 

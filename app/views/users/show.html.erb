@@ -20,7 +20,10 @@
 	<% all_tweets_and_retweets.sort! { |x,y| y.updated_at <=> x.updated_at} %>
 		
 	<% all_tweets_and_retweets.each do |post| %>
-		<%= render post %>
+		<div>
+			<%= image_tag(post.user.image_url, class: '') %>
+			<%= render post %>
+		</div>
 	<% end %>
 </div>
 
@@ -35,7 +38,7 @@
 <%= link_to 'Profile', edit_user_path(@user) %> |
 <% end %>
 
-<%= link_to 'Accounts', users_path %>
+<%= link_to 'Accounts', users_path %> |
 
 <%= link_to 'Back', users_path %>
 

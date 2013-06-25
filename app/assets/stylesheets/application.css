@@ -56,12 +56,3 @@ a:active {
 	color:blue;
 	text-decoration:none;
 }
-
-img {
-opacity:0.7;
-
-}
-
-img:hover {
-opacity:1;
-}
