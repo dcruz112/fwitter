@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 	end
 
 	validates :first_name, :last_name, :handle, :email, presence: true
-	validates :handle, uniqueness: { case_sensitive: false }
+	validates :handle, uniqueness: { case_sensitive: false }, :unless => :update
 	validates :handle, allow_blank: true, format: { with: /\A[a-zA-Z0-9_]+\z/,
     message: "Only use letters, numbers, and '_'" }
 

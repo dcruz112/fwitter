@@ -92,7 +92,13 @@ class UsersController < ApplicationController
         tweet.destroy
       end
       respond_to do |format|
-        format.html { redirect_to log_out_path(delete: true) }
+        format.html { 
+          if session[:current_account] == @user.id || @user.default
+            session[:current_account] = nil
+            redirect_to log_out_path(delete: true)
+          else
+            redirect_to users_path
+          end }
         format.json { head :no_content }
       end
     else
