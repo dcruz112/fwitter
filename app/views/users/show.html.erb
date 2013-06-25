@@ -20,10 +20,7 @@
 	<% all_tweets_and_retweets.sort! { |x,y| y.updated_at <=> x.updated_at} %>
 		
 	<% all_tweets_and_retweets.each do |post| %>
-		<div>
-			<%= image_tag(post.user.image_url, class: '') %>
-			<%= render post %>
-		</div>
+		<%= render post %>
 	<% end %>
 </div>
 
