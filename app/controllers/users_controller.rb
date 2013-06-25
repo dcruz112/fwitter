@@ -118,7 +118,7 @@ class UsersController < ApplicationController
     @a = Mechanize.new
     @a.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    @page = @a.get 'http://www.bbc.com/news/'#'https://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1'
+    @page = @a.get 'https://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1'
   end
 
   def default

@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
         @current_account = User.find(session[:current_account])
       else
         @current_user = @user_list.first
+        session[:current_account] = @current_user.id
       end
     elsif redirect && !params[:delete]
       redirect_to new_user_path and return
