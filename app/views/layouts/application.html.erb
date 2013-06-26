@@ -5,36 +5,49 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
-	<div id="sidebar">
-		<% if current_user(false) %>
-			<div id="user_info">
-				<h1><%= link_to 'FWITTER', root_path %></h1>
-				Welcome to Fwitter, <%= current_user.first_name %><br> 
 
-				<% t = Time.now.localtime %>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+ 
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+ 
+      <a class="brand" href="#">Fwitter</a>
+      <!-- Everything you want hidden at 940px or less, place within here -->
+      <div class="nav-collapse">
+		<ul class="nav">
+		  <li><%= link_to "Name Here Later", user_path(@user) %></li>
+		  <li><%= link_to 'Enter the Stream', tweets_path %></li>
+		  <li><%= link_to "New Tweet", new_tweet_path %></li>
+		</ul> 
+      </div>
+ 
+    </div>
+  </div>
+</div>
 
-				<% h = (t.hour)%24 %>
-				<% m = t.min %>
+	<% if current_user(false) %>
 
-				<% m = "0" + m.to_s if m < 10 %>
-				<% am_or_pm = "AM" %>
-				<% am_or_pm = "PM" if h > 12 %>
-				<% h = h - 12 if h > 12 %>
-				<%= "It is #{h}:#{m}#{am_or_pm} at Yale" %>
-
-				<br>
-				<h2><%= link_to 'FEED', tweets_path %></h2>
-				<div id="tweet-button"><%= link_to image_tag("yalelogo.jpg"), new_tweet_path %></div>
-			</div>
-			<div id="logout">
-			<%= link_to "Log Out", log_out_path %>
-			</div>
-		<% end %>
+	<div id="logout">
+		<%= link_to "Log Out", log_out_path %>
 	</div>
 
-<%= yield %>
+	<% end %>
+
+	<div class="container">
+		<div class="row">
+			<div class="span12"><%= yield %></div>
+		</div>
+	</div>
 
 </body>
 </html>

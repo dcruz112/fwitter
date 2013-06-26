@@ -1,5 +1,7 @@
 class Tweet < ActiveRecord::Base
 	belongs_to :user
+	has_many :favorite_tweets
+	has_many :favorited_by, through: :favorite_tweets, source: :user
 
 
 	def time_since_tweet

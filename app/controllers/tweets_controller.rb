@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :favorite]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index]
@@ -69,7 +69,7 @@ class TweetsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
 
   def retweet
 
@@ -88,6 +88,21 @@ class TweetsController < ApplicationController
   # @tweet.updated_at = Time.now
   end
 
+  def favorite
+    type = params[:type]
+    if type == "favorite"
+      current_user.favorites << @tweet
+      redirect_to :back, notice: 'Tweet favorited.'
+
+    elsif type == "un-favorite"
+      current_user.favorites.delete(@tweet)
+      redirect_to :back, notice: 'Tweet un-favorited.'
+
+    else
+      redirect_to :back, notice: 'Something went wrong. Nothing happened.'
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -100,4 +115,5 @@ class TweetsController < ApplicationController
     def tweet_params
       params.require(:tweet).permit(:content, :user_id, :is_retweet, :poster_id)
     end
+
 end

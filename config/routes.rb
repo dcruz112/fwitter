@@ -1,26 +1,26 @@
 Project1::Application.routes.draw do
-  root to: 'users#show'
-
   get '/log_in' => 'sessions#log_in', as: :log_in
   get '/log_out' => 'sessions#log_out', as: :log_out
-  get '/follow/:id' => 'users#follow', as: :follow
   get '/default/:id' => 'users#default', as: :default
   get '/show_stuff' => 'users#show_stuff', as: :show_stuff
   get '/retweet/:id' => 'tweets#retweet', as: :retweet
   get '/tweets/:id/retweet' => 'tweets#retweet'
 
+    root to: 'users#show'
+
+
 
   resources :tweets do
     member do
       get 'retweet'
+      get :favorite
     end
   end
 
-  resources :tweets
   resources :relationships
   resources :users do
     member do
-      get :following, :followers
+      get :following, :followers, :favorites
     end 
   end
 

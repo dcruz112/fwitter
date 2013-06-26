@@ -4,11 +4,19 @@
 
 .user-sidebar {
 	margin-top: 25px;
+	position: relative;
 }
 
 .users {
 	text-align: center;
 	font: Georgia;
+}
+
+.user-form { 
+}
+
+td {
+	padding: 20px;
 }
 
 .current {

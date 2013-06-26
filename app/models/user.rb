@@ -2,7 +2,9 @@ require 'net/ldap'
 
 class User < ActiveRecord::Base
 	has_many :tweets
-	has_many :favorites
+	has_many :favorite_tweets
+	has_many :favorites, through: :favorite_tweets, source: :tweet
+	
 	has_many :relationships, foreign_key: "follower_id", dependent: :destroy
 	has_many :followed_users, through: :relationships, source: :followed
 	has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy

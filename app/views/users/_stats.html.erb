@@ -4,5 +4,4 @@
 
 <div> <a href ="<%= followers_user_path(@user) %>">Followed By <%= @user.followers.count %> </a> </div>
 
-
-Should I be moving this to a separate "shared" view folder to make it work?
+<div> <a href ="<%= favorites_user_path(@user) %>"> <%= @user.favorite_tweets.count %> Favorites </a> </div>

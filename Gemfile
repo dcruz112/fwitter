@@ -9,6 +9,8 @@ gem 'mechanize'
 
 gem 'faker', '1.1.2'
 
+gem 'twitter-bootstrap-rails'
+
 # gem 'will_paginate', '3.0.4'
 
 # Use sqlite3 as the database for Active Record
