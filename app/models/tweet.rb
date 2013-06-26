@@ -1,7 +1,10 @@
 class Tweet < ActiveRecord::Base
 	belongs_to :user
+	has_many :favorite_tweets
+	has_many :favorited_by, through: :favorite_tweets, source: :user
 	has_many :retweets
 	has_many :mentions
+
 
 	def time_since_tweet
 		seconds = Time.now - self.updated_at
@@ -32,10 +35,5 @@ class Tweet < ActiveRecord::Base
 		months = { 1 => " Jan", 2 => " Feb", 3 =>" Mar", 4 => " Apr", 5 => " May", 6 => " Jun", 7 => " Jul", 8=> " Aug", 9=> " Sep", 10 => " Oct", 11 => " Nov", 12 => " Dec" }
 		return months[mo]
 	end
-
-	
-
-  	
-
 
 end

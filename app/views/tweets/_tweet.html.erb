@@ -1,9 +1,5 @@
-
-
-
-
 <div class="tweet-list">
-    
+	<%= image_tag(tweet.user.image_url, class: 'tweet-thumbnail') %>
     <div class="tweet-author">
         <strong><%= tweet.user.full_name %></strong>
 	    <span class= "author-handle"> <%= link_to tweet.user.handle_at, tweet.user %> </span>
@@ -13,7 +9,6 @@
 	<div class="tweet-content">
 	  	
 	  	<div class="tweet-body">
-
 	  		<%=  tweet.content %>
 	  	</div>
 	 
@@ -29,19 +24,25 @@
 
 	  	<div class="tweet-footer">
 	  		<table>	
-	  			
         		<td>
-        			<% if (current_user.id != tweet.poster_id && current_user.id != tweet.user_id && tweet.is_retweet == false) %>
-	        			<%= link_to 'Retweet', retweet_path(tweet) %>	
-	        	
-	        		<% elsif (current_user.id == tweet.user_id && tweet.is_retweet == true)  %>
-	        			<%= " "%>		
-	        	
-	        		<% elsif (current_user.id == tweet.user_id && tweet.is_retweet == false) %>
+	        		<% if current_user == tweet.user %>
 	        			<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
-        		 
-	        		<% elsif (current_user.id == tweet.poster_id && tweet.is_retweet == true)  %>
-	        			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>		
+        				<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
+	        		<% end %> 
+
+	        		<% if current_user != tweet.user %>
+	        			<%= link_to 'Favorite', favorite_tweet_path(@tweet, id: tweet.id, type: "favorite", method: :put) %>
+	        		<% end %>
+
+	        		<% if (current_user != tweet.user && current_user.favorite_tweets.include?(@tweet)) %>
+	        			<%= link_to 'Un-Favorite', favorite_tweet_path(@tweet, type: "unfavorite", method: :put) %>
+	        		<% end %>
+
+	        		<% if (current_user != tweet.user) %>
+	        			<%= link_to 'Retweet', retweet_path(tweet) %>	
+	        		<% end %> 
+	        		<% if (current_user != tweet.user && tweet.is_retweet == true) %>
+	        			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>	
 	        		<% end %> 
 	        		
         		</td>
@@ -49,5 +50,3 @@
 	  	</div>
     </div>
 </div>
-
-<!-- Note: simple_format doesn't seem to allow tags through? -->

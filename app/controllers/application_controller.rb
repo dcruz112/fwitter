@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def current_user(redirect=true)
     @user_list = User.where(netid: session[:cas_user], default: true)
     if !@user_list.empty?
-      if session[:current_account]
+      if !session[:current_account].nil?
         @current_account = User.find(session[:current_account])
       else
         @current_user = @user_list.first

@@ -29,12 +29,17 @@
 	padding: 8px;
 }
 
-#header {
+#sidebar {
  	color: #0F4D92;
  	font-size: 18px;
  	margin-top: 300px;
  	position: fixed;
+ 	margin-right: 10px
  }
+
+#tweet-button {
+	margin-top: 100px;
+}
 
 a:link {
 	color:black;
@@ -55,13 +60,4 @@ a:hover {
 a:active {
 	color:blue;
 	text-decoration:none;
-}
-
-img {
-opacity:0.7;
-
-}
-
-img:hover {
-opacity:1;
 }

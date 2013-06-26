@@ -50,6 +50,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
+    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
     if !current_user(false)
       @user.default = true
     else
@@ -92,7 +93,13 @@ class UsersController < ApplicationController
         tweet.destroy
       end
       respond_to do |format|
-        format.html { redirect_to log_out_path(delete: true) }
+        format.html { 
+          if session[:current_account] == @user.id || @user.default
+            session[:current_account] = nil
+            redirect_to log_out_path(delete: true)
+          else
+            redirect_to users_path
+          end }
         format.json { head :no_content }
       end
     else
@@ -107,6 +114,23 @@ class UsersController < ApplicationController
     # .paginate(page: params[:page])
     render 'show_follow'
   end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers
+    # .paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def favorites
+    @title = "Favorites"
+    @user = User.find(params[:id])
+    @tweets = @user.favorite_tweets
+    # .paginate(page: params[:page])
+    render @tweets
+  end
+  
 
   def switch_user
     @user = User.find(params[:id])
@@ -131,13 +155,6 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def followers
-    @title = "Followers"
-    @user = User.find(params[:id])
-    @users = @user.followers
-    # .paginate(page: params[:page])
-    render 'show_follow'
-  end
 
   def mentions
     #@user = User.find(params[:id])
@@ -146,13 +163,13 @@ class UsersController < ApplicationController
     Tweet.all.each do |tweet|
       if @user.id != tweet.user_id
         if tweet.content[@user.handle_at]
-            puts "HELLLLLLLLLLOOOOOOOOOOOOOOOOOOOO #{tweet.content}"
             @mentions << tweet
         end
       end
     end
     render 'show_mention'
   end
+
 
 
   
@@ -164,6 +181,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :handle, :biography, :current_location, :email)
+      params.require(:user).permit(:first_name, :last_name, :handle, :biography, 
+        :current_location, :email, :college)
     end
 end
