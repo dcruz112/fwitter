@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20130624142016) do
 
-    create_table "relationships", force: true do |t|
+  create_table "relationships", force: true do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
     t.datetime "created_at"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20130624142016) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
-
 
   create_table "retweets", force: true do |t|
     t.text     "content"
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(version: 20130624142016) do
     t.integer  "user_id"
     t.boolean  "is_retweet"
     t.string   "poster_id"
+    t.boolean  "retweeted"
   end
 
   add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"

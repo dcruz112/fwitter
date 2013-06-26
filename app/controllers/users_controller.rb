@@ -138,6 +138,23 @@ class UsersController < ApplicationController
     # .paginate(page: params[:page])
     render 'show_follow'
   end
+
+  def mentions
+    #@user = User.find(params[:id])
+    @user = current_user
+    @mentions = []
+    Tweet.all.each do |tweet|
+      if @user.id != tweet.user_id
+        if tweet.content[@user.handle_at]
+            puts "HELLLLLLLLLLOOOOOOOOOOOOOOOOOOOO #{tweet.content}"
+            @mentions << tweet
+        end
+      end
+    end
+    render 'show_mention'
+  end
+
+
   
   private
     # Use callbacks to share common setup or constraints between actions.

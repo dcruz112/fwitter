@@ -11,7 +11,16 @@
 		<% if current_user(false) %>
 			<div id="user_info">
 				<h1><%= link_to 'FWITTER', root_path %></h1>
-				Welcome to Fwitter, <%= current_user.first_name %><br> 
+				Welcome to Fwitter, <%= current_user.first_name %><br>
+
+
+
+
+				<%= link_to "Check out your Mentions Page", mentions_user_path(current_user)  %> 
+
+
+
+
 
 				<% t = Time.now.localtime %>
 

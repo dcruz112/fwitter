@@ -82,17 +82,7 @@ class TweetsController < ApplicationController
   end
 
 
-  # def retweet
 
-  #   @tweet = Tweet.find(params[:id])
-
-  #   @retweet = Tweet.new(content: ("RT: "+ @tweet.content), 
-  #     user_id: @tweet.user_id, is_retweet: true, poster_id: current_user.id)
-  #   @retweet.save
-
-  #   redirect_to tweets_path
-
-  # end
 
 
   private
