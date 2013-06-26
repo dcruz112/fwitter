@@ -63,7 +63,18 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy
+    
+    death = []
+    death << Retweet.where(tweet_id: @tweet.id)
+    death.flatten!
+    death.each do |die|
+      die.destroy
+    end
+
     @tweet.destroy
+
+
+
     respond_to do |format|
       format.html { redirect_to tweets_url }
       format.json { head :no_content }
@@ -71,22 +82,17 @@ class TweetsController < ApplicationController
   end
   
 
-  def retweet
+  # def retweet
 
-    @old_tweet = Tweet.find(params[:id])
+  #   @tweet = Tweet.find(params[:id])
 
-    @retweet = Tweet.new(content: ("RT: "+ @old_tweet.content), 
-      user_id: @old_tweet.user_id, is_retweet: true, poster_id: current_user.id)
-    @retweet.save
-    redirect_to tweets_path
+  #   @retweet = Tweet.new(content: ("RT: "+ @tweet.content), 
+  #     user_id: @tweet.user_id, is_retweet: true, poster_id: current_user.id)
+  #   @retweet.save
 
+  #   redirect_to tweets_path
 
-    #@retweet.content = "RT: " + @retweet.content.to_s  + "\nRetweeted by: " + @current_user.full_name
-  
-  # @tweet = self
-  #   @tweet.content = 'RT' + tweet.content.to_s
-  # @tweet.updated_at = Time.now
-  end
+  # end
 
   def favorite
     type = params[:type]

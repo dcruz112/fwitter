@@ -35,7 +35,14 @@
   </div>
 </div>
 
+
 	<% if current_user(false) %>
+
+				<% m = "0" + m.to_s if m < 10 %>
+				<% am_or_pm = "AM" %>
+				<% am_or_pm = "PM" if h > 12 %>
+				<% h = h - 12 if h > 12 %>
+				<%= "It is #{h}:#{m}#{am_or_pm} at Yale" %>
 
 	<div id="logout">
 		<%= link_to "Log Out", log_out_path %>

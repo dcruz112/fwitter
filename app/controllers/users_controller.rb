@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'rbconfig'
+require 'mechanize'
 require 'open-uri'
 
 class UsersController < ApplicationController
@@ -47,6 +50,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
+    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
     if !current_user(false)
       @user.default = true
     else
@@ -83,13 +87,23 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    @user.tweets.each do |tweet|
-      tweet.destroy
-    end
-    respond_to do |format|
-      format.html { redirect_to log_out_path(delete: true) }
-      format.json { head :no_content }
+    if User.where(netid: session[:cas_user]).length == 1 || !@user.default
+      @user.destroy
+      @user.tweets.each do |tweet|
+        tweet.destroy
+      end
+      respond_to do |format|
+        format.html { 
+          if session[:current_account] == @user.id || @user.default
+            session[:current_account] = nil
+            redirect_to log_out_path(delete: true)
+          else
+            redirect_to users_path
+          end }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to "http://www.youtube.com/watch?v=mJXYMDu6dpY"
     end
   end
 
@@ -117,11 +131,18 @@ class UsersController < ApplicationController
     render @tweets
   end
   
-  def change
+
+  def switch_user
+    @user = User.find(params[:id])
+    session[:current_account] = @user.id
+    redirect_to users_path
   end
 
   def show_stuff
-    @doc = Nokogiri::HTML(open("https://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1"))
+    @a = Mechanize.new
+    @a.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    @page = @a.get 'https://students.yale.edu/facebook/PhotoPage?currentIndex=-1&numberToGet=-1'
   end
 
   def default
@@ -142,6 +163,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :handle, :biography, :current_location, :email)
+      params.require(:user).permit(:first_name, :last_name, :handle, :biography, 
+        :current_location, :email, :college)
     end
 end

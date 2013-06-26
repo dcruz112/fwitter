@@ -2,6 +2,8 @@ class Tweet < ActiveRecord::Base
 	belongs_to :user
 	has_many :favorite_tweets
 	has_many :favorited_by, through: :favorite_tweets, source: :user
+	has_many :retweets
+
 
 
 	def time_since_tweet
@@ -12,7 +14,7 @@ class Tweet < ActiveRecord::Base
 			display = seconds.round(0).to_s + "s"
 		elsif seconds < 3600    #less than 1 hour
 			display = (seconds/60).round(0).to_s + "m"
-		elsif seconds < 86400     #less than 1 day
+		elsif seconds < (86400-1800)     #less than 23.5 hours
 			display = (seconds/3600).round(0).to_s + "h"
 		elsif seconds < 86400*2    #less than 2 days
 			display = "Yesterday"
@@ -33,10 +35,5 @@ class Tweet < ActiveRecord::Base
 		months = { 1 => " Jan", 2 => " Feb", 3 =>" Mar", 4 => " Apr", 5 => " May", 6 => " Jun", 7 => " Jul", 8=> " Aug", 9=> " Sep", 10 => " Oct", 11 => " Nov", 12 => " Dec" }
 		return months[mo]
 	end
-
-	
-
-  	
-
 
 end

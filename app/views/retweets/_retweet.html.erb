@@ -1,0 +1,48 @@
+
+<div class="tweet-list">
+    
+    <div class="tweet-author">
+        <strong><%= User.find(retweet.user_id).full_name %></strong>
+	    <span class= "author-handle"> <%= link_to User.find(retweet.user_id).handle_at, User.find(retweet.user_id) %> </span>
+	    <span class= "tweet-time-stamp"><%= retweet.time_since_retweet %></span>
+	</div>
+
+	<div class="tweet-content">
+	  	
+	  	<div class="tweet-body">
+	  		<%=  retweet.content %>
+	  	</div>
+
+	  	<div class="retweeted-by">
+	  		<%=  "Retweeted by #{User.find(retweet.poster_id).full_name}" %>
+	  	</div>
+
+
+		<div class="tweet-footer">
+	  		<table>	
+	  			
+        		<td>
+
+        			<% if ((current_user.id.to_i == retweet.poster_id.to_i) && (current_user.id.to_i != retweet.user_id.to_i))  %>
+	        			<%= link_to 'Un-Retweet', retweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>		
+        			
+
+	        		
+	        		<% elsif (current_user.id == retweet.user_id && current_user.id != retweet.poster_id)  %>
+	        			<%= " "%>		
+	        	     	
+        		 
+	        		
+	        		<% end %> 
+	        		
+        		</td>
+            </table>
+	  	</div>
+
+    </div>
+</div>
+
+
+
+
+	

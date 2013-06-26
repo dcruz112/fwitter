@@ -1,9 +1,5 @@
-
-
-
-
 <div class="tweet-list">
-    
+	<%= image_tag(tweet.user.image_url, class: 'tweet-thumbnail') %>
     <div class="tweet-author">
         <strong><%= tweet.user.full_name %></strong>
 	    <span class= "author-handle"> <%= link_to tweet.user.handle_at, tweet.user %> </span>
@@ -46,10 +42,9 @@
 	        		<% if (current_user != tweet.user && tweet.is_retweet == true) %>
 	        			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>	
 	        		<% end %> 
+	        		
         		</td>
             </table>
 	  	</div>
     </div>
 </div>
-
-<!-- Note: simple_format doesn't seem to allow tags through? -->

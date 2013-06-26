@@ -104,7 +104,7 @@ GEM
       rails (>= 3.0.0)
       rubycas-client (>= 2.2.0)
     sass (3.2.9)
-    sass-rails (4.0.0.rc2)
+    sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
@@ -162,6 +162,7 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   mechanize
+  net-http-digest_auth
   net-ldap
   nokogiri
   rails (= 4.0.0.rc1)

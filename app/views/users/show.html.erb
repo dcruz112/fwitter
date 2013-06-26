@@ -12,24 +12,40 @@
 				<% end %>
 			</div>
 
-
 <div>
 	<%= render Tweet.where(poster_id: @user.id).reverse %>
 </div>
 
-<!-- this is where we include a loop to display those followed, or a link to the follower page -->
+<div>
+	<% all_tweets_and_retweets = [] %>
+	<% all_tweets_and_retweets << Tweet.where(poster_id: @user.id) %>
+	<% all_tweets_and_retweets << Retweet.where(poster_id: @user.id) %>
+	<% all_tweets_and_retweets.flatten! %>
+	<% all_tweets_and_retweets.sort! { |x,y| y.updated_at <=> x.updated_at} %>
+		
+	<% all_tweets_and_retweets.each do |post| %>
+		<%= render post %>
+	<% end %>
+</div>
 
-<!-- how do we get the user's followers to show up here? We probably add them all to an array? -->
 
 <div class="user-sidebar">
 
-<div>
-	<%= render 'follow_form' %>
+	<div>
+		<%= render 'follow_form' %>
+	</div>
+
+	<% if current_user == @user %>
+	<%= link_to 'Profile', edit_user_path(@user) %> |
+	<% end %>
+
+	<% @user ||= current_user %>
+
+	<div> 
+		<%= render 'stats' %>
+	</div>
+
 </div>
 
-<div> 
-	<%= render 'stats' %>
-</div>
 
-
-<%= link_to 'Accounts', users_path %> |
+<%= link_to 'Accounts', users_path %> 
