@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.list-image {
+	width: 60px;
+	height: 60px;
+}
+
 .user-sidebar {
 	margin-top: 25px;
 	position: relative;
@@ -16,7 +21,7 @@
 }
 
 td {
-	padding: 20px;
+	padding: 5px;
 }
 
 .current {

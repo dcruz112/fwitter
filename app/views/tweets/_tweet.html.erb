@@ -3,13 +3,23 @@
     <div class="tweet-author">
         <strong><%= tweet.user.full_name %></strong>
 	    <span class= "author-handle"> <%= link_to tweet.user.handle_at, tweet.user %> </span>
-	    <span class= "tweet-time-stamp"><%= tweet.time_since_tweet %></span>
+	    <span class= "tweet-time-stamp", title=<%= tweet.updated_at.localtime.asctime.split.join('-') %>>
+	    	<%= distance_of_time_in_words(tweet.updated_at, Time.now, include_seconds = true) %>
+	    </span>
 	</div>
 
 	<div class="tweet-content">
 	  	
 	  	<div class="tweet-body">
-	  		<%=  tweet.content %>
+	  		<% @mentions = tweet.mentions %>
+	  		<% tweet.content.split(' ').each do |word| %>
+	  			<% if @mentions.include? word %>
+	  				<% @user = User.where(handle: word[1..-1]).first %>
+	  				<%= link_to word, @user %>
+	  			<% else %>
+	  				<%= word %>
+	  			<% end %>
+	  		<% end %>
 	  	</div>
 	 
 

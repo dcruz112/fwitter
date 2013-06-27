@@ -157,15 +157,12 @@ class UsersController < ApplicationController
 
 
   def mentions
-    #@user = User.find(params[:id])
     @user = current_user
     @mentions = []
     Tweet.all.each do |tweet|
-      if @user.id != tweet.user_id
-        if tweet.content[@user.handle_at]
-            @mentions << tweet
-        end
-      end
+      if !tweet.mentions.empty? && tweet.mentions.include?('@' + @user.handle)
+        @mentions << tweet
+      end 
     end
     render 'show_mention'
   end
