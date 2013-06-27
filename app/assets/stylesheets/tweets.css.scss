@@ -35,9 +35,14 @@ border-bottom:2px;
 text-decoration:none;
 }
 
+hr {
+	margin: 5px;
+}
 
 .tweet {
-	margin: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
 	-o-transition:.1s;
   -ms-transition:.1s;
   -moz-transition:.1s;
@@ -77,10 +82,6 @@ text-decoration:none;
 
 .tweet-time-stamp {
 	color: gray;
-}
-
-.tweet-list {
-	margin-left: 300px;
 }
 
 a:link {
