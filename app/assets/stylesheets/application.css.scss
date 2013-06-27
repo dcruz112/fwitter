@@ -12,7 +12,7 @@
  *= require_tree .
  */
 
- #time {
+  #time {
  	float: right
  }
 
@@ -78,6 +78,10 @@ a:active {
 	text-decoration: none;
 	background: none;
 	opacity: 1;
+}
+
+.container {
+	margin-bottom: 10px;
 }
 
 .content {

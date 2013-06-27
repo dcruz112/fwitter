@@ -1,25 +1,14 @@
 
 <p id="notice"><%= notice %></p>
 
-			<div class= "user-profile-info">
-				<h1><%= @user.full_name %></h1>
-				<h2><%= @user.handle_at %></h2>
-				<h3><%= @user.biography if @user.biography %></h3>
-				<h3><%= @user.current_location if @user.current_location %></h3>
-				<br><br>
-			</div>
+	<div class= "user-profile-info">
+		<h1><%= @user.full_name %></h1>
+		<h2><%= @user.handle_at %></h2>
+		<h3><%= @user.biography if @user.biography %></h3>
+		<h3><%= @user.current_location if @user.current_location %></h3>
+		<br><br>
+	</div>
 
-<div class="span8">
-	<%= render 'follow_form' %>
-</div>
-
-
-
-
-
-
-
-	
 	<% if @mentions.size > 0 %>
 		
 		<% @mentions.flatten! %>
@@ -31,32 +20,3 @@
    	<% else %>
      	<%= puts 'You have no mentions' %>
 	<% end %>
-
-
-
-
-
-
-<!-- this is where we include a loop to display those followed, or a link to the follower page -->
-
-<!-- how do we get the user's followers to show up here? We probably add them all to an array? -->
-
-
-<% if current_user == @user %>
-<%= link_to 'Profile', edit_user_path(@user) %> |
-<% end %>
-
-<%= link_to 'Accounts', users_path %>
-
-<%= link_to 'Back', users_path %>
-
-<% @user ||= current_user %>
-
-<div> <a href ="<%= following_user_path(@user) %>">Following <%= @user.followed_users.count %> </a> </div>
-
-<div> <a href ="<%= followers_user_path(@user) %>">Followed By <%= @user.followers.count %> </a> </div>
-
-
-
-
-

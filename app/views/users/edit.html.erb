@@ -2,17 +2,16 @@
 
 <%= render 'form_edit' %>
 
-<%= link_to 'Show', @user %> |
 <% if !@user.default %>
-	<%= link_to 'Set as Default', default_path(@user) %> |
+	<%= button_to 'Set as Default', default_path(@user), method: :get %>
 <% end %>
 <% if @user.default %>
-	<%= link_to 'Delete Profile', edit_user_path(@user), data: { confirm: 
-		'Warning: Please select a new default user before deleting this account' } %> |
+	<%= button_to 'Delete Profile', edit_user_path(@user), method: :get, data: { confirm: 
+		'Warning: Please select a new default user before deleting this account' } %>
 <% else %>
-	<%= link_to 'Delete Profile', @user, method: :delete, data: { confirm: 
-		'Warning: This will permanently delete your account and all of your tweets.' } %> |
+	<%= button_to 'Delete Profile', @user, method: :delete, data: { confirm: 
+		'Warning: This will permanently delete your account and all of your tweets.' } %>
 <% end %>
 
-<%= link_to 'Back', users_path %>
+<%= button_to 'Back', users_path, method: :get %>
 </div>

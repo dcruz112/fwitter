@@ -50,7 +50,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
-    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
+    if @user.college.nil?
+      @user.image_url = "Default_Pics/yc.png"
+    else
+      @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
+    end
     if !current_user(false)
       @user.default = true
     else
