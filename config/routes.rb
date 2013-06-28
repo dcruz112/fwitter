@@ -9,7 +9,7 @@ Project1::Application.routes.draw do
   get '/default/:id' => 'users#default', as: :default
   get '/switch_user/:id' => 'users#switch_user', as: :switch_user
   get '/show_stuff' => 'users#show_stuff', as: :show_stuff
-
+  get '/hashes/:hash_word' => 'tweets#hashes', as: :hash
 
 
   # get '/retweet/:id' => 'retweets#show'
@@ -23,7 +23,7 @@ Project1::Application.routes.draw do
 
   resources :tweets do
     member do
-      get :favorite
+      get :favorite, :hashes
     end
   end
 

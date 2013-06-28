@@ -12,11 +12,15 @@
 	<div class="tweet-content">
 	  	
 	  	<div class="tweet-body">
-	  		<% @mentions = tweet.mentions %>
+	  		<% @all_mentions = tweet.all_mentions_in_tweet %>
+	  		<% @all_hashes = tweet.all_hashes_in_tweet %>
 	  		<% tweet.content.split(' ').each do |word| %>
-	  			<% if @mentions.include? word %>
+	  			<% if @all_mentions.include? word %>
 	  				<% @user = User.where(handle: word[1..-1]).first %>
 	  				<%= link_to word, @user, class: "mention" %>
+	  			<% elsif @all_hashes.include? word %>
+	  			
+	  				<%= link_to word, hash_path(word), class: "hashes" %>
 	  			<% else %>
 	  				<%= word %>
 	  			<% end %>
