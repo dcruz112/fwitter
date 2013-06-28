@@ -35,17 +35,13 @@ class RetweetsController < ApplicationController
 
     respond_to do |format|
       if @retweet.save
-        format.html { redirect_to @retweet, notice: 'Retweet was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Retweet was successfully created.' }
         format.json { render action: 'show', status: :created, location: @retweet }
       else
         format.html { render action: 'new' }
         format.json { render json: @retweet.errors, status: :unprocessable_entity }
       end
     end
-
-
-
-    redirect_to tweets_path
 
   end
 
@@ -57,7 +53,7 @@ class RetweetsController < ApplicationController
   def update
     respond_to do |format|
       if @retweet.update(retweet_params)
-        format.html { redirect_to @retweet, notice: 'Retweet was successfully updated.' }
+        format.html {redirect_to retweets_path, notice: 'Retweet was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -66,13 +62,15 @@ class RetweetsController < ApplicationController
     end
   end
 
+
+
+
+
   # DELETE /retweets/1
   # DELETE /retweets/1.json
   def destroy
-    death = Retweet.where(tweet_id: @tweet.id)
-    death.each do |die|
-      die.destroy
-    end
+    @retweet.destroy
+   
     respond_to do |format|
       format.html { redirect_to retweets_url }
       format.json { head :no_content }

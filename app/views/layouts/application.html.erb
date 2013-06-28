@@ -21,45 +21,47 @@
         <span class="icon-bar"></span>
       </a>
  
-      <a class="brand" href="#">Fwitter</a>
-      <!-- Everything you want hidden at 940px or less, place within here -->
-      <div class="nav-collapse">
-		<ul class="nav">
-		  <li><%= link_to "Name Here Later", user_path(@user) %></li>
-		  <li><%= link_to 'Enter the Stream', tweets_path %></li>
-		  <li><%= link_to "New Tweet", new_tweet_path %></li>
-		  <li id="time">
-		  		<% t = Time.now.localtime %>
-				<% h = (t.hour)%24 %>
-				<% m = (t.min) %>
-				<% m = "0" + m.to_s if m < 10 %>
-				<% am_or_pm = "AM" %>
-				<% am_or_pm = "PM" if h > 12 %>
-				<% h = h - 12 if h > 12 %>
-				<%= "It is #{h}:#{m}#{am_or_pm} at Yale" %>
-		  </li>
-
-		</ul> 
-      </div>
+      <%= link_to image_tag("yalelogo2.png"), new_tweet_path, class: "brand" %>
+      <% if current_user(false) %>
+      
+	      <div class="nav-collapse">
+			<ul class="nav">
+			  <li>
+			  	<%= link_to "#{current_user.first_name}", 
+			  	    user_path(current_user) %>
+			  </li>
+			  <li><%= link_to 'Stream', tweets_path %></li>
+			  <li><%= link_to '@', mentions_user_path(current_user) %></li>
+			  <li><%= link_to 'Accounts', users_path %> </li>
+			  <li><%= link_to "Logout", log_out_path %></li>
+			</ul> 
+	      </div>
+      <% else %>      	
+      	<li><%= link_to "Log In", log_in_path %></li>
+      <% end %>
+      <div class="time">
+		<% if current_user(false) %>
+		  <% t = Time.now.localtime %>
+		  <% h = (t.hour)%24 %>
+		  <% m = t.min %>
+		  <% m = "0" + m.to_s if m < 10 %>
+		  <% am_or_pm = "AM" %>
+		  <% am_or_pm = "PM" if h >= 12 %>
+		  <% h = 12 if h == 0 %>
+		  <% h = h - 12 if h > 12 %>
+		  <%= "#{h}:#{m}#{am_or_pm}" %>
+		<% end %>
+	</div>
  
     </div>
   </div>
 </div>
 
-
-	<% if current_user(false) %>
-
-	<div id="logout">
-		<%= link_to "Log Out", log_out_path %>
+<div class="container">
+	<div class="row">
+		<div class="span12"><%= yield %></div>
 	</div>
-
-	<% end %>
-
-	<div class="container">
-		<div class="row">
-			<div class="span12"><%= yield %></div>
-		</div>
-	</div>
+</div>
 
 </body>
 </html>

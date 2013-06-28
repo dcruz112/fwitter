@@ -3,6 +3,7 @@
 	margin-right: 5px;
 	height: 60px;
 	width: 60px;
+	border-radius: 5px;
 }
 
 .tweet-author {
@@ -23,16 +24,10 @@
 	margin-left: 300px;
 }
 
-.tweet-body a:link {
+.tweet-body a {
 color:black;
-text-decoration:none;
+text-decoration:underline;
 }
-
-.tweet-body a:visited {
-color:black;
-text-decoration:none;
-}
-
 
 .tweet-body a:hover {
 color:blue;
@@ -40,10 +35,38 @@ border-bottom:2px;
 text-decoration:none;
 }
 
+hr {
+	margin: 5px;
+}
 
+.tweet {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+	-o-transition:.1s;
+  -ms-transition:.1s;
+  -moz-transition:.1s;
+  -webkit-transition:.1s;
+  /* ...and now for the proper property */
+  transition:.1s;
+  width: 600px;
+  border-radius: 5px;
+}
 
-.tweet-list {
-	margin-top: 20px;
+.tweet:hover {
+	background: LightGray;
+
+	.tweet-time-stamp {
+		color: black;
+	}
+}
+
+.tweet .tweet-footer {
+	visibility: hidden;
+}
+
+.tweet:hover .tweet-footer {
+	visibility: visible;
 }
 
 #new-tweet{
@@ -53,14 +76,27 @@ text-decoration:none;
 }
 
 .author-handle {
-	color: grey;
+	color: gray;
 	font-size: 12px;
 }
 
 .tweet-time-stamp {
-	color: grey;
+	color: gray;
 }
 
-.tweet-list {
-	margin-left: 300px;
+a:link {
+	color: #0F4D92;
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #0F4D92;
+	text-decoration: underline;
+}
+
+a:hover {
+	background: none;
+	color: #0F4D92;
+	font-weight: bold;
+	text-decoration: underline;
 }

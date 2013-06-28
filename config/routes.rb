@@ -1,20 +1,12 @@
 Project1::Application.routes.draw do
+  
+  root to: 'users#show'
 
   get '/log_in' => 'sessions#log_in', as: :log_in
   get '/log_out' => 'sessions#log_out', as: :log_out
   get '/default/:id' => 'users#default', as: :default
   get '/switch_user/:id' => 'users#switch_user', as: :switch_user
   get '/show_stuff' => 'users#show_stuff', as: :show_stuff
-
-    root to: 'users#show'
-
-  # get '/retweet/:id' => 'retweets#show'
-  # get '/retweets' => 'retweets#new', as: :new_retweet
-  # post '/retweets' => 'retweets#create', as: :retweet
-  # delete '/retweets/:id' => 'retweets#destroy'
-  # patch '/retweets/:id' => 'retweets#update'
-  # put '/retweets/:id' => 'retweets#update'
-  # get '/retweets' => 'retweets#index', as: :retweets
 
   resources :tweets do
     member do
@@ -29,12 +21,9 @@ Project1::Application.routes.draw do
 
   resources :users do
     member do
-      get :following, :followers, :favorites
+      get :following, :followers, :favorites, :mentions
     end 
   end
-
-  # We'll want to add a follow route at some point, I suppose?
-    # And eventually implement Ajax for auto-following
 
 
   # We want to use member rather than collection stuff, because there doesn't

@@ -22,10 +22,10 @@
       <tr class=<%= user.id == session[:current_account] ? 'current' : 'others' %>>
         <td><%= "*" if user.default %></td>
         <td>
-          <%= image_tag(user.image_url, class: 'list_image') %>
+          <%= image_tag(user.image_url, class: 'list-image') %>
         </td>
-        <td><%= link_to user.full_name, user %></td>
-        <td><%= user.handle_at %></td>
+        <td><%= user.full_name %></td>
+        <td><%= link_to user.handle_at, user %></td>
         <td><%= user.biography %></td>
         <td><%= user.current_location %></td>
         <td><%= link_to 'Switch To', switch_user_path(user) %></td>

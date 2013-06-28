@@ -52,7 +52,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
-    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
+    if @user.college.nil?
+      @user.image_url = "Default_Pics/yc.png"
+    else
+      @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
+    end
     if !current_user(false)
       @user.default = true
     else
@@ -156,6 +160,21 @@ class UsersController < ApplicationController
     @new_default.save
     redirect_to users_path
   end
+
+
+  def mentions
+    @user = current_user
+    @mentions = []
+    Tweet.all.each do |tweet|
+      if !tweet.mentions.empty? && tweet.mentions.include?('@' + @user.handle)
+        @mentions << tweet
+      end 
+    end
+    render 'show_mention'
+  end
+
+
+
   
   private
     # Use callbacks to share common setup or constraints between actions.

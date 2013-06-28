@@ -7,6 +7,7 @@ gem 'net-ldap'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'net-http-digest_auth'
+gem 'rails-timeago', '~> 2.0'
 
 gem 'faker', '1.1.2'
 

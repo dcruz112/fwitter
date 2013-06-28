@@ -6,9 +6,9 @@ class Retweet < ActiveRecord::Base
 		seconds = Time.now - self.updated_at
 		if seconds < 15
 			display = "Just Now"
-		elsif seconds < 60    #less than 1 minute
+		elsif seconds < 59.5    #less than 59.5 seconds
 			display = seconds.round(0).to_s + "s"
-		elsif seconds < 3600    #less than 1 hour
+		elsif seconds < (3600-30)    #less than 59.5 minutes
 			display = (seconds/60).round(0).to_s + "m"
 		elsif seconds < (86400-1800)     #less than 23.5 hours
 			display = (seconds/3600).round(0).to_s + "h"

@@ -55,7 +55,6 @@ class User < ActiveRecord::Base
 	end
 
 	def stream
-		# Retweet.from_users_followed_by(self)
 		Tweet.from_users_followed_by(self)
 	end
 end
