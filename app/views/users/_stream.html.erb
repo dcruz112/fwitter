@@ -1,0 +1,7 @@
+<% if @tweet_stream.any? %>
+	<ul class="tweets">
+		<% @tweet_stream.reverse.each do |post| %>
+			<%= render post %>
+		<% end %>
+	</ul>
+<% end %>

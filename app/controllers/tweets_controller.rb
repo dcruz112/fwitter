@@ -40,6 +40,7 @@ class TweetsController < ApplicationController
         format.html { redirect_to root_path}
         format.json { render action: 'show', status: :created, location: @tweet }
       else
+        @stream_items = []
         format.html { render action: 'new' }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end

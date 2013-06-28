@@ -3,33 +3,25 @@
 	<div class= "user-profile-info">
 		<h1><%= @user.full_name %></h1>
 		<h2><%= @user.handle_at %></h2>
-		<h3><%= @user.biography if @user.biography %></h3>
-		<h3><%= @user.current_location if @user.current_location %></h3>
+		<h5><%= @user.biography if @user.biography %></h5>
+		<h5><%= @user.current_location if @user.current_location %></h5>
 		<br>
 
 		<% if current_user == @user %>
-		<%= link_to 'Edit Profile', edit_user_path(@user) %> 
+			<%= link_to 'Edit Profile', edit_user_path(@user) %> 
 		<% end %>
 	</div>
 
-	<div class="tweets-list">
-		<% all_tweets_and_retweets = [] %>
-		<% all_tweets_and_retweets << Tweet.where(poster_id: @user.id) %>
-		<% all_tweets_and_retweets << Retweet.where(poster_id: @user.id) %>
-		<% all_tweets_and_retweets.flatten! %>
-		<% all_tweets_and_retweets.sort! { |x,y| y.updated_at <=> x.updated_at} %>
-			
-		<% all_tweets_and_retweets.each do |post| %>
-			<%= render post %>
-		<% end %>
-	</div>
-
-<div class="user-sidebar">
 	<div>
-		<%= render 'follow_form' if params[:id] != current_user.id %>
+		<%= render 'stream' %>
 	</div>
 
-	<div> 
-		<%= render 'stats' %>
+	<div class="user-sidebar">
+		<div>
+			<%= render 'follow_form' if params[:id] != current_user.id %>
+		</div>
+
+		<div> 
+			<%= render 'stats' %>
+		</div>
 	</div>
-</div>

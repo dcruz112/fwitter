@@ -22,8 +22,6 @@ class Tweet < ActiveRecord::Base
 	end
 
 
-
-
 	def all_hashes_in_tweet
 	  @tweet_words = self.content.split(' ')
 	  hashes = []
@@ -36,14 +34,8 @@ class Tweet < ActiveRecord::Base
 	end
 
 	def is_hash_in_tweet(current_hash)
-      
       self.all_hashes_in_tweet.each do |hash|
-        puts hash
-        puts "+++++++++++++++++++"
-        puts current_hash
-        puts "+++++++++++++++++++"
         if hash == current_hash
-         puts hash
           return true
         end
       end
@@ -52,4 +44,13 @@ class Tweet < ActiveRecord::Base
 	
   end
 
+
+	def self.from_users_followed_by(user)
+		followed_user_ids = "SELECT followed_id FROM relationships
+			WHERE follower_id = :user_id"
+		where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", 
+			followed_user_ids: followed_user_ids, user_id: user.id)
+	end
+
 end
+
