@@ -28,6 +28,17 @@
 		  <li><%= link_to "Name Here Later", user_path(@user) %></li>
 		  <li><%= link_to 'Enter the Stream', tweets_path %></li>
 		  <li><%= link_to "New Tweet", new_tweet_path %></li>
+		  <li id="time">
+		  		<% t = Time.now.localtime %>
+				<% h = (t.hour)%24 %>
+				<% m = (t.min) %>
+				<% m = "0" + m.to_s if m < 10 %>
+				<% am_or_pm = "AM" %>
+				<% am_or_pm = "PM" if h > 12 %>
+				<% h = h - 12 if h > 12 %>
+				<%= "It is #{h}:#{m}#{am_or_pm} at Yale" %>
+		  </li>
+
 		</ul> 
       </div>
  
@@ -37,12 +48,6 @@
 
 
 	<% if current_user(false) %>
-
-				<% m = "0" + m.to_s if m < 10 %>
-				<% am_or_pm = "AM" %>
-				<% am_or_pm = "PM" if h > 12 %>
-				<% h = h - 12 if h > 12 %>
-				<%= "It is #{h}:#{m}#{am_or_pm} at Yale" %>
 
 	<div id="logout">
 		<%= link_to "Log Out", log_out_path %>

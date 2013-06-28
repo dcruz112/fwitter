@@ -13,6 +13,7 @@ class TweetsController < ApplicationController
   # GET /tweets/1
   # GET /tweets/1.json
   def show
+    render @tweet
   end
 
   # GET /tweets/new
@@ -40,6 +41,7 @@ class TweetsController < ApplicationController
         format.html { redirect_to root_path}
         format.json { render action: 'show', status: :created, location: @tweet }
       else
+        @stream_items = []
         format.html { render action: 'new' }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end

@@ -1,0 +1,50 @@
+<div class="tweet-list">
+	<%= image_tag(tweet.user.image_url, class: 'tweet-thumbnail') %>
+    <div class="tweet-author">
+        <strong><%= tweet.user.full_name %></strong>
+	    <span class= "author-handle"> <%= link_to tweet.user.handle_at, tweet.user %> </span>
+	    <span class= "tweet-time-stamp"><%= tweet.time_since_tweet %></span>
+	</div>
+
+	<div class="tweet-content">
+	  	
+	  	<div class="tweet-body">
+	  		<%=  tweet.content %>
+	  	</div>
+	 
+
+	  	<div>
+	  		<% if tweet.is_retweet %>
+	  			<%= "Retweeted by #{User.find(tweet.poster_id).full_name}" %>
+	  		<% end %>
+	  	</div>
+
+
+	  	<div class="tweet-footer">
+	  		<table>	
+        		<td>
+	        		<% if current_user == tweet.user %>
+	        			<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
+        				<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
+	        		<% end %> 
+
+	        		<% if current_user != tweet.user %>
+	        			<%= link_to 'Favorite', favorite_tweet_path(@tweet, id: tweet.id, type: "favorite", method: :put) %>
+	        		<% end %>
+
+	        		<% if (current_user != tweet.user && current_user.favorite_tweets.include?(@tweet)) %>
+	        			<%= link_to 'Un-Favorite', favorite_tweet_path(@tweet, type: "unfavorite", method: :put) %>
+	        		<% end %>
+
+	        		<% if (current_user != tweet.user) %>
+	        			<%= link_to 'Retweet', retweet_path(tweet) %>	
+	        		<% end %> 
+	        		<% if (current_user != tweet.user && tweet.is_retweet == true) %>
+	        			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>	
+	        		<% end %> 
+	        		
+        		</td>
+            </table>
+	  	</div>
+    </div>
+</div>

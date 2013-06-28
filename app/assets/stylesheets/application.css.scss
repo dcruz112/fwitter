@@ -43,6 +43,12 @@
 	padding: 0;
 }
 
+#time {
+	float: right;
+	padding: 10px;
+	color: gray;
+}
+
 #navbar li {
 	float: left;
 	list-style-type: none;
@@ -57,10 +63,6 @@
 	font-size: 16px;
 	color: #069;
 	border-right: 1px solid #ccc; }
-
-#tweet-button {
-	/*margin-top: 100px;*/
-}
 
 a:link {
 	color:black;

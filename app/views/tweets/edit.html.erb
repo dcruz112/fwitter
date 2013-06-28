@@ -1,7 +1,5 @@
-<div class="retweet" style= "margin-left:300px;">
-<h1>Editing tweet</h1>
-
-<%= render 'form' %>
-
+<%- model_class = Tweet -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
-
+<%= render :partial => 'form' %>

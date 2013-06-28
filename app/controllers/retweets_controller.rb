@@ -13,6 +13,7 @@ class RetweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     @retweet = Retweet.new(content: @tweet.content, user_id: @tweet.user_id,  poster_id: current_user.id, tweet_id: @tweet.id )
     @retweet.save
+    render @retweet
   end
 
   # GET /retweets/new

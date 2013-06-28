@@ -19,7 +19,7 @@ Project1::Application.routes.draw do
   resources :tweets do
     member do
       get 'retweet'
-      get :favorite
+      get 'favorite'
     end
   end
 
