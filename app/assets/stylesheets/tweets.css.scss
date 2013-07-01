@@ -42,6 +42,7 @@ hr {
 .tweet {
 	margin-left: auto;
 	margin-right: auto;
+	background: white;
 	padding: 5px;
 	-o-transition:.1s;
   -ms-transition:.1s;
@@ -54,7 +55,7 @@ hr {
 }
 
 .tweet:hover {
-	background: LightGray;
+	background: WhiteSmoke;
 
 	.tweet-time-stamp {
 		color: black;
