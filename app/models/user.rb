@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
 	  browser = Mechanize.new
 	  browser.get( 'https://secure.its.yale.edu/cas/login' )
 	  form = browser.page.forms.first
-	  form.username = "YourNetID"
-	  form.password = "YourPassword"
+	  form.username = "dmc89"
+	  form.password = "Dnbkl4h4"
 	  form.submit
 	  browser
 	end
@@ -54,6 +54,15 @@ class User < ActiveRecord::Base
 	      self.college = value.nil? ? "YC" : value
 	    end
 	  end
+	end
+
+	def get_bio
+	  browser = make_cas_browser
+
+	  browser.get("https://students.yale.edu/facebook/")
+	  browser.page.forms[0]
+	  browser.get("https://students.yale.edu/facebook/Search?searchTerm=#{self.first_name}%20#{self.last_name}&searchResult=true")
+
 	end
 
 	# def search_ldap(login)
