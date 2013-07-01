@@ -26,39 +26,46 @@
 	  		<% end %>
 	  	</div>
 	 
-
 	  	<div>
 	  		<% if tweet.is_retweet %>
 	  			<%= "Retweeted by #{User.find(tweet.poster_id).full_name}" %>
 	  		<% end %>
 	  	</div>
 
-
-		
-
 	  	<div class="tweet-footer">
 	  		<table>	
         		<td>
-	        		<% if current_user == tweet.user %>
-	        			<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
-        				<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
+        			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+        				<li><% "This tweet has been favorited #{@tweet.favorited_by.count} times." %></li>
+        				<li><% "This tweet has been retweeted #{@tweet.retweets.count} times." %></li>
+        				<% @tweet.replies.each do |post| %>
+        					<li><%= render |post| %></l1>
+        				<% end %>
+        			</ul>
+
+	        		<% if current_user != tweet.user %> 
+	        			<% if current_user.favorites.exclude?(@tweet) %>
+	        				<%= link_to 'Favorite', favorite_tweet_path(@tweet, id: tweet.id, type: "favorite", method: :put) %>
+	        			<% else %>
+	        				<%= link_to 'Un-Favorite', favorite_tweet_path(@tweet, type: "unfavorite", method: :put) %>
+	        			<% end %>
+	        		<% end %>
+	        		
+	        		<% if (current_user != tweet.user) %>
+	        			<%= link_to 'Reply', reply_path(tweet) %>	
 	        		<% end %> 
-
-	        		<% if current_user != tweet.user %>
-	        			<%= link_to 'Favorite', favorite_tweet_path(@tweet, id: tweet.id, type: "favorite", method: :put) %>
-	        		<% end %>
-
-	        		<% if (current_user != tweet.user && current_user.favorite_tweets.include?(@tweet)) %>
-	        			<%= link_to 'Un-Favorite', favorite_tweet_path(@tweet, type: "unfavorite", method: :put) %>
-	        		<% end %>
 
 	        		<% if (current_user != tweet.user) %>
 	        			<%= link_to 'Retweet', retweet_path(tweet) %>	
 	        		<% end %> 
+
 	        		<% if (current_user != tweet.user && tweet.is_retweet == true) %>
-	        			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>	
+	        			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>
 	        		<% end %> 
-	        		
+
+	        		<% if current_user == tweet.user %>
+	        			<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
+	        		<% end %> 
         		</td>
             </table>
 	  	</div>

@@ -4,10 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0.rc1'
 
 gem 'net-ldap'
-gem 'nokogiri'
 gem 'mechanize'
 gem 'net-http-digest_auth'
-gem 'rails-timeago', '~> 2.0'
 
 gem 'faker', '1.1.2'
 
@@ -19,8 +17,8 @@ gem 'twitter-bootstrap-rails'
 gem 'sqlite3'
 
 # Authentication
-gem 'rubycas-client-rails'
-gem 'rubycas-client', '2.2.1'
+gem 'rubycas-client-rails', git: "git://github.com/rubycas/rubycas-client-rails.git"
+gem 'rubycas-client', '2.3.10.rc1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'

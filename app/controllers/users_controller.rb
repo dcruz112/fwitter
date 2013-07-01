@@ -5,6 +5,7 @@ require 'open-uri'
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
+  before_action :set_stream, only: [:show]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index, :new, :create]
@@ -24,16 +25,14 @@ class UsersController < ApplicationController
     else
       @user = User.find(@id)
     end
-
-    @tweet_stream = @user.stream
   end
 
   # GET /users/new
   def new
     @user = User.new
     @net_id = session[:cas_user]
-    @user.search_ldap(@net_id)
     @user.netid = @net_id
+    @user.get_user
     if !current_user(false)
       @user.default = true
     else
@@ -57,11 +56,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
-    if @user.college.nil?
-      @user.image_url = "Default_Pics/yc.png"
-    else
-      @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
-    end
+    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
     if !current_user(false)
       @user.default = true
     else
@@ -70,6 +65,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+
+        # Tell the UserMailer to send a welcome Email after save
+        UserMailer.welcome_email(@user).deliver
 
         format.html { redirect_to root_path(delete: false) }
         format.json { render action: 'show', status: :created, location: @user }
@@ -169,6 +167,19 @@ class UsersController < ApplicationController
     @new_default.save
     redirect_to users_path
   end
+
+  def set_stream
+    @total_stream = []
+
+    @user.retweet_stream.each do |post|
+      @total_stream << post
+    end
+
+    @user.tweet_stream.each do |post|
+      @total_stream << post
+    end
+  end
+
 
 
   def mentions

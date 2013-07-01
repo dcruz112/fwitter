@@ -12,15 +12,22 @@
 		<% end %>
 	</div>
 
-	<div>
+	<div class="tweet-stream">
 		<%= render 'stream' %>
+
+		<% if @user.tweets.count == 0 and @user.retweets.count == 0 %>
+			<% if @user == current_user %>
+				<%= "You should start tweeting! You are depriving the world of your precious thoughts!" %>
+			<% else %>
+				<%= "#{@user.handle} has no tweets. Come back soon! Or not." %>
+			<% end %>
+		<% end %>
 	</div>
 
 	<div class="user-sidebar">
 		<div>
 			<%= render 'follow_form' if params[:id] != current_user.id %>
 		</div>
-
 		<div> 
 			<%= render 'stats' %>
 		</div>

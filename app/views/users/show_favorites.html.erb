@@ -3,8 +3,6 @@
   <aside class="span4">
     <section>
       <h2><%= @user.handle %></h2>
-      <span><%= link_to "view my profile", @user %></span>
-      <span><b>Tweets:</b> <%= @user.tweets.count %></span>
     </section>
     <section>
       <%= render 'stats' %>

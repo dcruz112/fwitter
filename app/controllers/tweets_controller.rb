@@ -32,8 +32,10 @@ class TweetsController < ApplicationController
     @tweet.poster_id = current_user.id
     @tweet.user = current_user
     @tweet.is_retweet = false
-    #current_user was already defined somewhere, while finding by :user_id
-    # might not work for some reason. You were working from the wrong demo blog
+
+    # if @tweet.is_reply
+    #   Tweet.find(@tweet.reply_id).replies << @tweet
+    # end
 
     respond_to do |format|
       if @tweet.save
@@ -45,6 +47,11 @@ class TweetsController < ApplicationController
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
+
+    if @tweet.is_reply
+      Conversation.create(@tweet_id)
+    end
+
   end
 
   # PATCH/PUT /tweets/1
@@ -74,16 +81,11 @@ class TweetsController < ApplicationController
 
     @tweet.destroy
 
-
-
     respond_to do |format|
       format.html { redirect_to tweets_url }
       format.json { head :no_content }
     end
   end
-  
-
-
 
   def favorite
     type = params[:type]
@@ -125,7 +127,7 @@ class TweetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tweet_params
-      params.require(:tweet).permit(:content, :user_id, :is_retweet, :poster_id)
+      params.require(:tweet).permit(:content, :user_id, :is_retweet, :poster_id, :is_reply, :reply_id)
     end
 
 end
