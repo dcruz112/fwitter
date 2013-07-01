@@ -12,6 +12,10 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @users.where("first_name like ?", "%#{params[:q]}%") }
+    end
   end
 
   def show
@@ -44,6 +48,7 @@ class UsersController < ApplicationController
     else
       @user = User.find(@id)
     end
+    @@old = @user.handle
   end
 
   # POST /users
@@ -78,7 +83,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to root_path }
+        format.html { 
+          @old_handle = @@old
+          @new_handle = @user.handle
+          @user.replacing_all_mentions_in_tweets_after_editing_handle(@old_handle, @new_handle)
+          redirect_to root_path }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -196,6 +205,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :handle, :biography, 
-        :current_location, :email, :college)
+        :current_location, :email, :college, :user_tokens)
     end
 end

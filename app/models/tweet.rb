@@ -8,7 +8,10 @@ class Tweet < ActiveRecord::Base
     has_many :hashes
     #has_many :replies
 
-  attr_reader :current_hash
+	attr_reader :current_hash
+
+
+
 
 	def all_mentions_in_tweet
 	  @tweet_words = self.content.split(' ')
@@ -50,6 +53,13 @@ class Tweet < ActiveRecord::Base
 			WHERE follower_id = :user_id"
 		where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", 
 			followed_user_ids: followed_user_ids, user_id: user.id)
+	end
+
+	def replies
+		Tweet.where("reply_id = ?", id)
+		# @tweet = Tweet.find(1)
+		# reply_ids = "SELECT tweets WHERE reply_id = :tweet_id"
+		# where(tweet_id: @tweet.id)
 	end
 
 	# def conversation(tweet)

@@ -4,6 +4,16 @@
   <title>Fwitter</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+  <script type="text/javascript" src="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
+  <script type="text/javascript" src="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>  
+  <script type="text/javascript">  
+        $(document).ready(function () {  
+            $('.dropdown-toggle').dropdown();  
+        });  
+  </script>
+
+
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -31,7 +41,8 @@
 			  </li>
 			  <li><%= link_to 'Stream', tweets_path %></li>
 			  <li><%= link_to '@', mentions_user_path(current_user) %></li>
-			  <li><%= link_to 'Accounts', users_path %> </li>
+			  <li><%= link_to 'Accounts', users_path %> </li>  
+			 			<!--  render 'form_search -->
 			  <li><%= link_to "Logout", log_out_path %></li>
 			</ul> 
 	      </div>
@@ -55,8 +66,10 @@
 </div>
 
 <div class="container">
-	<div class="row">
-		<div class="span12"><%= yield %></div>
+	<div id = "background-color">
+		<div class="row">
+			<div class="span12"><%= yield %></div>
+		</div>
 	</div>
 </div>
 

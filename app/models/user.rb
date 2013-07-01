@@ -12,6 +12,14 @@ class User < ActiveRecord::Base
 	has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
 	has_many :followers, through: :reverse_relationships, source: :follower
 
+
+	attr_reader :user_tokens
+
+    def user_tokens=(ids)
+      self.user_ids = ids.split(",")
+    end
+
+
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
 	KNOWN_AS = /^\s*Known As:\s*$/i
 	EMAIL = /^\s*Email Address:\s*$/i
@@ -116,4 +124,21 @@ class User < ActiveRecord::Base
 	def retweet_stream
 		Retweet.from_users_followed_by(self)
 	end
+
+
+	def replacing_all_mentions_in_tweets_after_editing_handle(old_handle, new_handle)
+		if old_handle != new_handle
+	  		Tweet.all.each do |tweet|
+	  				if ( tweet.content[("#{old_handle}" + " ")] != nil )  ||  ( tweet.content.ends_with?(old_handle) )
+		  			segments_of_tweet = tweet.content.rpartition(old_handle)
+		   			tweet.content = [segments_of_tweet[0], new_handle, segments_of_tweet[2]].join
+		   			tweet.save
+		   		end
+		   	end
+		end
+	end
+
+	 
+   		   
+
 end
