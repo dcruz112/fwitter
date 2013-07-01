@@ -17,8 +17,8 @@ gem 'twitter-bootstrap-rails'
 gem 'sqlite3'
 
 # Authentication
-gem 'rubycas-client-rails'
-gem 'rubycas-client', '2.2.1'
+gem 'rubycas-client-rails', git: "git://github.com/rubycas/rubycas-client-rails.git"
+gem 'rubycas-client', '2.3.10.rc1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'

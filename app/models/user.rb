@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
 	  browser = Mechanize.new
 	  browser.get( 'https://secure.its.yale.edu/cas/login' )
 	  form = browser.page.forms.first
-	  form.username = "dmc89"
-	  form.password = "Preciliano51!"
+	  form.username = "YourNetID"
+	  form.password = "YourPassword"
 	  form.submit
 	  browser
 	end

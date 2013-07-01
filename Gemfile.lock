@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/rubycas/rubycas-client-rails.git
+  revision: b97de6edc7871bc43ca1c9572f4d9188a210b341
+  specs:
+    rubycas-client-rails (0.1.1)
+      rails (>= 3.0.0)
+      rubycas-client (~> 2.3.9.rc1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -98,11 +106,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
-    rubycas-client (2.2.1)
+    rubycas-client (2.3.10.rc1)
       activesupport
-    rubycas-client-rails (0.1.0)
-      rails (>= 3.0.0)
-      rubycas-client (>= 2.2.0)
     sass (3.2.9)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -165,8 +170,8 @@ DEPENDENCIES
   net-http-digest_auth
   net-ldap
   rails (= 4.0.0.rc1)
-  rubycas-client (= 2.2.1)
-  rubycas-client-rails
+  rubycas-client (= 2.3.10.rc1)
+  rubycas-client-rails!
   sass-rails (~> 4.0.0.rc1)
   sdoc
   simple_form (~> 3.0.0.rc)
