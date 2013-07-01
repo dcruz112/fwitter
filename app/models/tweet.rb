@@ -52,6 +52,13 @@ class Tweet < ActiveRecord::Base
 			followed_user_ids: followed_user_ids, user_id: user.id)
 	end
 
+	def replies
+		Tweet.where("reply_id = ?", id)
+		# @tweet = Tweet.find(1)
+		# reply_ids = "SELECT tweets WHERE reply_id = :tweet_id"
+		# where(tweet_id: @tweet.id)
+	end
+
 	# def conversation(tweet)
 	# 	conversation_tweet_ids = "SELECT tweet_id FROM replies
 	# 		WHERE reply_id = :tweet_id"

@@ -2,14 +2,16 @@
 
 	<% if @total_stream.any? %>
 	    <% @total_stream.flatten! %>
-		<% @total_stream = @total_stream.sort_by {:created_at} %>
+		<% @total_stream = @total_stream.sort! { |x,y| y.updated_at <=> x.updated_at} %>
 		<ul class="tweet-stream">
-			<% @total_stream.reverse.each do |post| %>
+			<% @total_stream.each do |post| %>
 				<%= render post %>
 			<% end %>
 		</ul>
+	<% end %>
+<% end %>
 
-	<% else %>
+<% if current_user != @user %>
 		<% all_tweets_and_retweets = [] %>
 		<% all_tweets_and_retweets << Tweet.where(poster_id: @user.id) %>
 		<% all_tweets_and_retweets << Retweet.where(poster_id: @user.id) %>
@@ -19,5 +21,4 @@
 		<ul> <% all_tweets_and_retweets.each do |post| %>
 			<%= render post %>
 		<% end %> </ul>
-	<% end %>
 <% end %>

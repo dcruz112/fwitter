@@ -131,11 +131,6 @@ class TweetsController < ApplicationController
         #@current_hash = params 
         #params(hash= odfiosdifo)
 
-
-
-
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
