@@ -15,8 +15,8 @@
 	  		<% @mentions = tweet.mentions %>
 	  		<% tweet.content.split(' ').each do |word| %>
 	  			<% if @mentions.include? word %>
-	  				<% @user = User.where(handle: word[1..-1]).first %>
-	  				<%= link_to word, @user, class: "mention" %>
+	  				<% @mentioned_user = User.where(handle: word[1..-1]).first %>
+	  				<%= link_to word, @mentioned_user, class: "mention" %>
 	  			<% else %>
 	  				<%= word %>
 	  			<% end %>
@@ -50,11 +50,17 @@
 	        		<% end %>
 
 	        		<% if (current_user != tweet.user) %>
+	        			<%= link_to 'Reply', reply_tweet_path(tweet, id: tweet.id) %>	
+	        		<% end %> 
+
+	        		<% if (current_user != tweet.user) %>
 	        			<%= link_to 'Retweet', retweet_path(tweet) %>	
 	        		<% end %> 
+
 	        		<% if (current_user != tweet.user && tweet.is_retweet == true) %>
 	        			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>	
 	        		<% end %> 
+
 	        		
         		</td>
             </table>

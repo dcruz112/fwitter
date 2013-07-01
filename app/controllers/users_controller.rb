@@ -5,6 +5,7 @@ require 'open-uri'
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
+  before_action :set_stream, only: [:show]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index, :new, :create]
@@ -20,8 +21,6 @@ class UsersController < ApplicationController
     else
       @user = User.find(@id)
     end
-
-    @tweet_stream = @user.stream
   end
 
   # GET /users/new
@@ -160,6 +159,19 @@ class UsersController < ApplicationController
     @new_default.save
     redirect_to users_path
   end
+
+  def set_stream
+    @total_stream = []
+
+    @user.retweet_stream.each do |post|
+      @total_stream << post
+    end
+
+    @user.tweet_stream.each do |post|
+      @total_stream << post
+    end
+  end
+
 
 
   def mentions

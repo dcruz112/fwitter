@@ -2,6 +2,7 @@ require 'net/ldap'
 
 class User < ActiveRecord::Base
 	has_many :tweets
+	has_many :retweets
 	has_many :favorite_tweets
 	has_many :favorites, through: :favorite_tweets, source: :tweet
 	
@@ -43,7 +44,7 @@ class User < ActiveRecord::Base
 	end
 
 	def following?(some_user)
-		Relationship.find_by(followed_id: some_user.id)
+		self.relationships.find_by(followed_id: some_user.id)
 	end
 
 	def follow!(other_user)
@@ -54,7 +55,11 @@ class User < ActiveRecord::Base
 		relationships.find_by(followed_id: other_user.id).destroy
 	end
 
-	def stream
-		Tweet.from_users_followed_by(self)
+	def tweet_stream
+		Tweet.from_users_followed_by(self) 
+	end
+
+	def retweet_stream
+		Retweet.from_users_followed_by(self)
 	end
 end
