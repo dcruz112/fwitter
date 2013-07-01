@@ -13,12 +13,7 @@
 	</div>
 
 	<div class="tweet-stream">
-		<% if @user == current_user %>
-			<%= render 'stream' %>
-		<% else %>
-			<%= render @user.tweets.reverse %>
-			<%= render @user.retweets.reverse %>
-		<% end %>
+		<%= render 'stream' %>
 
 		<% if @user.tweets.count == 0 and @user.retweets.count == 0 %>
 			<% if @user == current_user %>
