@@ -36,10 +36,10 @@
 	  		<table>	
         		<td>
         			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-        				<li><% "This tweet has been favorited #{@tweet.favorited_by.count} times." %></li>
-        				<li><% "This tweet has been retweeted #{@tweet.retweets.count} times." %></li>
-        				<% @tweet.replies.each do |post| %>
-        					<li><%= render |post| %></l1>
+        				<li><% "This tweet has been favorited #{tweet.favorited_by.count} times." %></li>
+        				<li><% "This tweet has been retweeted #{tweet.retweets.count} times." %></li>
+        				<% tweet.replies.each do |post| %>
+        					<li><%= render post %></l1>
         				<% end %>
         			</ul>
 
