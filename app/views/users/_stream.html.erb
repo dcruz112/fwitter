@@ -1,6 +1,6 @@
 <% if @total_stream.any? %>
 	<% @total_stream = @total_stream.sort_by {:created_at} %>
-	<ul class="tweets">
+	<ul class="tweet-stream">
 		<% @total_stream.reverse.each do |post| %>
 			<%= render post %>
 		<% end %>

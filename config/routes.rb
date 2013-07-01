@@ -8,10 +8,12 @@ Project1::Application.routes.draw do
   get '/switch_user/:id' => 'users#switch_user', as: :switch_user
   get '/show_stuff' => 'users#show_stuff', as: :show_stuff
   get 'tweets/:id/reply' => 'tweets#new', as: :new
+  get '/hashes/:hash_word' => 'tweets#hashes', as: :hash
+
 
   resources :tweets do
     member do
-      get 'retweet', 'favorite', 'reply'
+      get :favorite, :hashes, :reply
     end
   end
 

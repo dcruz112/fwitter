@@ -12,11 +12,14 @@
 	<div class="tweet-content">
 	  	
 	  	<div class="tweet-body">
-	  		<% @mentions = tweet.mentions %>
+	  		<% @all_mentions = tweet.all_mentions_in_tweet %>
+	  		<% @all_hashes = tweet.all_hashes_in_tweet %>
 	  		<% tweet.content.split(' ').each do |word| %>
-	  			<% if @mentions.include? word %>
-	  				<% @mentioned_user = User.where(handle: word[1..-1]).first %>
-	  				<%= link_to word, @mentioned_user, class: "mention" %>
+	  			<% if @all_mentions.include? word %>
+	  				<% @user = User.where(handle: word[1..-1]).first %>
+	  				<%= link_to word, @user, class: "mention" %>
+	  			<% elsif @all_hashes.include? word %>
+	  				<%= link_to word, hash_path(word), class: "hashes" %>
 	  			<% else %>
 	  				<%= word %>
 	  			<% end %>
@@ -38,17 +41,16 @@
         		<td>
 	        		<% if current_user == tweet.user %>
 	        			<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
-        				<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
 	        		<% end %> 
 
-	        		<% if current_user != tweet.user %>
-	        			<%= link_to 'Favorite', favorite_tweet_path(@tweet, id: tweet.id, type: "favorite", method: :put) %>
+	        		<% if current_user != tweet.user %> 
+	        			<% if current_user.favorites.exclude?(@tweet) %>
+	        				<%= link_to 'Favorite', favorite_tweet_path(@tweet, id: tweet.id, type: "favorite", method: :put) %>
+	        			<% else %>
+	        				<%= link_to 'Un-Favorite', favorite_tweet_path(@tweet, type: "unfavorite", method: :put) %>
+	        			<% end %>
 	        		<% end %>
-
-	        		<% if (current_user != tweet.user && current_user.favorite_tweets.include?(@tweet)) %>
-	        			<%= link_to 'Un-Favorite', favorite_tweet_path(@tweet, type: "unfavorite", method: :put) %>
-	        		<% end %>
-
+	        		
 	        		<% if (current_user != tweet.user) %>
 	        			<%= link_to 'Reply', reply_tweet_path(tweet, id: tweet.id) %>	
 	        		<% end %> 
