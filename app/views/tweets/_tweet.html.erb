@@ -10,8 +10,8 @@
     <div class="tweet-author">
         <strong><%= tweet.user.full_name %></strong>
 	    <span class= "author-handle"> <%= link_to tweet.user.handle_at, tweet.user %> </span>
-	    <span class= "tweet-time-stamp", title=<%= tweet.updated_at.localtime.asctime.split.join('-') %>>
-	    	<%= distance_of_time_in_words_to_now(tweet.updated_at, include_seconds = true) %>
+	    <span class= "tweet-time-stamp", title=<%= tweet.created_at.localtime.asctime.split.join('-') %>>
+	    	<%= distance_of_time_in_words_to_now(tweet.created_at, include_seconds = true) %>
 	    </span>
 	</div>
 
@@ -23,7 +23,7 @@
 	  		<% tweet.content.split(' ').each do |word| %>
 	  			<% if @all_mentions.include? word %>
 	  				<% @user = User.where(handle: word[1..-1]).first %>
-	  				<%= link_to word, @user, class: "mention" %>
+	  				<%= link_to @user.handle_at, @user, class: "mention" %>
 	  			<% elsif @all_hashes.include? word %>
 	  				<%= link_to word, hash_path(word), class: "hashes" %>
 	  			<% else %>

@@ -1,0 +1,10 @@
+<%= simple_form_for @user do |f| %>
+  
+   <%= f.input :user_tokens, label: false, input_html: {data: {load: @user.first_name}} %>
+	<div class="actions">
+    	<%= f.submit "Search" %>
+ 	</div>
+
+<% end %>
+
+

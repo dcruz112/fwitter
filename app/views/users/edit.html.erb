@@ -1,17 +1,26 @@
 <div class="edit-user" style="margin-left: 300px;"><h1>Edit Profile</h1>
 
-<%= render 'form_edit' %>
 
-<% if !@user.default %>
-	<%= button_to 'Set as Default', default_path(@user), method: :get %>
-<% end %>
-<% if @user.default %>
-	<%= button_to 'Delete Profile', edit_user_path(@user), method: :get, data: { confirm: 
-		'Warning: Please select a new default user before deleting this account' } %>
-<% else %>
-	<%= button_to 'Delete Profile', @user, method: :delete, data: { confirm: 
-		'Warning: This will permanently delete your account and all of your tweets.' } %>
-<% end %>
 
-<%= button_to 'Back', users_path, method: :get %>
+
+	<%= render 'form_edit' %>
+	
+
+	<% if !@user.default %>
+		<%= button_to 'Set as Default', default_path(@user), method: :get %>
+	<% end %>
+	<% if @user.default %>
+		<%= button_to 'Delete Profile', edit_user_path(@user), method: :get, data: { confirm: 
+			'Warning: Please select a new default user before deleting this account' } %>
+	<% else %>
+		<%= button_to 'Delete Profile', @user, method: :delete, data: { confirm: 
+			'Warning: This will permanently delete your account and all of your tweets.' } %>
+	<% end %>
+
+
+
+
+
 </div>
+
+
