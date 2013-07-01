@@ -115,8 +115,9 @@ class TweetsController < ApplicationController
     end
     render 'show_hashes'
   end
-
-
+        #redirect to show_hashes
+        #@current_hash = params 
+        #params(hash= odfiosdifo)
 
   private
     # Use callbacks to share common setup or constraints between actions.

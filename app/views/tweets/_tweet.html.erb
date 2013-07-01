@@ -1,3 +1,9 @@
+    <script type="text/javascript">  
+        $(document).ready(function () {  
+            $('.dropdown-toggle').dropdown();  
+        });  
+   </script>
+
 <hr>
 <div class="tweet">
 	<%= image_tag(tweet.user.image_url, class: 'tweet-thumbnail') %>
@@ -35,24 +41,29 @@
 	  	<div class="tweet-footer">
 	  		<table>	
         		<td>
-        			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-        				<li><% "This tweet has been favorited #{tweet.favorited_by.count} times." %></li>
-        				<li><% "This tweet has been retweeted #{tweet.retweets.count} times." %></li>
-        				<% tweet.replies.each do |post| %>
-        					<li><%= render post %></l1>
-        				<% end %>
-        			</ul>
+
+        			<div class="dropdown">
+        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">View Conversation</a>
+		        			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+		        				<li><%= "This tweet has been favorited #{tweet.favorited_by.count} times." %></li>
+								<li><%= "This tweet has been retweeted #{tweet.retweets.count} times." %></li>
+		        					<% tweet.replies.each do |post| %>
+		        						<li><%= render post %></li>
+		        					<% end %>
+		        			</ul>
+        			</div>
+        			
 
 	        		<% if current_user != tweet.user %> 
-	        			<% if current_user.favorites.exclude?(@tweet) %>
-	        				<%= link_to 'Favorite', favorite_tweet_path(@tweet, id: tweet.id, type: "favorite", method: :put) %>
+	        			<% if current_user.favorites.exclude?(tweet) %>
+	        				<%= link_to 'Favorite', favorite_tweet_path(tweet, id: tweet.id, type: "favorite", method: :put) %>
 	        			<% else %>
-	        				<%= link_to 'Un-Favorite', favorite_tweet_path(@tweet, type: "unfavorite", method: :put) %>
+	        				<%= link_to 'Un-Favorite', favorite_tweet_path(tweet, type: "unfavorite", method: :put) %>
 	        			<% end %>
 	        		<% end %>
 	        		
 	        		<% if (current_user != tweet.user) %>
-	        			<%= link_to 'Reply', reply_path(tweet) %>	
+	        			<%= link_to 'Reply', reply_tweet_path(tweet) %>	
 	        		<% end %> 
 
 	        		<% if (current_user != tweet.user) %>
