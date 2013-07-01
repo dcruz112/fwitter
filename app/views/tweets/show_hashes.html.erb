@@ -1,0 +1,11 @@
+	<% if @hashes.size > 0 %>
+		<% puts "hhhhhhhhhhhhhhhhhhhhhhello" %>
+		<% @hashes.flatten! %>
+		<% @hashes.sort! { |x,y| y.updated_at <=> x.updated_at} %>
+
+		<% @hashes.each do |tweet| %>
+			<%= render tweet %>
+		<% end %>
+   	<% else %>
+     	<%='There are no tweets with this hash' %>
+	<% end %>

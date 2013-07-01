@@ -20,6 +20,8 @@ class UsersController < ApplicationController
     else
       @user = User.find(@id)
     end
+
+    @tweet_stream = @user.stream
   end
 
   # GET /users/new
@@ -129,9 +131,9 @@ class UsersController < ApplicationController
   def favorites
     @title = "Favorites"
     @user = User.find(params[:id])
-    @tweets = @user.favorite_tweets
+    @tweets = @user.favorites
     # .paginate(page: params[:page])
-    render @tweets
+    render 'show_favorites'
   end
   
 

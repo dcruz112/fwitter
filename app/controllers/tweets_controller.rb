@@ -40,6 +40,7 @@ class TweetsController < ApplicationController
         format.html { redirect_to root_path}
         format.json { render action: 'show', status: :created, location: @tweet }
       else
+        @stream_items = []
         format.html { render action: 'new' }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
@@ -98,6 +99,39 @@ class TweetsController < ApplicationController
       redirect_to :back, notice: 'Something went wrong. Nothing happened.'
     end
   end
+
+
+
+
+  # def hashes_index  
+  #   @hashes = []
+  #   Tweet.all.each do |tweet|
+  #     if !tweet.all_hashes_in_tweet.empty?
+  #       @hashes << tweet
+  #     end 
+  #   end
+  #   render 'show_hashes'
+  # end
+
+  def hashes
+    @current_hash = params[:hash_word]
+    puts @current_hash
+     @hashes = [] 
+    Tweet.all.each do |tweet|
+      if tweet.is_hash_in_tweet(@current_hash)
+        @hashes << tweet
+        puts "sonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+      end 
+    end
+    render 'show_hashes'
+  end
+        #redirect to show_hashes
+        #@current_hash = params 
+        #params(hash= odfiosdifo)
+
+
+
+
 
 
   private
