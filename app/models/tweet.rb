@@ -29,34 +29,28 @@ class Tweet < ActiveRecord::Base
 	  @tweet_words = self.content.split(' ')
 	  hashes = []
       @tweet_words.each do |word|
-        if word[0] == '#'
-          hashes << word
-        end
+        hashes << word    if word[0] == '#'
       end
       return hashes
 	end
 
 	def is_hash_in_tweet(current_hash)
       self.all_hashes_in_tweet.each do |hash|
-        if hash == current_hash
-          return true
-        end
+        return true   if hash == current_hash
       end
-
       return false
-	
-  end
+    end
 
 
 	def self.from_users_followed_by(user)
-		followed_user_ids = "SELECT followed_id FROM relationships
-			WHERE follower_id = :user_id"
-		where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", 
-			followed_user_ids: followed_user_ids, user_id: user.id)
+	  followed_user_ids = "SELECT followed_id FROM relationships
+		WHERE follower_id = :user_id"
+	  where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", 
+	    followed_user_ids: followed_user_ids, user_id: user.id)
 	end
 
 	def replies
-		Tweet.where("reply_id = ?", id)
+	  Tweet.where("reply_id = ?", id)
 		# @tweet = Tweet.find(1)
 		# reply_ids = "SELECT tweets WHERE reply_id = :tweet_id"
 		# where(tweet_id: @tweet.id)
