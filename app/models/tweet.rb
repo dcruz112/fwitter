@@ -4,7 +4,7 @@ class Tweet < ActiveRecord::Base
 	has_many :favorited_by, through: :favorite_tweets, source: :user
 	has_many :retweets
 	has_many :mentions
-  has_many :hashes
+  	has_many :hashes
 
   attr_reader :current_hash
 

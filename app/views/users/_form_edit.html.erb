@@ -2,7 +2,9 @@
 
 
 <%= simple_form_for @user do |f| %>
-  
+
+
+
   <br>
 
     <%= f.input :first_name, input_html: { maxlength: 20 }, label: 'First Name'%>
@@ -12,9 +14,17 @@
     <%= f.input :biography, input_html: { maxlength: 160 }, label: 'Biography' %>
     <%= f.input :current_location, input_html:{ maxlength: 20 }, label: 'Current Location' %>
     <%= f.hidden_field :college, input_html:{ maxlength: 2 }, label: 'College' %>
-    <%= f.submit 'Save Changes' %>
+	<%= f.submit 'Save Changes' %>
+
+ 
+
+
+
+<br>
+
+
+
 
 <% end %>
 
-<br>
 

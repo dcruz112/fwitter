@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -11,7 +10,6 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
 
 ActiveRecord::Schema.define(version: 20130625203224) do
 
@@ -72,4 +70,3 @@ ActiveRecord::Schema.define(version: 20130625203224) do
   end
 
 end
-

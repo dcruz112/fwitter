@@ -10,7 +10,6 @@ Project1::Application.routes.draw do
 
   get '/hashes/:hash_word' => 'tweets#hashes', as: :hash
 
-
   resources :tweets do
     member do
       get :favorite, :hashes

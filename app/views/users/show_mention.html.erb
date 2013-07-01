@@ -12,7 +12,7 @@
 	<% if @mentions.size > 0 %>
 		
 		<% @mentions.flatten! %>
-		<% @mentions.sort! { |x,y| y.updated_at <=> x.updated_at} %>
+		<% @mentions.sort! { |x,y| y.created_at <=> x.created_at} %>
 
 		<% @mentions.each do |tweet| %>
 			<%= render tweet %>
