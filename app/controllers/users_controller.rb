@@ -26,8 +26,8 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @net_id = session[:cas_user]
-    @user.search_ldap(@net_id)
     @user.netid = @net_id
+    @user.get_user
     if !current_user(false)
       @user.default = true
     else
@@ -50,11 +50,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
-    if @user.college.nil?
-      @user.image_url = "Default_Pics/yc.png"
-    else
-      @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
-    end
+    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
     if !current_user(false)
       @user.default = true
     else
@@ -63,6 +59,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+
+        # Tell the UserMailer to send a welcome Email after save
+        UserMailer.welcome_email(@user).deliver
 
         format.html { redirect_to root_path(delete: false) }
         format.json { render action: 'show', status: :created, location: @user }

@@ -1,11 +1,17 @@
 class ApplicationController < ActionController::Base
-  before_action RubyCAS::Filter
+  before_action RubyCAS::Filter, :unless => :skip_login?
   before_action :current_user
   helper_method :current_user
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+ 
+# hack for skip_before_filter with CAS
+# overwrite this method (with 'true') in any controller you want to skip CAS authentication
+def skip_login? 
+  false 
+end
 
   private
 
