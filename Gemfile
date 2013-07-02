@@ -9,6 +9,8 @@ gem 'net-http-digest_auth'
 
 gem 'faker', '1.1.2'
 
+gem 'carrierwave'
+
 gem 'twitter-bootstrap-rails'
 
 # gem 'will_paginate', '3.0.4'

@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  skip_before_action :current_user, only: [:log_out]
+
   def log_in
   	session[:current_account] = nil
   	current_user

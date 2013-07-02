@@ -2,6 +2,8 @@
 require 'mechanize'
 
 class User < ActiveRecord::Base
+	mount_uploader :image_url, ImageUrlUploader
+
 	has_many :tweets
 	has_many :retweets
 	has_many :favorite_tweets
@@ -34,8 +36,8 @@ class User < ActiveRecord::Base
 	  browser = Mechanize.new
 	  browser.get( 'https://secure.its.yale.edu/cas/login' )
 	  form = browser.page.forms.first
-	  form.username = "YourNetID"
-	  form.password = "YourPassword"
+	  form.username = ENV['netid']
+	  form.password = ENV['password']
 	  form.submit
 	  browser
 	end

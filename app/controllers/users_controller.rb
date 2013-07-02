@@ -73,6 +73,7 @@ class UsersController < ApplicationController
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
+        flash[:notice] = "User could not be saved"        
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -205,6 +206,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :handle, :biography, 
-        :current_location, :email, :college, :user_tokens)
+        :current_location, :email, :college, :user_tokens, :image_url)
     end
 end

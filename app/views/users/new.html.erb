@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <div class= "new-user" style="margin-left: 300px;" >
 	<h1>Welcome to Fwitter!<br>Create your profile below. </h1>
 
@@ -7,7 +9,9 @@
 	<%= link_to 'Back', users_path %>
 <% else %>
 	<%= render 'form_new' %>
-	<%= link_to 'Back', users_path %>
 <% end %>
+
+<%= link_to "Logout", log_out_path %>
+<%= link_to "Login", log_in_path %>
 
 </div>

@@ -3,17 +3,18 @@
   
     <br>
 
-    <%= f.hidden_field :first_name, input_html: { maxlength: 20 }, label: 'First Name'%>
-    <%= f.hidden_field :last_name, input_html: { maxlength: 20 }, label: 'Last Name' %>
-    <%= f.hidden_field :email, input_html:{ maxlength: 30 }, label: 'E-mail' %>
+    <%= f.input :first_name, input_html: { maxlength: 20 }, label: 'First Name'%>
+    <%= f.input :last_name, input_html: { maxlength: 20 }, label: 'Last Name' %>
+    <%= f.input :email, input_html:{ maxlength: 30 }, label: 'E-mail' %>
     <%= f.input :handle, input_html: { maxlength: 15 }, label: 'Handle' %>
     <%= f.input :biography, input_html: { maxlength: 160 }, label: 'Biography' %>
     <%= f.input :current_location, input_html:{ maxlength: 20 }, label: 'Current Location' %>
-    <%= f.hidden_field :college, input_html:{ maxlength: 2 }, label: 'College' %>
-    <%= f.submit 'Create Profile' %>
+    <%= f.input :college, input_html:{ maxlength: 2 }, label: 'College' %>
+    
+    <div style="width:70px;height:70px;border:5px solid #000;padding:5px;margin:10px 0 10px 0">Choose a photo the size of this box!</div>
 
+    <%= f.file_field :image_url %><br><br>
 
-  
+    <%= f.submit 'Create Profile', class: "btn btn-large btn-primary" %>
+
 	<% end %>
-
-	<br>
