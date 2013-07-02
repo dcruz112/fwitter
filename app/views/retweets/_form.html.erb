@@ -1,14 +1,5 @@
-
-
 <%= simple_form_for @retweet do |f| %>
-  
-  
-
-   
-    <%= f.hidden_field :content, input_html: { maxlength: 140 }, label: false %>  <br>
-    <%= f.submit 'ReTweet' %>
-  
- 
+  <%= f.hidden_field :content, input_html: { maxlength: 140 }, label: false %>  <br>
+  <%= f.submit 'ReTweet' %>
 <% end %>
-
 <% redirect_to root_path %>

@@ -1,8 +1,4 @@
-
-	<%= simple_form_for @user do |f| %>
-  
-    <br>
-
+<%= simple_form_for @user do |f| %>
     <%= f.hidden_field :first_name, input_html: { maxlength: 20 }, label: 'First Name'%>
     <%= f.hidden_field :last_name, input_html: { maxlength: 20 }, label: 'Last Name' %>
     <%= f.hidden_field :email, input_html:{ maxlength: 30 }, label: 'E-mail' %>
@@ -11,9 +7,4 @@
     <%= f.input :current_location, input_html:{ maxlength: 20 }, label: 'Current Location' %>
     <%= f.hidden_field :college, input_html:{ maxlength: 2 }, label: 'College' %>
     <%= f.submit 'Create Profile' %>
-
-
-  
-	<% end %>
-
-	<br>
+<% end %>

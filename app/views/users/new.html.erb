@@ -1,13 +1,10 @@
 <div class= "new-user" style="margin-left: 300px;" >
 	<h1>Welcome to Fwitter!<br>Create your profile below. </h1>
-
-<% if current_user(false) %>
-	<%= render 'form_edit' %>
-
-	<%= link_to 'Back', users_path %>
-<% else %>
-	<%= render 'form_new' %>
-	<%= link_to 'Back', users_path %>
-<% end %>
-
+	<% if current_user(false) %>
+		<%= render 'form_edit' %>
+		<%= link_to 'Back', users_path %>
+	<% else %>
+		<%= render 'form_new' %>
+		<%= link_to 'Back', users_path %>
+	<% end %>
 </div>
