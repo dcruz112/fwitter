@@ -1,24 +1,22 @@
 <% if current_user == @user %>
+  <% if @total_stream.any? %>
+    <% @total_stream.flatten! %>
+    <% @total_stream = @total_stream.sort! { |x,y| y.created_at <=> x.created_at} %>
+	  <ul class="tweet-stream">
+	    <% @total_stream.each do |post| %>
+		    <%= render post %>
+      <% end %>
+	  </ul>
+  <% end %>
+<% elsif current_user != @user %>
+    <% all_tweets_and_retweets = [] %>
+    <% all_tweets_and_retweets << Tweet.where(poster_id: @user.id) %>
+    <% all_tweets_and_retweets << Retweet.where(poster_id: @user.id) %>
+    <% all_tweets_and_retweets.flatten! %>
+    <% all_tweets_and_retweets.sort! { |x,y| y.created_at <=> x.created_at} %>
 
-	<% if @total_stream.any? %>
-	    <% @total_stream.flatten! %>
-		<% @total_stream = @total_stream.sort! { |x,y| y.updated_at <=> x.updated_at} %>
-		<ul class="tweet-stream">
-			<% @total_stream.each do |post| %>
-				<%= render post %>
-			<% end %>
-		</ul>
-	<% end %>
-<% end %>
-
-<% if current_user != @user %>
-		<% all_tweets_and_retweets = [] %>
-		<% all_tweets_and_retweets << Tweet.where(poster_id: @user.id) %>
-		<% all_tweets_and_retweets << Retweet.where(poster_id: @user.id) %>
-		<% all_tweets_and_retweets.flatten! %>
-		<% all_tweets_and_retweets.sort! { |x,y| y.updated_at <=> x.updated_at} %>
-
-		<ul> <% all_tweets_and_retweets.each do |post| %>
-			<%= render post %>
-		<% end %> </ul>
+    <ul> <% all_tweets_and_retweets.each do |post| %>
+  	  <%= render post %>
+    <% end %> 
+    </ul>
 <% end %>

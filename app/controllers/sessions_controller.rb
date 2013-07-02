@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def log_in
   	session[:current_account] = nil
   	current_user
-	redirect_to current_user
+	  redirect_to current_user
   end
 
   def log_out

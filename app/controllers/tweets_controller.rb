@@ -71,7 +71,6 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy
-    
     death = []
     death << Retweet.where(tweet_id: @tweet.id)
     death.flatten!
@@ -92,22 +91,17 @@ class TweetsController < ApplicationController
     if type == "favorite"
       current_user.favorites << @tweet
       redirect_to :back, notice: 'Tweet favorited.'
-
     elsif type == "un-favorite"
       current_user.favorites.delete(@tweet)
       redirect_to :back, notice: 'Tweet un-favorited.'
-
     else
       redirect_to :back, notice: 'Something went wrong. Nothing happened.'
     end
   end
 
-
-
   def hashes
     @current_hash = params[:hash_word]
-    puts @current_hash
-     @hashes = [] 
+    @hashes = [] 
     Tweet.all.each do |tweet|
       if tweet.is_hash_in_tweet(@current_hash)
         @hashes << tweet
@@ -115,20 +109,15 @@ class TweetsController < ApplicationController
     end
     render 'show_hashes'
   end
-        #redirect to show_hashes
-        #@current_hash = params 
-        #params(hash= odfiosdifo)
+
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tweet
-      @tweet = Tweet.find(params[:id])
-      
-    end
+  def set_tweet
+    @tweet = Tweet.find(params[:id])    
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tweet_params
-      params.require(:tweet).permit(:content, :user_id, :is_retweet, :poster_id, :is_reply, :reply_id)
-    end
+  def tweet_params
+    params.require(:tweet).permit(:content, :user_id, :is_retweet, :poster_id, :is_reply, :reply_id)
+  end
 
 end

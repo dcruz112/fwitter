@@ -1,17 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<div class= "new-user" style="margin-left: 300px;" >
-	<h1>Welcome to Fwitter!<br>Create your profile below. </h1>
-
 <% if current_user(false) %>
-	<%= render 'form_edit' %>
-
-	<%= link_to 'Back', users_path %>
+  <script type="text/javascript">
+    window.location.href="/users/edit"  
+  </script>
 <% else %>
 	<%= render 'form_new' %>
 <% end %>
 
 <%= link_to "Logout", log_out_path %>
 <%= link_to "Login", log_in_path %>
-
-</div>
