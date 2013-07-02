@@ -11,8 +11,6 @@ class Tweet < ActiveRecord::Base
 	attr_reader :current_hash
 
 
-
-
 	def all_mentions_in_tweet
 	  @tweet_words = self.content.split(' ')
 	  @mentions = []

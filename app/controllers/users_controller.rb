@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     @net_id = session[:cas_user]
     @user.netid = @net_id
     @user.get_user
+    @user.get_bio
     if !current_user(false)
       @user.default = true
     else

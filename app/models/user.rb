@@ -1,4 +1,4 @@
-# require 'net/ldap'
+require 'net/ldap'
 require 'mechanize'
 
 class User < ActiveRecord::Base
@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
 	  browser = Mechanize.new
 	  browser.get( 'https://secure.its.yale.edu/cas/login' )
 	  form = browser.page.forms.first
-	  form.username = "dmc89"
-	  form.password = "Dnbkl4h4"
+	  form.username = ENV["netid"]
+	  form.password = ENV["netid_password"]
 	  form.submit
 	  browser
 	end
@@ -59,38 +59,63 @@ class User < ActiveRecord::Base
 	    when EMAIL
 	  	  self.email = value
 	    when COLLEGE
-	      self.college = value.nil? ? "YC" : value
+	      self.college = value
 	    end
+	    self.college ||= "YC"
 	  end
 	end
 
 	def get_bio
 	  browser = make_cas_browser
-
-	  browser.get("https://students.yale.edu/facebook/")
-	  browser.page.forms[0]
+	  self.biography = "Hi!"
+	  browser.get("https://students.yale.edu/facebook/ChangeCollege?newOrg=Yale%20College")
 	  browser.get("https://students.yale.edu/facebook/Search?searchTerm=#{self.first_name}%20#{self.last_name}&searchResult=true")
+	  page = browser.page.search("div.student_info")
+	  if !page.empty?
+	  	len = page.children.length
+	    major = page.children[len - 3].text
+	    dob = page.children.last.text.split(' ')
+	    location = page.children[len - 5].text.split(' ')
+	  	if major == "Undeclared"
+	  		self.biography += " I'm in #{page.first.children.text} and am still trying to figure out my major."
+	  	else
+	  		self.biography += " I'm a #{major} major in #{page.first.children.text}."
+	  	end
+	  	self.biography += " My birthday is #{month_abbr_converter(dob.first)} #{dob.last.to_i.ordinalize}."
+	  	self.current_location = "#{location.first} #{location[1]}"
+	  end
+	  if self.first_name.nil?
+	  	self.search_ldap(session[:cas_user])
+	  end
+	end
+	
 
+	def month_abbr_converter(month)
+		months = { "Jan" => "January", "Feb" => "February", "Mar" => "March", 
+			"Apr" => "April", "May" => "May", "Jun" => "June", "Jul" => "July",
+			"Aug" => "August", "Sep" => "September", "Oct" => "October", 
+			"Nov" => "November", "Dec" => "Decemeber"}
+		return months[month]
 	end
 
-	# def search_ldap(login)
-	#     ldap = Net::LDAP.new(host: "directory.yale.edu", port: 389)
-	#     filter = Net::LDAP::Filter.eq("uid", login)
-	#     attrs = ["givenname", "sn", "eduPersonNickname", "telephoneNumber", "uid",
-	#              "mail", "collegename", "curriculumshortname", "college", "class"]
-	#     result = ldap.search(base: "ou=People,o=yale.edu", filter: filter, attributes: attrs)
-	# 	if !result.empty?
-	#     	@nickname = result[0][:eduPersonNickname]
-	# 		if @nickname.empty?
-	# 			self.first_name  = result[0][:givenname][0]
-	# 		else
-	# 		    self.first_name  = @nickname[0]
-	# 		end
-	# 		self.last_name   = result[0][:sn][0]
-	# 		self.email   = result[0][:mail][0]
-	# 		self.college = result[0][:college][0]
-	# 	end
-	# end
+	def search_ldap(login)
+	    ldap = Net::LDAP.new(host: "directory.yale.edu", port: 389)
+	    filter = Net::LDAP::Filter.eq("uid", login)
+	    attrs = ["givenname", "sn", "eduPersonNickname", "telephoneNumber", "uid",
+	             "mail", "collegename", "curriculumshortname", "college", "class"]
+	    result = ldap.search(base: "ou=People,o=yale.edu", filter: filter, attributes: attrs)
+		if !result.empty?
+	    	@nickname = result[0][:eduPersonNickname]
+			if @nickname.empty?
+				self.first_name  = result[0][:givenname][0]
+			else
+			    self.first_name  = @nickname[0]
+			end
+			self.last_name   = result[0][:sn][0]
+			self.email   = result[0][:mail][0]
+			self.college = result[0][:college][0]
+		end
+	end
 
 	validates :first_name, :handle, :email, presence: true
 	validates :handle, uniqueness: { case_sensitive: false }
