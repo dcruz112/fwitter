@@ -12,6 +12,15 @@
 		<% end %>
 	</div>
 
+	<div class="user-sidebar">
+		<div>
+			<%= render 'follow_form' if params[:id] != current_user.id %>
+		</div>
+		<div> 
+			<%= render 'stats' %>
+		</div>
+	</div>
+	
 	<div class="tweet-stream">
 		<%= render 'stream' %>
 
@@ -24,11 +33,4 @@
 		<% end %>
 	</div>
 
-	<div class="user-sidebar">
-		<div>
-			<%= render 'follow_form' if params[:id] != current_user.id %>
-		</div>
-		<div> 
-			<%= render 'stats' %>
-		</div>
-	</div>
+
