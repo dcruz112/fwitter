@@ -1,3 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<div class= "hash-profile-info" style= "margin-left: 300px;">
+	<br>
+	<h1><%= @current_hash %></h1>
+	<br><br>
+</div>
+
 <% if @hashes.size > 0 %>
 	<% @hashes.flatten! %>
 	<% @hashes.sort! { |x,y| y.created_at <=> x.created_at} %>		

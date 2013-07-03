@@ -128,4 +128,30 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def mention_count(number)
+		all_instances_of_mentions = []
+		h = Hash.new(0)	
+		Tweet.all.each do |tweet|
+			all_instances_of_mentions << tweet.all_mentions_in_tweet
+		end
+		all_instances_of_mentions.flatten.each {|v| h[v] +=1}
+		s = Hash[h.sort_by{|k, v| v}.reverse].keys[0..(number-1)]
+		s = s[0..(number-1)] if s.length > number
+		return s
+	end
+
+	def hash_count(number)
+		all_instances_of_hashes = []
+		h = Hash.new(0)	
+		Tweet.all.each do |tweet|
+			if ((Time.now - tweet.created_at) < 86400 ) 
+				all_instances_of_hashes << tweet.all_hashes_in_tweet
+			end
+		end
+		all_instances_of_hashes.flatten.each {|v| h[v] +=1}
+		s = Hash[h.sort_by{|k, v| v}.reverse].keys
+		s = s[0..(number-1)] if s.length > number
+		return s
+	end
+
 end

@@ -41,8 +41,7 @@
 						</ul> 
 		      </div>
 	      <% end %>
-      
-    		<div class="time">
+    		
 					<% if current_user(false) %>
 					  <% t = Time.now.localtime %>
 					  <% h = (t.hour)%24 %>
@@ -52,12 +51,32 @@
 					  <% am_or_pm = "PM" if h >= 12 %>
 					  <% h = 12 if h == 0 %>
 					  <% h = h - 12 if h > 12 %>
-					  <%= "#{h}:#{m}#{am_or_pm}" %>
 					<% end %>
+				<div class="time">
+					<%= "#{h}:#{m}#{am_or_pm}" %>
 				</div>
     	</div>
   	</div>
 	</div>
+
+
+
+		<div class="trending" style="position:fixed; margin-top:40px; margin-left: 1000px;">
+		<br><br>
+			<strong> Trending Right Now </strong>
+		<br>
+		<% trending_hashes = current_user.hash_count(4) %>
+			<% trending_hashes.each do |trending_hash| %>
+				<%= link_to trending_hash, hash_path(trending_hash)%><br> 
+			<% end %>
+		<%  trending_mentions = current_user.mention_count(4) %>
+			<% trending_mentions.each do |trending_mention| %>
+				<% @user = User.where(handle: trending_mention[1,trending_mention.length]).first %>
+				<%= link_to trending_mention, @user %><br> 
+			<% end %>
+
+		</div>
+
 
 	<div class="container">
 		<div id = "background-color">
@@ -66,6 +85,11 @@
 			</div>
 		</div>
 	</div>
+
+
+		
+
+
 
 </body>
 </html>
