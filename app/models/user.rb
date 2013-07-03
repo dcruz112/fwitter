@@ -153,5 +153,4 @@ class User < ActiveRecord::Base
 		s = s[0..(number-1)] if s.length > number
 		return s
 	end
-
 end

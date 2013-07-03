@@ -14,7 +14,8 @@
   	</div>
 
   	<div class="retweeted-by">
-  		<%=  "Retweeted by #{User.find(retweet.poster_id).full_name}" %>
+      <% @user = User.find(retweet.poster_id)
+  		<%=  link_to "Retweeted by #{@user.full_name}", @user %>
   	</div>
 
 		<div class="tweet-footer">
