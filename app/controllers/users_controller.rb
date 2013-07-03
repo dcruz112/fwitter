@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     @user = User.new
     @net_id = session[:cas_user]
     @user.netid = @net_id
-    # @user.search_ldap(@netid)
+    @user.search_ldap(@net_id)
     @user.get_user if @user.first_name.nil?
     if !current_user(false)
       @user.default = true

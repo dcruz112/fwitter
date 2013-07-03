@@ -41,11 +41,11 @@ hr {
 }
 
 .tweet {
-	margin-left: auto;
-	margin-right: auto;
-	background: white;
-	padding: 5px;
-	-o-transition:.1s;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  padding: 5px;
+  -o-transition:.1s;
   -ms-transition:.1s;
   -moz-transition:.1s;
   -webkit-transition:.1s;
@@ -56,19 +56,19 @@ hr {
 }
 
 .tweet:hover {
-	background: WhiteSmoke;
-
-	.tweet-time-stamp {
-		color: black;
-	}
+  background: LightGray;
+  
+  .tweet-time-stamp {
+    color: black;
+  }
 }
 
 .tweet .tweet-footer {
-	visibility: hidden;
+  visibility: hidden;
 }
 
 .tweet:hover .tweet-footer {
-	visibility: visible;
+  visibility: visible;
 }
 
 #new-tweet{
