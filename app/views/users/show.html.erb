@@ -12,6 +12,7 @@
 	<div class="tweet-stream">
 		<div class="span9">
 			<div class= "user-profile-info">
+				<%= image_tag(@user.image_url ||= "Default_Pics/#{@user.college.downcase}.png", class: 'profile-pic') %>
 				<h1><%= @user.full_name %></h1>
 				<h2><%= @user.handle_at %></h2>
 				<h5><%= @user.biography if @user.biography %></h5>

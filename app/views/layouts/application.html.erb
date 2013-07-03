@@ -28,7 +28,7 @@
 	        <span class="icon-bar"></span>
  -->	      </a>
 	      
-	 	  	<% if current_user(false) %>
+	 	  <% if current_user(false) %>
 	      	<%= link_to image_tag("yalelogo4.png"), new_tweet_path, class: "brand" %>
 		      <div class="nav-collapse">
 					<ul class="nav">
@@ -53,6 +53,21 @@
   	</div>
 	</div>
 
+
+		<div class="trending" style="position:fixed; margin-top:40px; margin-left: 1000px;">
+			<br><br><strong> Trending Right Now </strong><br>
+			<% trending_hashes = current_user.hash_count(4) %>
+			<% trending_hashes.each do |trending_hash| %>
+				<%= link_to trending_hash, hash_path(trending_hash)%><br> 
+			<% end %>
+			<%  trending_mentions = current_user.mention_count(4) %>
+			<% trending_mentions.each do |trending_mention| %>
+				<% @user = User.where(handle: trending_mention[1,trending_mention.length]).first %>
+				<%= link_to trending_mention, @user %><br> 
+			<% end %>
+		</div>
+
+
 	<div class="container">
 		<div id = "background-color">
 			<div class="row">
@@ -60,6 +75,7 @@
 			</div>
 		</div>
 	</div>
+
 
 </body>
 </html>

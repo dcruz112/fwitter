@@ -12,6 +12,15 @@
  *= require_tree .
  */
 
+hr {
+	display: block;
+	-webkit-margin-before: 0.5em;
+	-webkit-margin-after: 0.5em;
+	-webkit-margin-start: auto;
+	-webkit-margin-end: auto;
+	border-style: inset;
+	border-width: 1px;
+}
 
 #header {
  	color: #0F4D92;
@@ -31,6 +40,7 @@
 	float: right;
 	padding: 10px;
 	color: gray;
+	font-size: 18px;
 }
 
 #navbar li {
@@ -102,4 +112,10 @@ a:active {
 .nav {
 	font-size: 18px;
 	padding: 0px;
+}
+
+
+.form {
+	margin-left: 25%;
+	margin-top: 25%;	
 }

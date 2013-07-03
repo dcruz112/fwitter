@@ -23,6 +23,7 @@ class Tweet < ActiveRecord::Base
     return mentions
 	end
 
+
 	def is_hash_in_tweet(current_hash)
     self.all_hashes_in_tweet.each do |hash|
       return true   if hash == current_hash

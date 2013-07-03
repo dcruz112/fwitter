@@ -1,3 +1,4 @@
+<hr>
 <div class="tweet">
 	<%= image_tag(retweet.user.image_url, class: 'tweet-thumbnail') %>
 	<div class="tweet-author">
@@ -14,7 +15,8 @@
   	</div>
 
   	<div class="retweeted-by">
-  		<%= "Retweeted by" %> <%= link_to User.find(retweet.poster_id).full_name, User.find(retweet.poster_id) %>
+      <% @user = User.find(retweet.poster_id) %>
+  		<%= "Retweeted by" %> <%= link_to " #{@user.full_name}", @user %>
   	</div>
 
 		<div class="tweet-footer">

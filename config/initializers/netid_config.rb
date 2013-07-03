@@ -1,2 +1,2 @@
-ENV['netid'] = 'alg65'
-ENV['netid_password'] = 'mushiny11y'
+ENV['netid'] = "YourNetID"
+ENV['netid_password'] = "YourPassword"
