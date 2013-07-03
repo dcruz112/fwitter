@@ -9,6 +9,7 @@ Project1::Application.routes.draw do
   get '/show_stuff' => 'users#show_stuff', as: :show_stuff
   get 'tweets/:id/reply' => 'tweets#new', as: :new
   get '/hashes/:hash_word' => 'tweets#hashes', as: :hash
+  get '/users/edit' => 'users#edit'
 
   resources :tweets do
     member do

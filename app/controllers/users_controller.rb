@@ -32,8 +32,8 @@ class UsersController < ApplicationController
     @user = User.new
     @net_id = session[:cas_user]
     @user.netid = @net_id
-    @user.get_user
-    @user.get_bio
+    # @user.search_ldap(@netid)
+    @user.get_user if @user.first_name.nil?
     if !current_user(false)
       @user.default = true
     else
@@ -57,23 +57,18 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
-    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
     if !current_user(false)
       @user.default = true
     else
       @user.default = false
     end
-
     respond_to do |format|
       if @user.save
-
-        # Tell the UserMailer to send a welcome Email after save
-        UserMailer.welcome_email(@user).deliver
-
         format.html { redirect_to root_path(delete: false) }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
+        flash[:notice] = "User could not be saved"        
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -181,22 +176,17 @@ class UsersController < ApplicationController
     end
   end
 
-
-
   def mentions
     @user = current_user
     @mentions = []
     Tweet.all.each do |tweet|
-      if !tweet.mentions.empty? && tweet.mentions.include?('@' + @user.handle)
+      if !tweet.all_mentions_in_tweet.empty? && tweet.all_mentions_in_tweet.include?('@' + @user.handle)
         @mentions << tweet
       end 
     end
     render 'show_mention'
   end
 
-
-
-  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -206,6 +196,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :handle, :biography, 
-        :current_location, :email, :college, :user_tokens)
+        :current_location, :email, :college, :user_tokens, :image_url)
     end
 end

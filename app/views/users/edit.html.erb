@@ -1,11 +1,5 @@
-<div class="edit-user" style="margin-left: 300px;"><h1>Edit Profile</h1>
-
-
-
-
+<div class="edit-user" style="margin-left: 300px;">
 	<%= render 'form_edit' %>
-	
-
 	<% if !@user.default %>
 		<%= button_to 'Set as Default', default_path(@user), method: :get %>
 	<% end %>
@@ -16,11 +10,4 @@
 		<%= button_to 'Delete Profile', @user, method: :delete, data: { confirm: 
 			'Warning: This will permanently delete your account and all of your tweets.' } %>
 	<% end %>
-
-
-
-
-
 </div>
-
-

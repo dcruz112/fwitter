@@ -13,7 +13,8 @@ class RetweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     @retweet = Retweet.new(content: @tweet.content, user_id: @tweet.user_id,  poster_id: current_user.id, tweet_id: @tweet.id )
     @retweet.save
-    render @retweet
+    redirect_to root_path
+    #render @retweet
   end
 
   # GET /retweets/new
@@ -30,9 +31,6 @@ class RetweetsController < ApplicationController
   def create
     @tweet = Tweet.find(params[:id])
     @retweet = Retweet.new(content: @tweet.content, user_id: @tweet.user_id,  poster_id: current_user.id, tweet_id: @tweet.id )
-    
-    #@retweet.save
-
     respond_to do |format|
       if @retweet.save
         format.html { redirect_to root_path, notice: 'Retweet was successfully created.' }
@@ -42,11 +40,7 @@ class RetweetsController < ApplicationController
         format.json { render json: @retweet.errors, status: :unprocessable_entity }
       end
     end
-
   end
-
-
-
 
   # PATCH/PUT /retweets/1
   # PATCH/PUT /retweets/1.json
@@ -62,15 +56,10 @@ class RetweetsController < ApplicationController
     end
   end
 
-
-
-
-
   # DELETE /retweets/1
   # DELETE /retweets/1.json
   def destroy
     @retweet.destroy
-   
     respond_to do |format|
       format.html { redirect_to retweets_url }
       format.json { head :no_content }
@@ -78,13 +67,12 @@ class RetweetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     # def set_retweet
     #   @retweet = Retweet.find(params[:id])
     # end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def retweet_params
-      params.require(:retweet).permit(:content, :user_id, :poster_id, :tweet_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def retweet_params
+    params.require(:retweet).permit(:content, :user_id, :poster_id, :tweet_id)
+  end
 end

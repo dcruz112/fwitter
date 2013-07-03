@@ -1,9 +1,9 @@
-	<% if @hashes.size > 0 %>
-		<% @hashes.flatten! %>
-		<% @hashes.sort! { |x,y| y.created_at <=> x.created_at} %>
-		<% @hashes.each do |tweet| %>
-			<%= render tweet %>
-		<% end %>
-   	<% else %>
-     	<%='There are no tweets with this hash' %>
+<% if @hashes.size > 0 %>
+	<% @hashes.flatten! %>
+	<% @hashes.sort! { |x,y| y.created_at <=> x.created_at} %>		
+	<% @hashes.each do |tweet| %>
+		<%= render tweet %>
 	<% end %>
+<% else %>
+ 	<%='There are no tweets with this hash' %>
+<% end %>
