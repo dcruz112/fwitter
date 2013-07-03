@@ -1,4 +1,9 @@
-<div> <a href ="<%= user_path(@user) %>"><b>Tweets:</b> <%= @user.tweets.count %> </a> </div>
-<div> <a href ="<%= following_user_path(@user) %>"><b>Following:</b> <%= @user.followed_users.count %> </a> </div>
-<div> <a href ="<%= followers_user_path(@user) %>"><b>Followed By:</b> <%= @user.followers.count %> </a> </div>
-<div> <a href ="<%= favorites_user_path(@user) %>"><b>Favorites:</b> <%= @user.favorite_tweets.count %> </a> </div>
+<table class="stats">
+	<caption>Statistics</caption>
+		<tbody>
+			<tr><td><a href ="<%= user_path(@user) %>"><b>Tweets:</b></a> <%= @user.tweets.count %> </td> </tr>
+			<tr><td><a href ="<%= following_user_path(@user) %>"><b>Following:</b></a> <%= @user.followed_users.count %> </td></tr>
+			<tr><td><a href ="<%= followers_user_path(@user) %>"><b>Followed By:</b></a> <%= @user.followers.count %> </td></tr>
+			<tr><td><a href ="<%= favorites_user_path(@user) %>"><b>Favorites:</b></a> <%= @user.favorite_tweets.count %> </td></tr>
+		</tbody>
+</table>

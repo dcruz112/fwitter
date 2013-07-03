@@ -23,38 +23,32 @@
 	    <div class="container">
       	<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<!-- 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </a>
+ -->	      </a>
 	      
 	 	  	<% if current_user(false) %>
 	      	<%= link_to image_tag("yalelogo4.png"), new_tweet_path, class: "brand" %>
 		      <div class="nav-collapse">
-						<ul class="nav">
-						  <li><%= link_to "#{current_user.first_name}", user_path(current_user) %></li>
-						  <li><%= link_to 'Stream', tweets_path %></li>
-						  <li><%= link_to '@', mentions_user_path(current_user) %></li>
-						  <li><%= link_to 'Accounts', users_path %> </li>  
-						 			<!--  render 'form_search -->
-						  <li><%= link_to "Logout", log_out_path %></li>
-						</ul> 
-		      </div>
-	      <% end %>
-      
-    		<div class="time">
-					<% if current_user(false) %>
-					  <% t = Time.now.localtime %>
-					  <% h = (t.hour)%24 %>
-					  <% m = t.min %>
-					  <% m = "0" + m.to_s if m < 10 %>
-					  <% am_or_pm = "AM" %>
-					  <% am_or_pm = "PM" if h >= 12 %>
-					  <% h = 12 if h == 0 %>
-					  <% h = h - 12 if h > 12 %>
-					  <%= "#{h}:#{m}#{am_or_pm}" %>
-					<% end %>
+					<ul class="nav">
+					  <li><%= link_to "#{current_user.first_name}", user_path(current_user) %></li>
+					  <li><%= link_to 'Stream', tweets_path %></li>
+					  <li><%= link_to '@', mentions_user_path(current_user) %></li>
+					  <li><%= link_to 'Accounts', users_path %> </li>  
+					</ul>
+					<div class="nav" style="float:right;">
+						<div class="dropdown">
+	        				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= image_tag("Slthytove_Gears.png")%></a>
+			       				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+									<li><%= link_to 'Edit Profile', edit_user_path(current_user) %></li>
+									<li><%= link_to "Logout", log_out_path %></li>
+								</ul>
+							</li>
+						</div>
+					</div>
 				</div>
+	      <% end %>
     	</div>
   	</div>
 	</div>

@@ -4,8 +4,7 @@
         });  
 </script>
 
-<hr>
-	<div class="tweet">
+<div class="tweet">
 	<%= image_tag(tweet.user.image_url, class: 'tweet-thumbnail') %>
     <div class="tweet-author">
       <strong><%= tweet.user.full_name %></strong>
@@ -41,17 +40,26 @@
 	  		<table>	
         	<td>
         		<div class="dropdown">
-        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">View Conversation</a>
+        			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Expand</a>
 		       		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-		       			<li><%= "This tweet has been favorited #{tweet.favorited_by.count} times." %></li>
-								<li><%= "This tweet has been retweeted #{tweet.retweets.count} times." %></li>
-		     				<% tweet.replies.each do |post| %>
-		     					<li><%= render post %></li>
-	      				<% end %>
+		       			<li>
+		       				<table>
+		       					<td><%= pluralize("#{tweet.favorited_by.count}", 'Favorite') %></td>
+		       					<td><%= pluralize("#{tweet.retweets.count}", "Retweet") %></td>
+		       				</table>
+		       			</li>
+		 	       		<% if tweet.replies.any? %>
+		 	       		<li class="divider"></li>
+							<h4>Conversation</h4>
+			     			<% tweet.replies.each do |post| %>
+			     				<%= render post %>
+		      				<% end %>
+		      			<% end %>
 	        		</ul>
 	        	</div>
-        			
+	        </td>
 
+	        <td>
 	        	<% if current_user != tweet.user %> 
 	        		<% if current_user.favorites.exclude?(tweet) %>
 	        			<%= link_to 'Favorite', favorite_tweet_path(tweet, id: tweet.id, type: "favorite", method: :put) %>
@@ -73,10 +81,10 @@
         		<% end %> 
 
         		<% if current_user == tweet.user %>
-        			<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
+        			<div class="tweet-delete"><%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %></div>	
         		<% end %> 
        		</td>
         </table>
 	  	</div>
     </div>
-	</div>
+</div>

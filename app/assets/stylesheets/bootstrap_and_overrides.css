@@ -12,4 +12,15 @@ body {
 	padding-top: 50px;
 }
 
+.dropdown-menu {
+	font-size: 14px;
+	font-family: Arial;
+	padding-left: 10px;
+}
+
+.dropdown-toggle, img {
+	height: 30px;
+	width: 30px;
+}
+
 @import "twitter/bootstrap/responsive";

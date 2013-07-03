@@ -10,6 +10,8 @@ class Tweet < ActiveRecord::Base
 
 	attr_reader :current_hash
 
+	# self.per_page = 10
+
 	def all_mentions_in_tweet
 	  @tweet_words = self.content.split(' ')
 	  mentions = []

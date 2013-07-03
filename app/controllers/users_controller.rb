@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @tweet = Tweet.new
     @id = params[:id]
     if @id.nil?
       @user = User.find(current_user.id)
@@ -172,12 +173,12 @@ class UsersController < ApplicationController
   def set_stream
     @total_stream = []
 
-    @user.retweet_stream.each do |post|
+    @user.tweet_stream.each do |post|
       @total_stream << post
     end
 
-    @user.tweet_stream.each do |post|
-      @total_stream << post
+    @user.retweet_stream.each do |post|
+        @total_stream << post
     end
   end
 
