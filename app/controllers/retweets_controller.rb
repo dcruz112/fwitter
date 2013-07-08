@@ -1,5 +1,5 @@
 class RetweetsController < ApplicationController
-  # before_action :set_retweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_retweet, only: [:destroy]
 
   # GET /retweets
   # GET /retweets.json
@@ -63,15 +63,15 @@ class RetweetsController < ApplicationController
   def destroy
     @retweet.destroy
     respond_to do |format|
-      format.html { redirect_to retweets_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end
 
   private
-    # def set_retweet
-    #   @retweet = Retweet.find(params[:id])
-    # end
+    def set_retweet
+      @retweet = Retweet.find(params[:id])
+    end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def retweet_params

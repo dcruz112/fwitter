@@ -88,6 +88,8 @@ GEM
       mini_portile (~> 0.5.0)
     ntlm-http (0.1.1)
     polyglot (0.3.3)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -173,6 +175,7 @@ DEPENDENCIES
   mechanize
   net-http-digest_auth
   net-ldap
+  quiet_assets
   rails (= 4.0.0.rc1)
   rubycas-client (= 2.3.10.rc1)
   rubycas-client-rails!
