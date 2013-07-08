@@ -8,7 +8,6 @@ gem 'quiet_assets'
 gem 'net-ldap'
 gem 'mechanize'
 gem 'net-http-digest_auth'
-gem 'lightbox-rails'
 
 gem 'ffaker'
 
