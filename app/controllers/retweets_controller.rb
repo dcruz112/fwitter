@@ -40,6 +40,8 @@ class RetweetsController < ApplicationController
         format.json { render json: @retweet.errors, status: :unprocessable_entity }
       end
     end
+
+    @notification = Notification.new(user_id: @tweet.user_id, content: @tweet.content, image_url: User.find(@tweet.poster_id).image_url, message: "#{User.find(@tweet.poster_id).full_name} retweeted your tweet!")
   end
 
   # PATCH/PUT /retweets/1

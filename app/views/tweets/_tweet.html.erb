@@ -43,7 +43,7 @@
         			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Expand</a>
 		       		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 		       			<li>
-		       				<table>
+		       				<table style="width:200px;">
 		       					<td><%= pluralize("#{tweet.favorited_by.count}", 'Favorite') %></td>
 		       					<td><%= pluralize("#{tweet.retweets.count}", "Retweet") %></td>
 		       				</table>

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<% @connect = [] %>
+
+<% if @mentions.size > 0 %>
+	<% @mentions.each do |tweet| %>
+		<% @connect << tweet %>
+	<% end %>
+<% end %>
+
+<% if @notifications.size > 0 %>
+	<% @notifications.each do |notification| %>
+		<% @connect << notification %>
+	<% end %>
+<% end %>
+
+<%= @notifications.inspect %>
+	
+<% @connect.flatten! %>
+<% @connect.sort! { |x,y| y.created_at <=> x.created_at} %>
+
+<% if @connect.size > 0 %>
+	<% @connect.each do |post| %>
+		<%= render post %>
+	<% end %>
+<% else %>
+ 	<%= "You have no notifications. What kind of social networker are you? Get out there and get noticed!" %>
+<% end %>
