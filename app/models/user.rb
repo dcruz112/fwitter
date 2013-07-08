@@ -71,6 +71,7 @@ class User < ActiveRecord::Base
 	def get_bio(fname, lname)
 	  browser = make_cas_browser
 	  self.biography = "Hi!"
+	  self.current_location = "New Haven, CT"
 	  browser.get("https://students.yale.edu/facebook/ChangeCollege?newOrg=Yale%20College")
 	  browser.get("https://students.yale.edu/facebook/Search?searchTerm=#{fname}%20#{lname}&searchResult=true")
 	  page = browser.page.search("div.student_info")
@@ -151,7 +152,7 @@ class User < ActiveRecord::Base
 		Retweet.from_users_followed_by(self)
 	end
 
-	def replacing_all_mentions_in_tweets_after_editing_handle(old_handle, new_handle)
+	def replace_all_mentions_in_tweets(old_handle, new_handle)
 		if old_handle != new_handle
 	  	Tweet.all.each do |tweet|
 	  		if ( tweet.content[("#{old_handle}" + " ")] != nil )  ||  ( tweet.content.ends_with?(old_handle) )
