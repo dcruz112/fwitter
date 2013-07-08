@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 	mount_uploader :image_url, ImageUrlUploader
 
 	has_many :tweets
+	# accepts_nested_attributes_for :tweets
 	has_many :retweets
 	has_many :favorite_tweets
 	has_many :favorites, through: :favorite_tweets, source: :tweet

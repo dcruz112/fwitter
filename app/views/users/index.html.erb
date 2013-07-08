@@ -1,17 +1,17 @@
 
 <div class="list-of-users">
-<h1>Accounts</h1>
+<h2>Your Accounts</h2>
 
 <table>
   <thead>
     <tr>
-      <th></th>
+<!--       <th></th>
       <th></th>
       <th>Name</th>
       <th>Handle</th>
       <th>Biography</th>
       <th>Current location</th>
-      <th></th>
+      <th></th> -->
     </tr>
   </thead>
 
@@ -20,7 +20,7 @@
     <% @users.each do |user| %>
 
       <tr class=<%= user.id == session[:current_account] ? 'current' : 'others' %>>
-        <td><%= "*" if user.default %></td>
+        <td><%= "***" if user.default %></td>
         <td>
           <%= image_tag(user.image_url, class: 'list-image') %>
         </td>
@@ -47,5 +47,5 @@
 
 <br>
 
-<%= link_to 'Add another!', new_user_path %>
+<strong><%= link_to 'Add another!', new_user_path %></strong>
 </div>

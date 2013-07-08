@@ -21,6 +21,7 @@ body {
 .dropdown-toggle, img {
 	height: 30px;
 	width: 30px;
+	margin-top: 5px;
 }
 
 @import "twitter/bootstrap/responsive";

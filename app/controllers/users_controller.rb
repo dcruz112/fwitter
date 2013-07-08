@@ -4,7 +4,7 @@ require 'mechanize'
 require 'open-uri'
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers, :mentions]
   before_action :set_stream, only: [:show]
 
   skip_before_action RubyCAS::Filter, only: [:index]
@@ -178,7 +178,6 @@ class UsersController < ApplicationController
   end
 
   def mentions
-    @user = current_user
     @mentions = []
     Tweet.all.each do |tweet|
       if !tweet.all_mentions_in_tweet.empty? && tweet.all_mentions_in_tweet.include?('@' + @user.handle)

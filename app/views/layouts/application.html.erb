@@ -29,8 +29,6 @@
  -->	      </a>
 	      
 	 	  <% if current_user(false) %>
-	      	<%= link_to image_tag("yalelogo4.png"), new_tweet_path, class: "brand" %>
-		      <div class="nav-collapse">
 					<ul class="nav">
 					  <li><%= link_to "#{current_user.first_name}", user_path(current_user) %></li>
 					  <li><%= link_to 'Stream', tweets_path %></li>
@@ -38,7 +36,14 @@
 					  <li><%= link_to 'Accounts', users_path %> </li>  
 					</ul>
 					<div class="nav" style="float:right;">
-						<div class="dropdown">
+						<div class="dropdown" style="display:inline-block;margin-right:50px;">
+	        				<a class="dropdown-toggle" close-on-click="false" data-toggle="dropdown" href="#"><%= image_tag("yalelogo4.png")%></a>
+			       				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+									<li><%= render '/tweets/form' %></li>
+								</ul>
+							</li>
+						</div>
+						<div class="dropdown" style="display:inline-block;">
 	        				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= image_tag("Slthytove_Gears.png")%></a>
 			       				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 									<li><%= link_to 'Edit Profile', edit_user_path(current_user) %></li>
@@ -76,6 +81,10 @@
 		</div>
 	</div>
 
+<script type="text/javascript">
+$('.dropdown-menu').on('click', function (e) {
+e.stopPropagation()
+});</script>
 
 </body>
 </html>

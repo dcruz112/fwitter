@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <div class= "user-profile-info">
-	<h1><%= @user.full_name %></h1>
+<!-- 	<h1><%= @user.full_name %></h1>
 	<h2><%= @user.handle_at %></h2>
 	<h3><%= @user.biography if @user.biography %></h3>
-	<h3><%= @user.current_location if @user.current_location %></h3>
+	<h3><%= @user.current_location if @user.current_location %></h3> -->
 	<br><br>
 </div>
 
@@ -15,5 +15,5 @@
 		<%= render tweet %>
 	<% end %>
 <% else %>
- 	<%= puts 'You have no mentions' %>
+ 	<h5><%= "You have no mentions. What kind of social networker are you? Get out there and get noticed!" %></h5>
 <% end %>

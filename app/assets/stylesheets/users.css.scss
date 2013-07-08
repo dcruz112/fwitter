@@ -71,6 +71,32 @@ a:hover {
 	padding-right: 130px;
 }
 
+.trending {
+	border-collapse: collapse;
+	text-align: left;
+	margin: auto;
+
+caption {
+	font-size: 20px;
+	margin: 10px 0px 10px 0px;
+
+}
+td {
+	font-size: 14px;
+	border: 1px solid black;
+	padding: 20px 20px 20px 20px;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:hover {
+	font-weight: bold;
+	font-size: 16px;
+}
+}
+
 .users {
 	text-align: center;
 	font: Georgia;
@@ -87,6 +113,7 @@ td {
 	background: SteelBlue;
 	color: white;
 	font-weight: bold;
+	// padding: 10px 0px 0px 0px;
 
 	a {
 		color: white;
