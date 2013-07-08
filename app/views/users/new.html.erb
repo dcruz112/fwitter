@@ -1,12 +1,3 @@
 <p id="notice"><%= notice %></p>
 
-<% if current_user(false) %>
-  <script type="text/javascript">
-    window.location.href="/users/edit"  
-  </script>
-<% else %>
-	<%= render 'form_new' %>
-<% end %>
-
-<%= link_to "Logout", log_out_path %>
-<%= link_to "Login", log_in_path %>
+<%= render 'form_new' %>

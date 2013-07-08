@@ -10,33 +10,35 @@ class Tweet < ActiveRecord::Base
 
 	attr_reader :current_hash
 
+	# self.per_page = 10
+
 	def all_mentions_in_tweet
 	  @tweet_words = self.content.split(' ')
 	  mentions = []
-    @tweet_words.each do |word|
-      if word[0] == '@' && !User.where(handle: word[1..-1]).empty?
-        mentions << word
+	  @tweet_words.each do |word|
+	    if word[0] == '@' && !User.where(handle: word[1..-1]).empty?
+	      mentions << word
+	    end
       end
-    end
-    return mentions
+	  return mentions
 	end
 
 
 	def is_hash_in_tweet(current_hash)
-    self.all_hashes_in_tweet.each do |hash|
-      return true   if hash == current_hash
-    end
-    return false
-  end
+	  self.all_hashes_in_tweet.each do |hash|
+	    return true   if hash == current_hash
+	  end
+	  return false
+	end
 
   def all_hashes_in_tweet
-	  @tweet_words = self.content.split(' ')
-	  hashes = []
+    @tweet_words = self.content.split(' ')
+    hashes = []
     @tweet_words.each do |word|
       hashes << word    if word[0] == '#'
     end
     return hashes
-	end
+  end
 
 	def self.from_users_followed_by(user)
 	  followed_user_ids = "SELECT followed_id FROM relationships

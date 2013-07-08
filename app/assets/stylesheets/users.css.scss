@@ -1,22 +1,107 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// You can use Sass (SCSS) here: http://sass-lang.com
+
+// .page-shrink {
+// 	width: 80%;
+// 	margin: auto;
+// }
+
+.tweet-stream {
+	margin: auto;
+	padding-right: 100px;
+}
+
+.user-profile-info {
+	width: 500px;
+	text-align: center;
+	padding-left: 100px;
+}
+
 
 .list-image {
 	width: 60px;
 	height: 60px;
+	border-radius: 5px;
+}
+
+.profile-pic {
+	width: 120px;
+	height: 120px;
+	box-shadow: 0 0 0 5px black;
+	border-radius: 25px;
 }
 
 .user-sidebar {
-	margin-top: 100px;
-	position: absolute;
 	top: 0;
 	left: 0;
+	float: left;
+}
+
+.stats {
+	border-collapse: collapse;
+	text-align: center;
+	margin: auto;
+
+caption {
+	font-size: 20px;
+	margin: 10px 0px 10px 0px;
+
+}
+td {
+	font-size: 14px;
+	border: 1px solid black;
+	padding: 20px 20px 20px 20px;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:hover {
+	font-weight: bold;
+	font-size: 16px;
+}
+}
+
+#no-tweets-yet{
+	margin-top: 20px;
+	font-size: 16px;
+	text-align: center;
+	padding-right: 130px;
+}
+
+.trending {
+	border-collapse: collapse;
+	text-align: left;
+	margin: auto;
+
+caption {
+	font-size: 20px;
+	margin: 10px 0px 10px 0px;
+
+}
+td {
+	font-size: 14px;
+	border: 1px solid black;
+	padding: 20px 20px 20px 20px;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:hover {
+	font-weight: bold;
+	font-size: 16px;
+}
 }
 
 .users {
 	text-align: center;
 	font: Georgia;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .user-form { 
@@ -30,16 +115,11 @@ td {
 	background: SteelBlue;
 	color: white;
 	font-weight: bold;
+	// padding: 10px 0px 0px 0px;
 
 	a {
 		color: white;
 	}
-}
-
-.user-profile-info {
-	margin-left: 300px;
-	width: 300px;
-	text-align: center;
 }
 
 .user-blank-image {

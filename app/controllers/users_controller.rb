@@ -4,8 +4,9 @@ require 'mechanize'
 require 'open-uri'
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers, :mentions]
   before_action :set_stream, only: [:show]
+  before_action :have_sidebar, except: [:new, :edit, :index]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index, :new, :create]
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @tweet = Tweet.new
     @id = params[:id]
     if @id.nil?
       @user = User.find(current_user.id)
@@ -32,7 +34,8 @@ class UsersController < ApplicationController
     @user = User.new
     @net_id = session[:cas_user]
     @user.netid = @net_id
-    @user.get_user
+    @user.search_ldap(@net_id)
+    @user.get_user if @user.first_name.nil?
     if !current_user(false)
       @user.default = true
     else
@@ -46,9 +49,9 @@ class UsersController < ApplicationController
     if @id.nil?
       @user = User.find(current_user.id)
     else
+     
       @user = User.find(@id)
     end
-    @@old = @user.handle
   end
 
   # POST /users
@@ -56,19 +59,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
-    @user.image_url = "Default_Pics/" + @user.college.downcase + ".png"
     if !current_user(false)
       @user.default = true
     else
       @user.default = false
     end
-
     respond_to do |format|
       if @user.save
-
-        # Tell the UserMailer to send a welcome Email after save
-        UserMailer.welcome_email(@user).deliver
-
         format.html { redirect_to root_path(delete: false) }
         format.json { render action: 'show', status: :created, location: @user }
       else
@@ -82,13 +79,16 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user = User.find(params[:id])
+    old_handle = @user.handle
     respond_to do |format|
       if @user.update(user_params)
         format.html { 
-          @old_handle = @@old
-          @new_handle = @user.handle
-          @user.replacing_all_mentions_in_tweets_after_editing_handle(@old_handle, @new_handle)
-          redirect_to root_path }
+          if old_handle != @user.handle
+            @user.replace_all_mentions_in_tweets(old_handle, @user.handle)
+          end
+          redirect_to root_path
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -172,17 +172,16 @@ class UsersController < ApplicationController
   def set_stream
     @total_stream = []
 
-    @user.retweet_stream.each do |post|
+    @user.tweet_stream.each do |post|
       @total_stream << post
     end
 
-    @user.tweet_stream.each do |post|
-      @total_stream << post
+    @user.retweet_stream.each do |post|
+        @total_stream << post
     end
   end
 
   def mentions
-    @user = current_user
     @mentions = []
     Tweet.all.each do |tweet|
       if !tweet.all_mentions_in_tweet.empty? && tweet.all_mentions_in_tweet.include?('@' + @user.handle)
@@ -190,6 +189,10 @@ class UsersController < ApplicationController
       end 
     end
     render 'show_mention'
+  end
+
+  def have_sidebar
+   @have_sidebar = true
   end
 
   private

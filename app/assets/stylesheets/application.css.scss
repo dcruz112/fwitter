@@ -12,7 +12,6 @@
  *= require_tree .
  */
 
-
 #header {
  	color: #0F4D92;
  	font-size: 18px;
@@ -27,12 +26,12 @@
 	padding: 0;
 }
 
-#time {
-	float: right;
-	padding: 10px;
-	color: gray;
-	font-size: 18px;
-}
+// #time {
+// 	float: right;
+// 	padding: 10px;
+// 	color: gray;
+// 	font-size: 18px;
+// }
 
 #navbar li {
 	float: left;
@@ -68,10 +67,6 @@ a:hover {
 a:active {
 	color:blue;
 	text-decoration:none;
-}
-
-.brand {
-	opacity: 0.8;
 }
 
 .brand:hover {

@@ -52,6 +52,12 @@ class TweetsController < ApplicationController
       Conversation.create(@tweet_id)
     end
 
+    # user.each do 
+    #   if !@tweet.all_mentions_in_tweet.empty? && @tweet.all_mentions_in_tweet.include?('@' + @user.handle)
+    #      @mentions << @tweet
+    #   end 
+    # end
+
   end
 
   # PATCH/PUT /tweets/1

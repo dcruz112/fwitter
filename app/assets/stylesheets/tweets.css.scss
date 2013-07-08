@@ -4,7 +4,6 @@
 	height: 60px;
 	width: 60px;
 	border-radius: 5px;
-	background: gray;
 }
 
 .tweet-author {
@@ -15,15 +14,18 @@
 
 .tweet-content {
 	color: black;
-	font-size: 12px;
+	font-size: 13px;
 	font-family: Helvetica;
 }
 
-
-
-.news-feed-title{
-	margin-left: 300px;
+.retweeted-by {
+	color: gray;
+	font-size: 11px;
 }
+
+// .news-feed-title{
+// 	margin-left: 300px;
+// }
 
 .tweet-body a {
 color:black;
@@ -36,40 +38,44 @@ border-bottom:2px;
 text-decoration:none;
 }
 
-hr {
-	margin: 5px;
+.tweet-delete{
+	// float: right;
 }
 
 .tweet {
-	margin-left: auto;
-	margin-right: auto;
-	background: white;
-	padding: 5px;
-	-o-transition:.1s;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  padding: 5px;
+  -o-transition:.1s;
   -ms-transition:.1s;
   -moz-transition:.1s;
   -webkit-transition:.1s;
   /* ...and now for the proper property */
   transition:.1s;
-  width: 600px;
+  width: 500px;
   border-radius: 5px;
 }
 
 .tweet:hover {
-	background: WhiteSmoke;
-
-	.tweet-time-stamp {
-		color: black;
-	}
+  background: LightGray;
+  
+  .tweet-time-stamp {
+    color: black;
+  }
 }
 
 .tweet .tweet-footer {
-	visibility: hidden;
+  visibility: hidden;
 }
 
 .tweet:hover .tweet-footer {
-	visibility: visible;
+  visibility: visible;
 }
+
+// .tweet-footer{
+// 	width: 300px;
+// }
 
 #new-tweet{
 	// border: 2px solid black;
@@ -88,7 +94,7 @@ hr {
 
 a:link {
 	color: #0F4D92;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 a:visited {
@@ -102,3 +108,17 @@ a:hover {
 	font-weight: bold;
 	text-decoration: underline;
 }
+
+.form{
+	margin-left: 10px;
+	width: 200px;
+	margin-top: 15px;
+}
+
+.form-actions {
+	margin-top: 0px;
+	padding: 0px;
+	width: 80px;
+}
+
+

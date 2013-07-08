@@ -29,7 +29,4 @@ Project1::Application.routes.draw do
 
   resources :conversations
 
-  # We want to use member rather than collection stuff, because there doesn't
-  # seem to be a point to seeing all followers in the DB -- maybe for admin?
-
 end

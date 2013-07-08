@@ -10,11 +10,23 @@
 
 	<div class="tweet-content">
   	<div class="tweet-body">
-  		<%=  retweet.content %>
-  	</div>
+      <% @all_mentions = retweet.all_mentions_in_tweet %>
+      <% @all_hashes = retweet.all_hashes_in_tweet %>
+      <% retweet.content.split(' ').each do |word| %>
+        <% if @all_mentions.include? word %>
+          <% @user = User.where(handle: word[1..-1]).first %>
+          <%= link_to word, @user, class: "mention" %>
+        <% elsif @all_hashes.include? word %>
+          <%= link_to word, hash_path(word), class: "hashes" %>
+        <% else %>
+          <%= word %>
+        <% end %>
+      <% end %>
+    </div>
 
   	<div class="retweeted-by">
-  		<%=  link_to "Retweeted by #{User.find(retweet.poster_id).full_name}", User.find(retweet.poster_id) %>
+      <% @user = User.find(retweet.poster_id) %>
+  		<%= "Retweeted by" %> <%= link_to " #{@user.full_name}", @user %>
   	</div>
 
 		<div class="tweet-footer">
