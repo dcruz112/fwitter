@@ -96,12 +96,12 @@ class TweetsController < ApplicationController
     type = params[:type]
     if type == "favorite"
       current_user.favorites << @tweet
-      redirect_to :back, notice: 'Tweet favorited.'
-    elsif type == "un-favorite"
+      redirect_to :back
+    elsif type == "unfavorite"
       current_user.favorites.delete(@tweet)
-      redirect_to :back, notice: 'Tweet un-favorited.'
+      redirect_to :back
     else
-      redirect_to :back, notice: 'Something went wrong. Nothing happened.'
+      redirect_to :back, notice: 'Something went wrong.'
     end
   end
 

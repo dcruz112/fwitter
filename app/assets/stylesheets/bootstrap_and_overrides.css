@@ -6,9 +6,7 @@
   =require twitter-bootstrap-static/fontawesome
   */
 
-@import "twitter/bootstrap/bootstrap";
-
-body {
+ body {
 	padding-top: 50px;
 }
 
@@ -23,5 +21,3 @@ body {
 	width: 30px;
 	margin-top: 5px;
 }
-
-@import "twitter/bootstrap/responsive";

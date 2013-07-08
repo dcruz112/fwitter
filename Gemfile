@@ -3,9 +3,12 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
 
+gem 'quiet_assets'
+
 gem 'net-ldap'
 gem 'mechanize'
 gem 'net-http-digest_auth'
+gem 'lightbox-rails'
 
 gem 'ffaker'
 

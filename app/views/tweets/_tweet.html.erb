@@ -1,4 +1,4 @@
-<script type="text/javascript">  
+c<script type="text/javascript">  
         $(document).ready(function () {  
             $('.dropdown-toggle').dropdown();  
         });  
@@ -69,7 +69,12 @@
 	        	<% end %>
 	        		
 	        	<% if (current_user != tweet.user) %>
-	        		<%= link_to 'Reply', reply_tweet_path(tweet) %>	
+    				<div class="dropdown">
+	    				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reply</a>
+			       		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+							<li><%= render partial: 'tweets/form_reply', locals: {reply_to: tweet.user.handle} %></li>
+						</ul>
+					</div>
 	        	<% end %> 
 
 	        	<% if (current_user != tweet.user) %>
