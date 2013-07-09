@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.0.0'
 
 gem 'quiet_assets'
-
+gem 'better_errors'
+gem 'rails_12factor', group: :production
 gem 'thin'
 
 gem 'net-ldap'
@@ -20,14 +21,14 @@ gem 'twitter-bootstrap-rails'
 gem 'will_paginate', '3.0.4'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 
 # Authentication
 gem 'rubycas-client-rails', git: "git://github.com/rubycas/rubycas-client-rails.git"
 gem 'rubycas-client', '2.3.10.rc1'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0.rc1'
+gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
