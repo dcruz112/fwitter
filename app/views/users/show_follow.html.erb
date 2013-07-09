@@ -2,20 +2,22 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h2><%= @user.handle %></h2>
-      <span><%= link_to "view my profile", @user %></span>
-      <span><b>Tweets:</b> <%= @user.tweets.count %></span>
-    </section>
-    <section>
       <%= render 'stats' %>
     </section>
   </aside>
   <div class="span8">
     <h3><%= @title %></h3>
     <% if @users.any? %>
-      <ul>
-       <%= render @users %>
-      </ul>
+      <% @users.each do |user| %>
+        <div class="followers">
+          <%= image_tag(user.image_url, class: 'tweet-thumbnail') %>
+          <div class="name"><%= user.full_name %></div>
+          <div class="info">
+            <%= link_to "@#{user.handle}", user %><br>
+            <%= user.current_location %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

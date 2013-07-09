@@ -4,7 +4,7 @@ require 'mechanize'
 require 'open-uri'
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers, :mentions]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers, :notifications]
   before_action :set_stream, only: [:show]
   before_action :have_sidebar, except: [:new, :edit, :index]
 
@@ -181,7 +181,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def mentions
+  def notifications
     @tweet = Tweet.new()
     @mentions = []
     Tweet.all.each do |tweet|
@@ -189,7 +189,14 @@ class UsersController < ApplicationController
         @mentions << tweet
       end 
     end
-    render 'show_mention'
+
+    @notifications = []
+    Notification.all.each do |notification|
+      if notification.user_id == @user.id
+        @notifications << notification
+      end
+    end
+    render 'show_notification'
   end
 
   def have_sidebar

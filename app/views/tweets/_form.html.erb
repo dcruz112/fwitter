@@ -1,7 +1,7 @@
 
 	<% @tweet = Tweet.new %>
 
-	<%= simple_form_for @tweet, :html => { :class => 'form-vertical' } do |f| %>
+	<%= simple_form_for @tweet, remote: true, :html => { :class => 'form-vertical' } do |f| %>
 	<div class="form">
 	  <%= f.input :content, input_html: { maxlength: 140 } %>
 	  <div class="form-actions">

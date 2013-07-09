@@ -19,7 +19,7 @@ Project1::Application.routes.draw do
 
   resources :users do
     member do
-      get :following, :followers, :favorites, :mentions
+      get :following, :followers, :favorites, :notifications
     end 
   end
 

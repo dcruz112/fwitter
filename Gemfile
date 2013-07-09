@@ -5,6 +5,8 @@ gem 'rails', '4.0.0.rc1'
 
 gem 'quiet_assets'
 
+gem 'thin'
+
 gem 'net-ldap'
 gem 'mechanize'
 gem 'net-http-digest_auth'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130628201912) do
+ActiveRecord::Schema.define(version: 20130708183436) do
 
   create_table "conversations", force: true do |t|
     t.datetime "created_at"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20130628201912) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "notifications", force: true do |t|
+    t.string   "content"
+    t.string   "image_url"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "message"
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"

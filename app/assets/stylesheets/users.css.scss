@@ -7,6 +7,18 @@
 // 	margin: auto;
 // }
 
+.followers {
+	overflow: auto;
+	margin: 5px;
+
+	.name {
+		font-weight: bold;
+		font-size: 20px;
+		margin-top: 5px;
+		margin-bottom: 2px;
+	}
+}
+
 .tweet-stream {
 	margin: auto;
 	padding-right: 100px;

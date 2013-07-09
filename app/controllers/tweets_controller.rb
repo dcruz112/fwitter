@@ -41,22 +41,18 @@ class TweetsController < ApplicationController
     respond_to do |format|
       if @tweet.save
         format.html { redirect_to root_path}
-        format.json { render action: 'show', status: :created, location: @tweet }
+        format.js { render 'create' }
       else
-        @stream_items = []
+        @tweet_stream = []
         format.html { render action: 'new' }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
 
-    if @tweet.is_reply
-      Conversation.create(@tweet_id)
-    end
+    # if @tweet.is_reply
+    #   Conversation.create(@tweet_id)
 
-    # user.each do 
-    #   if !@tweet.all_mentions_in_tweet.empty? && @tweet.all_mentions_in_tweet.include?('@' + @user.handle)
-    #      @mentions << @tweet
-    #   end 
+    #   Notification.new(user_id: Tweet.find(reply_id).user_id, img_url: User.find(Tweet.find(reply_id).user_id).img_url, content: @tweet.content, message: "#{User.find(@tweet.user_id).full_name} retweeted your tweet!"
     # end
 
   end
@@ -97,7 +93,11 @@ class TweetsController < ApplicationController
     type = params[:type]
     if type == "favorite"
       current_user.favorites << @tweet
-      redirect_to :back
+
+      redirect_to :back, notice: 'Tweet favorited.'
+
+      Notification.create(user_id: @tweet.user_id, image_url: current_user.image_url, message: "#{current_user.full_name} favorited your tweet!")
+
     elsif type == "unfavorite"
       current_user.favorites.delete(@tweet)
       redirect_to :back
