@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= "#{@user.handle} %>
+
 <% @connect = [] %>
 
 <% if @mentions.size > 0 %>
@@ -13,8 +15,6 @@
 		<% @connect << notification %>
 	<% end %>
 <% end %>
-
-<%= @notifications.inspect %>
 	
 <% @connect.flatten! %>
 <% @connect.sort! { |x,y| y.created_at <=> x.created_at} %>
