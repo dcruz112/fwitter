@@ -182,6 +182,7 @@ class UsersController < ApplicationController
   end
 
   def mentions
+    @tweet = Tweet.new()
     @mentions = []
     Tweet.all.each do |tweet|
       if !tweet.all_mentions_in_tweet.empty? && tweet.all_mentions_in_tweet.include?('@' + @user.handle)

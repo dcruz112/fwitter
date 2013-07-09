@@ -25,7 +25,6 @@
         		<td>
 	        		<% if current_user == tweet.user %>
 	        			<%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %>	
-        				<!-- <%= link_to 'Edit', edit_tweet_path(tweet) %>  -->
 	        		<% end %> 
 
 	        		<% if current_user != tweet.user %>
