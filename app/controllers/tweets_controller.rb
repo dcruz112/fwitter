@@ -40,9 +40,9 @@ class TweetsController < ApplicationController
     respond_to do |format|
       if @tweet.save
         format.html { redirect_to root_path}
-        format.json { render action: 'show', status: :created, location: @tweet }
+        format.js { render 'create' }
       else
-        @stream_items = []
+        @tweet_stream = []
         format.html { render action: 'new' }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
