@@ -21,7 +21,7 @@ gem 'twitter-bootstrap-rails'
 gem 'will_paginate', '3.0.4'
 
 # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem 'sqlite3'
 
 # Authentication
 gem 'rubycas-client-rails', git: "git://github.com/rubycas/rubycas-client-rails.git"
