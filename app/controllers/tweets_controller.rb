@@ -94,13 +94,22 @@ class TweetsController < ApplicationController
     if type == "favorite"
       current_user.favorites << @tweet
 
-      redirect_to :back, notice: 'Tweet favorited.'
+      @note = @tweet.user.notifications.build(creator_id: current_user.id, image_url: current_user.image_url.to_s, message: " favorited your tweet!", content: @tweet.content)
+      @note.creator = current_user
+      @note.save!
 
-      Notification.create(user_id: @tweet.user_id, image_url: current_user.image_url, message: "#{current_user.full_name} favorited your tweet!")
+      # respond_to do |format|
+      #   format.html { redirect_to :back, notice: 'Tweet favorited'}
+      #   format.js 
+      # end
 
     elsif type == "unfavorite"
       current_user.favorites.delete(@tweet)
-      redirect_to :back
+      # respond_to do |format|
+      #   format.html { redirect_to :back, notice: 'Tweet un-favorited'}
+      #   format.js 
+      # end
+
     else
       redirect_to :back, notice: 'Something went wrong.'
     end

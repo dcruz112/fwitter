@@ -1,0 +1,11 @@
+<div class="notification">
+	<div class="notification-header">
+		<strong><%= notification.creator.full_name %></strong> <%= notification.message %>
+	</div>
+	<div class="notification-content">
+		<%= notification.content %>
+	</div>
+	<div class="notification-image">
+		<%= image_tag(notification.image_url ||= "Default_Pics/#{notification.creator.college.downcase}.png") %>
+	</div>
+</div>

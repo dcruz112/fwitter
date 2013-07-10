@@ -140,14 +140,17 @@ class User < ActiveRecord::Base
 
 	def follow!(other_user)
 		self.relationships.create!(followed_id: other_user.id)
-		# @note = Notification.new(user_id: other_user.id, image_url: self.image_url, message: "#{self.full_name} followed you!")
-  #  		@note.save!
+		@note = other_user.notifications.build(creator_id: self.id, image_url: self.image_url.to_s, message: " followed you!")
+		@note.creator = self
+		@note.save!
 	end
 
 	def unfollow!(other_user)
 		relationships.find_by(followed_id: other_user.id).destroy
-		# @note = Notification.new(user_id: other_user.id, image_url: self.image_url, message: "#{self.full_name} unfollowed you!")
-  #   	@note.save!
+		@note = other_user.notifications.build(creator_id: self.id, image_url: self.image_url.to_s, message: " unfollowed you!")
+		@note.creator = self
+		@note.save!
+
 	end
 
 	def tweet_stream
