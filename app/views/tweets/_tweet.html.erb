@@ -7,11 +7,14 @@
 <div class="tweet">
 	<%= image_tag(tweet.user.image_url, class: 'tweet-thumbnail') %>
     <div class="tweet-author">
-      <strong><%= tweet.user.full_name %></strong>
-	    <span class= "author-handle"> <%= link_to tweet.user.handle_at, tweet.user %> </span>
+      <strong><%= link_to tweet.user.full_name, tweet.user %></strong>
+	    <span class= "author-handle"> <%= tweet.user.handle_at %> </span>
 	    <span class= "tweet-time-stamp", title=<%= tweet.updated_at.localtime.asctime.split.join('-') %>>
 	    	<%= distance_of_time_in_words_to_now(tweet.updated_at, include_seconds = true) %>
 	    </span>
+	    	<% if current_user.favorites.include?(tweet) %>
+	    		<span class="favorite-tag">F</span>
+	    	<% end %>
 		</div>
 
 		<div class="tweet-content">
