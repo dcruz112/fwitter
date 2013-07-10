@@ -174,7 +174,9 @@ class User < ActiveRecord::Base
 		all_instances_of_mentions = []
 		h = Hash.new(0)	
 		Tweet.all.each do |tweet|
-			all_instances_of_mentions << tweet.all_mentions_in_tweet
+			if ((Time.now - tweet.created_at) < 86400 ) 
+				all_instances_of_mentions << tweet.all_mentions_in_tweet
+			end
 		end
 		all_instances_of_mentions.flatten.each {|v| h[v] +=1}
 		s = Hash[h.sort_by{|k, v| v}.reverse].keys[0..(number-1)]
