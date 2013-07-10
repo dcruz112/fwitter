@@ -38,6 +38,10 @@ border-bottom:2px;
 text-decoration:none;
 }
 
+.favorite-tag {
+	float: right;
+}
+
 .tweet-delete{
 	// float: right;
 }
@@ -45,6 +49,7 @@ text-decoration:none;
 .tweet {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 2px;
   background: white;
   padding: 5px;
   -o-transition:.1s;
@@ -53,8 +58,9 @@ text-decoration:none;
   -webkit-transition:.1s;
   /* ...and now for the proper property */
   transition:.1s;
-  width: 500px;
-  border-radius: 5px;
+  width: 480px;
+  height: 80px;
+  border: 3px solid blue;
 }
 
 .tweet:hover {

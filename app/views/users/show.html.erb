@@ -4,13 +4,11 @@
 	<div class="user-sidebar">
 		<div class="span2">
 			<%= render 'stats' %>
-			<% if @user == current_user %>
-				<%= render '/tweets/form' %>
-			<% end %>
+			<%= render '/tweets/form' %>
 		</div>
 	</div>
 	<div class="user-content">
-		<div class="span9">
+		<div class="span8">
 			<div class= "user-profile-info">
 				<%= image_tag(@user.image_url ||= "Default_Pics/#{@user.college.downcase}.png", class: 'profile-pic') %>
 				<h1><%= @user.full_name %></h1>
