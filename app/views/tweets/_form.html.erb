@@ -3,8 +3,14 @@
 
 	<%= simple_form_for @tweet, remote: true, :html => { :class => 'form-vertical' } do |f| %>
 	<div class="form">
-	  <%= f.input :content, input_html: { maxlength: 140 }, label: "What's Happening?" %>
-	  <div class="form-actions">
+
+		  <% if @user != current_user %>
+		  	<%= f.input :content, input_html: { maxlength: 140, value: "@#{@user.handle}" } %>
+		  <% else %>
+		  	<%= f.input :content, input_html: { maxlength: 140 }, label: "What's Happening?"%>
+		  <% end %>
+
+    <div class="form-actions">
 	    <%= f.button :submit, :class => 'btn-primary' %>
 	  </div>
 	 </div>

@@ -13,3 +13,4 @@ jQuery ->
       return "<li>" + item.first_name + " " + item.last_name + " " + "<em>" + "</li>"
     tokenFormatter: (item) ->
       return "<li>" + item.first_name + " " + item.last_name + " " + "<em>" + "</li>"
+

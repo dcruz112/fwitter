@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
 	mount_uploader :image_url, ImageUrlUploader
 
 	has_many :tweets
-	# accepts_nested_attributes_for :tweets
 	has_many :retweets
 	has_many :favorite_tweets
 	has_many :favorites, through: :favorite_tweets, source: :tweet
+	has_many :mentions
+	has_many :notifications
 
 	has_many :relationships, foreign_key: "follower_id", dependent: :destroy
 	has_many :followed_users, through: :relationships, source: :followed
@@ -139,10 +140,14 @@ class User < ActiveRecord::Base
 
 	def follow!(other_user)
 		self.relationships.create!(followed_id: other_user.id)
+		# @note = Notification.new(user_id: other_user.id, image_url: self.image_url, message: "#{self.full_name} followed you!")
+  #  		@note.save!
 	end
 
 	def unfollow!(other_user)
 		relationships.find_by(followed_id: other_user.id).destroy
+		# @note = Notification.new(user_id: other_user.id, image_url: self.image_url, message: "#{self.full_name} unfollowed you!")
+  #   	@note.save!
 	end
 
 	def tweet_stream
@@ -190,4 +195,5 @@ class User < ActiveRecord::Base
 		s = s[0..(number-1)] if s.length > number
 		return s
 	end
+
 end

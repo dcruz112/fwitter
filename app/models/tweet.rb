@@ -54,6 +54,8 @@ class Tweet < ActiveRecord::Base
 		# where(tweet_id: @tweet.id)
 	end
 
+	validates :content, presence: true
+
 	# def conversation(tweet)
 	# 	conversation_tweet_ids = "SELECT tweet_id FROM replies
 	# 		WHERE reply_id = :tweet_id"
