@@ -4,7 +4,11 @@
 	<div class="user-sidebar">
 		<div class="span2">
 			<%= render 'stats' %>
-			<%= render '/tweets/form' %>
+			<% if @user != current_user %>
+				<%= render partial: '/tweets/form_reply', locals: {reply_to: @user.handle} %>
+			<% else %>
+				<%= render partial: '/tweets/form'%>
+			<% end %>
 		</div>
 	</div>
 	<div class="user-content">

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers, :notifications]
   before_action :set_stream, only: [:show]
   before_action :have_sidebar, except: [:new, :edit, :index]
+  before_action :other_user, only: [:show]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index, :new, :create]
@@ -201,6 +202,10 @@ class UsersController < ApplicationController
 
   def have_sidebar
    @have_sidebar = true
+  end
+
+  def other_user
+   @other_user = true
   end
 
   private
