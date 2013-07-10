@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :favorite]
-
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :favorite, :hashes]
+  before_action :have_sidebar
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index]
 
@@ -117,10 +117,14 @@ class TweetsController < ApplicationController
     render 'show_hashes'
   end
 
+  def have_sidebar
+   @have_sidebar = true
+  end
+
 
   private
   def set_tweet
-    @tweet = Tweet.find(params[:id])    
+    @tweet = Tweet.new   
   end
 
   def tweet_params
