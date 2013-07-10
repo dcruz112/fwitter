@@ -21,13 +21,13 @@
 
 .tweet-stream {
 	margin: auto;
-	padding-right: 100px;
+	padding-left: 300px;
 }
 
 .user-profile-info {
 	width: 500px;
 	text-align: center;
-	margin: auto;
+	padding-left: 300px;
 }
 
 
@@ -45,9 +45,10 @@
 }
 
 .user-sidebar {
-	top: 0;
-	left: 0;
-	float: left;
+	
+	position: fixed;
+	margin-top:40px; margin-left: 20px;
+
 }
 
 .stats {
