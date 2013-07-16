@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers, :notifications]
   before_action :set_stream, only: [:show]
   before_action :have_sidebar, except: [:new, :edit, :index]
+  before_action :other_user, only: [:show]
 
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index, :new, :create]
@@ -182,7 +183,7 @@ class UsersController < ApplicationController
   end
 
   def notifications
-    
+    @tweet = Tweet.new()
     @mentions = []
     Tweet.all.each do |tweet|
       if !tweet.all_mentions_in_tweet.empty? && tweet.all_mentions_in_tweet.include?('@' + @user.handle)
@@ -203,10 +204,18 @@ class UsersController < ApplicationController
    @have_sidebar = true
   end
 
+  def other_user
+   @other_user = true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = current_user
+      if params[:id] == nil
+        @user = current_user
+      else
+        @user = User.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

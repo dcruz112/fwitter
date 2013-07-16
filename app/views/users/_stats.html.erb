@@ -1,9 +1,15 @@
 <table class="stats">
-	<caption>Statistics</caption>
+	<% if @user == current_user %>
+		<caption>Your Stats</caption>
+	<% else %>
+		<caption><%= "#{@user.first_name}" + "'s Stats"  %>
+	<% end %>
+
 		<tbody>
 			<tr><td><a href ="<%= user_path(@user) %>"><b>Tweets:</b></a> <%= @user.tweets.count %> </td> </tr>
 			<tr><td><a href ="<%= following_user_path(@user) %>"><b>Following:</b></a> <%= @user.followed_users.count %> </td></tr>
 			<tr><td><a href ="<%= followers_user_path(@user) %>"><b>Followed By:</b></a> <%= @user.followers.count %> </td></tr>
 			<tr><td><a href ="<%= favorites_user_path(@user) %>"><b>Favorites:</b></a> <%= @user.favorite_tweets.count %> </td></tr>
 		</tbody>
+		
 </table>

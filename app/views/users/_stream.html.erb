@@ -15,7 +15,7 @@
     <% all_tweets_and_retweets.flatten! %>
     <% all_tweets_and_retweets.sort! { |x,y| y.created_at <=> x.created_at} %>
 
-    <ul> <% all_tweets_and_retweets.each do |post| %>
+    <ul class="tweet-stream"> <% all_tweets_and_retweets.each do |post| %>
   	  <%= render post %>
     <% end %> 
     </ul>

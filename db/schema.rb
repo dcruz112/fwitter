@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130708183436) do
+ActiveRecord::Schema.define(version: 20130710142000) do
 
   create_table "conversations", force: true do |t|
     t.datetime "created_at"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20130708183436) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "message"
+    t.integer  "creator_id"
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"

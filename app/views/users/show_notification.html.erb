@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+ 
 <%= "#{@user.handle}" %>
+=======
+<h1><%= "#{@user.handle_at}" %></h1><br><br> 
 
 <% @connect = [] %>
 
@@ -19,10 +22,12 @@
 <% @connect.flatten! %>
 <% @connect.sort! { |x,y| y.created_at <=> x.created_at} %>
 
-<% if @connect.size > 0 %>
-	<% @connect.each do |post| %>
-		<%= render post %>
+<div class="notification-stream">
+	<% if @connect.size > 0 %>
+		<% @connect.each do |post| %>
+			<%= render post %>
+		<% end %>
+	<% else %>
+	 	<%= "You have no notifications. What kind of social networker are you? Get out there and get noticed!" %>
 	<% end %>
-<% else %>
- 	<%= "You have no notifications. What kind of social networker are you? Get out there and get noticed!" %>
-<% end %>
+</div>

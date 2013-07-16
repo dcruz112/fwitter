@@ -1,0 +1,34 @@
+.notification-stream {
+	margin-left: -30%
+}
+
+.notification {
+  margin: auto;
+  margin-bottom: 2px;
+  background: white;
+  padding: 5px;
+  -o-transition:.1s;
+  -ms-transition:.1s;
+  -moz-transition:.1s;
+  -webkit-transition:.1s;
+  /* ...and now for the proper property */
+  transition:.1s;
+  width: 480px;
+  height: 80px;
+  border: 3px solid black;
+}
+
+.notification-image {
+	height: 30px;
+	width: 30px; 
+}
+
+.notification-content {
+	color: gray; 
+	font-size: 15px;
+}
+
+.notification-header {
+	color: black;
+	font-size: 15px;
+}

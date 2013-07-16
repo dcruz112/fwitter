@@ -1,0 +1,53 @@
+<table>	
+	<td>
+		<div class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Expand</a>
+       		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+       			<li>
+       				<table style="width:200px;">
+       					<td><%= pluralize("#{tweet.favorited_by.count}", 'Favorite') %></td>
+       					<td><%= pluralize("#{tweet.retweets.count}", "Retweet") %></td>
+       				</table>
+       			</li>
+ 	       		<% if tweet.replies.any? %>
+ 	       		<li class="divider"></li>
+					<h4>Conversation</h4>
+	     			<% tweet.replies.each do |post| %>
+	     				<%= render post %>
+      				<% end %>
+      			<% end %>
+    		</ul>
+    	</div>
+    </td>
+
+    <td>
+    	<% if current_user != tweet.user %> 
+    		<% if current_user.favorites.exclude?(tweet) %>
+    			<%= link_to 'Favorite', favorite_tweet_path(tweet, id: tweet.id, type: "favorite", method: :put, remote: true) %>
+    		<% else %>
+    			<%= link_to 'Un-Favorite', favorite_tweet_path(tweet, type: "unfavorite", method: :put, remote: true) %>
+    		<% end %>
+    	<% end %>
+    		
+    	<% if (current_user != tweet.user) %>
+			<div class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Reply</a>
+	       		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+					<li><%= render partial: 'tweets/form_reply', locals: {reply_to: tweet.user.handle} %></li>
+				</ul>
+			</div>
+    	<% end %> 
+
+    	<% if (current_user != tweet.user) %>
+    		<%= link_to 'Retweet', retweet_path(tweet) %>	
+    	<% end %> 
+
+		<% if (current_user != tweet.user && tweet.is_retweet == true) %>
+			<%= link_to 'Un-Retweet', tweet, method: :delete, data: { confirm: 'Are you sure that you would like to un-retweet this tweet?' } %>
+		<% end %> 
+
+		<% if current_user == tweet.user %>
+			<div class="tweet-delete"><%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you really robbing your words from the world?' } %></div>	
+		<% end %> 
+		</td>
+</table>

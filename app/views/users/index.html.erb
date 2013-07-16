@@ -28,7 +28,7 @@
         <td><%= link_to user.handle_at, user %></td>
         <td><%= user.biography %></td>
         <td><%= user.current_location %></td>
-        <td><%= link_to 'Switch To', switch_user_path(user) %></td>
+        <td><%= link_to 'Select', switch_user_path(user) %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td>
           <% if @users.length > 1 && user.default %>

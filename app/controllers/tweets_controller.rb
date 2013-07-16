@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :favorite]
-
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :favorite, :hashes]
+  before_action :have_sidebar
   skip_before_action RubyCAS::Filter, only: [:index]
   skip_before_action :current_user, only: [:index]
 
@@ -8,6 +8,7 @@ class TweetsController < ApplicationController
   # GET /tweets.json
   def index
     @tweets = Tweet.all
+    @tweet = Tweet.new
   end
 
   # GET /tweets/1
@@ -93,13 +94,22 @@ class TweetsController < ApplicationController
     if type == "favorite"
       current_user.favorites << @tweet
 
-      redirect_to :back, notice: 'Tweet favorited.'
+      @note = @tweet.user.notifications.build(creator_id: current_user.id, image_url: current_user.image_url.to_s, message: " favorited your tweet!", content: @tweet.content)
+      @note.creator = current_user
+      @note.save!
 
-      Notification.create(user_id: @tweet.user_id, image_url: current_user.image_url, message: "#{current_user.full_name} favorited your tweet!")
+      # respond_to do |format|
+      #   format.html { redirect_to :back, notice: 'Tweet favorited'}
+      #   format.js 
+      # end
 
     elsif type == "unfavorite"
       current_user.favorites.delete(@tweet)
-      redirect_to :back
+      # respond_to do |format|
+      #   format.html { redirect_to :back, notice: 'Tweet un-favorited'}
+      #   format.js 
+      # end
+
     else
       redirect_to :back, notice: 'Something went wrong.'
     end
@@ -116,10 +126,14 @@ class TweetsController < ApplicationController
     render 'show_hashes'
   end
 
+  def have_sidebar
+   @have_sidebar = true
+  end
+
 
   private
   def set_tweet
-    @tweet = Tweet.find(params[:id])    
+    @tweet = Tweet.new   
   end
 
   def tweet_params

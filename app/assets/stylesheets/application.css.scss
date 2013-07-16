@@ -12,6 +12,14 @@
  *= require_tree .
  */
 
+h1 {
+	text-align: center;
+}
+
+.dropdown {
+	display:inline-block;
+}
+
 #header {
  	color: #0F4D92;
  	font-size: 18px;
@@ -104,4 +112,8 @@ a:active {
 .form {
 	margin-left: 25%;
 	margin-top: 25%;	
+}
+
+.button btn-primary {
+	margin-left: 2%;
 }

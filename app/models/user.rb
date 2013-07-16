@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
 	mount_uploader :image_url, ImageUrlUploader
 
 	has_many :tweets
-	# accepts_nested_attributes_for :tweets
 	has_many :retweets
 	has_many :favorite_tweets
 	has_many :favorites, through: :favorite_tweets, source: :tweet
+	has_many :mentions
+	has_many :notifications
 
 	has_many :relationships, foreign_key: "follower_id", dependent: :destroy
 	has_many :followed_users, through: :relationships, source: :followed
@@ -139,10 +140,17 @@ class User < ActiveRecord::Base
 
 	def follow!(other_user)
 		self.relationships.create!(followed_id: other_user.id)
+		@note = other_user.notifications.build(creator_id: self.id, image_url: self.image_url.to_s, message: " followed you!")
+		@note.creator = self
+		@note.save!
 	end
 
 	def unfollow!(other_user)
 		relationships.find_by(followed_id: other_user.id).destroy
+		@note = other_user.notifications.build(creator_id: self.id, image_url: self.image_url.to_s, message: " unfollowed you!")
+		@note.creator = self
+		@note.save!
+
 	end
 
 	def tweet_stream
@@ -169,7 +177,9 @@ class User < ActiveRecord::Base
 		all_instances_of_mentions = []
 		h = Hash.new(0)	
 		Tweet.all.each do |tweet|
-			all_instances_of_mentions << tweet.all_mentions_in_tweet
+			if ((Time.now - tweet.created_at) < 86400 ) 
+				all_instances_of_mentions << tweet.all_mentions_in_tweet
+			end
 		end
 		all_instances_of_mentions.flatten.each {|v| h[v] +=1}
 		s = Hash[h.sort_by{|k, v| v}.reverse].keys[0..(number-1)]
@@ -190,4 +200,5 @@ class User < ActiveRecord::Base
 		s = s[0..(number-1)] if s.length > number
 		return s
 	end
+
 end
